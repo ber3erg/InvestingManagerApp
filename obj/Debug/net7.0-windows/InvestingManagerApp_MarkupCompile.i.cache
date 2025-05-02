@@ -1,0 +1,20 @@
+﻿InvestingManagerApp
+1.0.0.0
+
+winexe
+C#
+.cs
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingManagerApp\obj\Debug\net7.0-windows\
+InvestingManagerApp
+none
+false
+TRACE;DEBUG;NET;NET7_0;NETCOREAPP
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingManagerApp\App.xaml
+61275807332
+
+24-1286759806
+198650335325
+MainWindow.xaml;Views\AdminWindowView.xaml;Views\PortfolioDetailsView.xaml;Views\PortfolioListView.xaml;Views\TransactionHistoryView.xaml;Views\UserWindowView.xaml;
+
+False
+
