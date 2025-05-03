@@ -1,28 +1,20 @@
-﻿using System;
+﻿using InvestingManagerApp.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
-namespace InvestingManagerApp.Models
+namespace InvestingManagerApp.ViewModels
 {
-    /// <summary>
-    /// Логика взаимодействия для UserPortfel.xaml
-    /// </summary>
-    public partial class UserPortfel : Page
+    public class PortfolioListViewModel
     {
-        public UserPortfel()
+        public ObservableCollection<Portfolio> Portfolios { get; set; }
+
+        public PortfolioListViewModel()
         {
-            InitializeComponent();
+            Portfolios = new ObservableCollection<Portfolio>
+            {
+                new Portfolio("Tech"),
+                new Portfolio("Learning")
+            };
         }
     }
 }

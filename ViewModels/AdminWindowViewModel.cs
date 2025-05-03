@@ -1,28 +1,16 @@
-﻿using System;
+﻿using InvestingManagerApp.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
-namespace InvestingManagerApp.Views
+namespace InvestingManagerApp.ViewModels
 {
-    /// <summary>
-    /// Логика взаимодействия для AdminWindow.xaml
-    /// </summary>
-    public partial class AdminWindow : Page
+    public class AdminWindowViewModel
     {
-        public AdminWindow()
+        public ObservableCollection<Security> Securities { get; set; }
+
+        public AdminWindowViewModel(Admin admin)
         {
-            InitializeComponent();
+            Securities = new ObservableCollection<Security>(admin.GetSecurities());
         }
     }
 }

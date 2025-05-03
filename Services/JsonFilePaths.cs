@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace InvestingManagerApp.Services
 {
-    internal class JsonFilePaths
+    public class JsonFilePaths
     {
+
     }
 }

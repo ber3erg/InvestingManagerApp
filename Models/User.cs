@@ -26,7 +26,7 @@
         }
 
         public decimal GetTotalInvestment(){
-            return portfolios.Sum(p => p.CalculateTotal());
+            return portfolios.Sum(p => p.CalculateTotalValue());
         }
 
         public Portfolio GetPortfolioById(int portfolioId){

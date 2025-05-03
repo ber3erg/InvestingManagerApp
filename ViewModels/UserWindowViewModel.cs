@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InvestingManagerApp.Views
+namespace InvestingManagerApp.ViewModels
 {
     /// <summary>
     /// Логика взаимодействия для UserWindow.xaml
@@ -22,7 +22,7 @@ namespace InvestingManagerApp.Views
     {
         public UserWindow()
         {
-            InitializeComponent();
+             //InitializeComponent();
         }
     }
 }

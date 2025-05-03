@@ -1,0 +1,120 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Machenike\\source\\repos\\InvestingManagerApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\machenike\\source\\repos\\investingmanagerapp\\views\\securityeditorview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:views\\securityeditorview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\machenike\\source\\repos\\investingmanagerapp\\views\\securityeditorview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:views\\securityeditorview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\machenike\\source\\repos\\investingmanagerapp\\models\\security.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:models\\security.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\machenike\\source\\repos\\investingmanagerapp\\views\\portfoliolistview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:views\\portfoliolistview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\machenike\\source\\repos\\investingmanagerapp\\views\\portfoliolistview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:views\\portfoliolistview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\machenike\\source\\repos\\investingmanagerapp\\viewmodels\\userwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:viewmodels\\userwindowviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SecurityEditorView.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Machenike\\source\\repos\\InvestingManagerApp\\Views\\SecurityEditorView.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\SecurityEditorView.xaml.cs",
+              "ToolTip": "C:\\Users\\Machenike\\source\\repos\\InvestingManagerApp\\Views\\SecurityEditorView.xaml.cs",
+              "RelativeToolTip": "Views\\SecurityEditorView.xaml.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAUwCcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-03T00:16:55.03Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SecurityEditorView.xaml",
+              "DocumentMoniker": "C:\\Users\\Machenike\\source\\repos\\InvestingManagerApp\\Views\\SecurityEditorView.xaml",
+              "RelativeDocumentMoniker": "Views\\SecurityEditorView.xaml",
+              "ToolTip": "C:\\Users\\Machenike\\source\\repos\\InvestingManagerApp\\Views\\SecurityEditorView.xaml",
+              "RelativeToolTip": "Views\\SecurityEditorView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-05-03T00:18:33.614Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Security.cs",
+              "DocumentMoniker": "C:\\Users\\Machenike\\source\\repos\\InvestingManagerApp\\Models\\Security.cs",
+              "RelativeDocumentMoniker": "Models\\Security.cs",
+              "ToolTip": "C:\\Users\\Machenike\\source\\repos\\InvestingManagerApp\\Models\\Security.cs",
+              "RelativeToolTip": "Models\\Security.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAwwCwAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-03T00:17:11.289Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PortfolioListView.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Machenike\\source\\repos\\InvestingManagerApp\\Views\\PortfolioListView.xaml.cs",
+              "RelativeDocumentMoniker": "Views\\PortfolioListView.xaml.cs",
+              "ToolTip": "C:\\Users\\Machenike\\source\\repos\\InvestingManagerApp\\Views\\PortfolioListView.xaml.cs",
+              "RelativeToolTip": "Views\\PortfolioListView.xaml.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAuwCsAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-03T00:13:38.94Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserWindowViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Machenike\\source\\repos\\InvestingManagerApp\\ViewModels\\UserWindowViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\UserWindowViewModel.cs",
+              "ToolTip": "C:\\Users\\Machenike\\source\\repos\\InvestingManagerApp\\ViewModels\\UserWindowViewModel.cs",
+              "RelativeToolTip": "ViewModels\\UserWindowViewModel.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABgAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-03T00:13:11.054Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PortfolioListView.xaml",
+              "DocumentMoniker": "C:\\Users\\Machenike\\source\\repos\\InvestingManagerApp\\Views\\PortfolioListView.xaml",
+              "RelativeDocumentMoniker": "Views\\PortfolioListView.xaml",
+              "ToolTip": "C:\\Users\\Machenike\\source\\repos\\InvestingManagerApp\\Views\\PortfolioListView.xaml",
+              "RelativeToolTip": "Views\\PortfolioListView.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-05-03T00:12:08.63Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

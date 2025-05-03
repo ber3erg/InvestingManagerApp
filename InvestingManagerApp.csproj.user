@@ -39,8 +39,5 @@
     <Page Update="Views\TransactionHistoryView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\UserWindowView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
 </Project>
