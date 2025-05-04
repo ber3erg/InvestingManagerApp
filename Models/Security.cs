@@ -2,15 +2,18 @@
 {
     public abstract class Security
     {
-        public string Ticker {  get; private set; }
-        public string Name {  get; private set; }
+        private static int counter = 0;
+        public int Id { get; private set; }
+        public string Ticker { get; private set; }
+        public string Name { get; private set; }
         public string Company { get; private set; }
         public SecurityType Type { get; private set; }
         public decimal CurrentPrice { get; private set; }
 
 
         public Security()
-        {
+        {   
+            Id = 0;
             Ticker = "aaaa";
             Name = string.Empty;
             Company = string.Empty;
@@ -20,7 +23,8 @@
 
         // Основной конструктор
         public Security(string ticker, string name, string company, SecurityType type, decimal currentPrice)
-        {
+        {   
+            Id = ++counter;
             Ticker = ticker;
             Name = name;
             Company = company;
@@ -32,7 +36,8 @@
 
         // Упрощённый конструктор
         public Security(string ticker, string name)
-        {
+        {   
+            Id = ++counter;
             Ticker = ticker;
             Name = name;
             Company = "Не указано";

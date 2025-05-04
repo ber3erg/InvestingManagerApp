@@ -30,7 +30,7 @@
         }
 
         public Portfolio GetPortfolioById(int portfolioId){
-            return portfolios.FirstOrDefault(p => p.Id == portfolioId);
+            return portfolios.FirstOrDefault(p => p.Id == portfolioId)!;
         }
     }
 }
