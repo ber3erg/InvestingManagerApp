@@ -9,30 +9,54 @@ namespace InvestingManagerApp.Services
 {
     public static class TransactionStorage
     {
-        private static List<Transaction> transactions = new List<Transaction>();
+        public static List<Transaction> Transactions { get; private set; } = JsonDataStorage.GetTransactionsFromJsonFile();
 
         public static void AddTransaction(Transaction transaction)
         {
-            transactions.Add(transaction);
+            Transactions.Add(transaction);
+            JsonDataStorage.AddTransactionToJsonFile(transaction);
         }
 
         public static void RemoveTransaction(int transactionId)
         {
-            foreach (Transaction transaction in transactions)
+            foreach (Transaction transaction in Transactions)
             {
                 if (transaction.Id == transactionId)
-                    transactions.Remove(transaction);
+                {
+                    Transactions.Remove(transaction);
+                    JsonDataStorage.DeleteTransactionFromJsonFile(transaction);
+                }
             }
         }
 
         public static List<Transaction> GetTransactionsByPortfolioId(int portfolioId)
         {
             List<Transaction> result = new List<Transaction>();
-            foreach (Transaction transaction in transactions)
+            foreach (Transaction transaction in Transactions)
             {
-                if (transaction.portfolioId == portfolioId)
+                if (transaction.PortfolioId == portfolioId)
                 {
                     result.Add(transaction);
+                }
+            }
+            return result;
+        }
+
+        public static List<Transaction> GetTransactionsByUserId(int userId)
+        {
+
+            List<Portfolio> userPortfolios = PortfolioStorage.GetPortfoliosByUserId(userId);
+            List<Transaction> result = new List<Transaction>();
+
+            foreach (Portfolio portfolio in userPortfolios)
+            {
+                int portfolioId = portfolio.Id;
+                foreach (Transaction transaction in Transactions)
+                {
+                    if (transaction.PortfolioId == portfolioId)
+                    {
+                        result.Add(transaction);
+                    }
                 }
             }
             return result;

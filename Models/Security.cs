@@ -2,7 +2,7 @@
 
 namespace InvestingManagerApp.Models
 {
-    public abstract class Security
+    public class Security
     {
         private static int counter = 0;
         public int Id { get; private set; }
@@ -52,6 +52,5 @@ namespace InvestingManagerApp.Models
             CurrentPrice = currentPrice;
         }
 
-        public abstract decimal GetEstimatedYield();
     }
 }
