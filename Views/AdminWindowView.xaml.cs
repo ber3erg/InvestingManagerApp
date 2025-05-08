@@ -9,27 +9,12 @@ namespace InvestingManagerApp.Views
     {
         private Admin _admin;
 
-        public AdminWindowView(Admin admin)
+        public AdminWindowView(Person preAdmin)
         {
             InitializeComponent();
+            Admin admin = new(preAdmin.Name, preAdmin.Login, preAdmin.Password);
             _admin = admin;
             DataContext = new AdminWindowViewModel(admin);
-        }
-
-        // Переход на экран списка портфелей
-        private void NavigateToPortfolioList_Click(object sender, RoutedEventArgs e)
-        {
-            var portfolioListView = new PortfolioListView(); // Переход на экран списка портфелей
-            portfolioListView.Show();
-            this.Close();
-        }
-
-        // Переход на экран истории транзакций
-        private void NavigateToTransactionHistory_Click(object sender, RoutedEventArgs e)
-        {
-            var transactionHistoryView = new TransactionHistoryView(); // Переход на экран истории транзакций
-            transactionHistoryView.Show();
-            this.Close();
         }
 
         // Добавление новой ценной бумаги

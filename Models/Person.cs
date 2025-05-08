@@ -8,6 +8,7 @@ namespace InvestingManagerApp.Models
         public int Id { get; private set; }
         public string? Name { get; private set; }
         public string Login { get; private set; } = string.Empty;
+        public bool IsAdmin { get; protected set; } = false;
         public string Password { get; private set; } = string.Empty;
 
         public Person(string name, string login, string password)

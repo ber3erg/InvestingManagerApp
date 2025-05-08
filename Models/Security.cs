@@ -1,4 +1,6 @@
-﻿namespace InvestingManagerApp.Models
+﻿using InvestingManagerApp.Services;
+
+namespace InvestingManagerApp.Models
 {
     public abstract class Security
     {

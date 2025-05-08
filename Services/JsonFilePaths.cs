@@ -8,10 +8,11 @@ namespace InvestingManagerApp.Services
 {
     public static class JsonFilePaths
     {
-        public readonly static string people = "Data/people.json";
-        public readonly static string portfolios = "Data/portfolios.json";
-        public readonly static string securities = "Data/people.json";
-        public readonly static string transactions = "Data/people.json";
+        public readonly static string admin = "C:\\Users\\ПК\\Desktop\\учёба\\3 семестр\\ООП\\КП\\InvestingApp\\Data\\admin.json";
+        public readonly static string users = "C:\\Users\\ПК\\Desktop\\учёба\\3 семестр\\ООП\\КП\\InvestingApp\\Data\\users.json";
+        public readonly static string portfolios = "C:\\Users\\ПК\\Desktop\\учёба\\3 семестр\\ООП\\КП\\InvestingApp\\Data\\portfolios.json";
+        public readonly static string securities = "C:\\Users\\ПК\\Desktop\\учёба\\3 семестр\\ООП\\КП\\InvestingApp\\Data\\securities.json";
+        public readonly static string transactions = "C:\\Users\\ПК\\Desktop\\учёба\\3 семестр\\ООП\\КП\\InvestingApp\\Data\\transactions.json";
         
     }
 }

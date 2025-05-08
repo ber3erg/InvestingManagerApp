@@ -13,7 +13,7 @@ namespace InvestingManagerApp.Services
         // =========== получение объектов ============
         // Для получения объектов реализованы следующие общие методы
         private static List<T> GetAllFromFile<T>(string filename){
-            // для начала прочитаем содержимое файла person.json
+            // для начала прочитаем содержимое файла
             // А также проведём десериализацию данных
             // Прочитанные данные помещаем в список
             string objectsJson = File.ReadAllText(filename, Encoding.UTF8);
@@ -24,10 +24,15 @@ namespace InvestingManagerApp.Services
             return _objects;
         }
 
-        public static List<Person> GetPeopleFromJsonFile()
+        public static List<Admin> GetAdminsFromJsonFile()
         {
-            List<Person> peopleFromJson = GetAllFromFile<Person>(JsonFilePaths.people);
-            return peopleFromJson;
+            List<Admin> adminsFromJson = GetAllFromFile<Admin>(JsonFilePaths.admin);
+            return adminsFromJson;
+        }
+        public static List<User> GetUsersFromJsonFile()
+        {
+            List<User> usersFromJson = GetAllFromFile<User>(JsonFilePaths.users);
+            return usersFromJson;
         }
 
         public static List<Portfolio> GetPortfoliosFromJsonFile()
@@ -66,9 +71,14 @@ namespace InvestingManagerApp.Services
             var utf8WithBom = new UTF8Encoding(encoderShouldEmitUTF8Identifier: true);
             File.WriteAllText(filePath, jsonString, utf8WithBom);
         }
-        public static void AddPersonToJsonFile(Person _person)
+        public static void AddAdminToJsonFile(Admin _admin)
         {
-            AddItemToJsonFile<Person>(_person, JsonFilePaths.people);
+            AddItemToJsonFile<Admin>(_admin, JsonFilePaths.admin);
+        }
+
+        public static void AddUserToJsonFile(User _user)
+        {
+            AddItemToJsonFile<User>(_user, JsonFilePaths.users);
         }
 
         public static void AddPortfolioToJsonFile(Portfolio _portfolio)
@@ -106,9 +116,14 @@ namespace InvestingManagerApp.Services
             File.WriteAllText(filePath, jsonString, utf8WithBom);
         }
 
-        public static void DeletePersonFromJsonFile(Person _person)
+        public static void DeleteUserFromJsonFile(User _user)
         {
-            DeleteItemFromJsonFile<Person>(_person, JsonFilePaths.people);
+            DeleteItemFromJsonFile<Person>(_user, JsonFilePaths.users);
+        }
+
+        public static void DeleteUserFromJsonFile(Admin _admin)
+        {
+            DeleteItemFromJsonFile<Admin>(_admin, JsonFilePaths.admin);
         }
 
         public static void DeletePortfolioFromJsonFile(Portfolio _portfolio)

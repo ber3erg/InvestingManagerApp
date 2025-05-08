@@ -1,7 +1,7 @@
 ﻿<Application x:Class="InvestingManagerApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="Views/PortfolioListView.xaml">
+             StartupUri="MainWindow.xaml">
     <Application.Resources>
         <!-- Здесь можно определять общие ресурсы для всего приложения (например, стили, конвертеры и т.д.) -->
 

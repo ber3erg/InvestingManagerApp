@@ -30,3 +30,35 @@ C:\Users\Machenike\Source\Repos\InvestingManagerApp\obj\Debug\net7.0-windows\ref
 C:\Users\Machenike\Source\Repos\InvestingManagerApp\obj\Debug\net7.0-windows\InvestingManagerApp.pdb
 C:\Users\Machenike\Source\Repos\InvestingManagerApp\obj\Debug\net7.0-windows\InvestingManagerApp.genruntimeconfig.cache
 C:\Users\Machenike\Source\Repos\InvestingManagerApp\obj\Debug\net7.0-windows\ref\InvestingManagerApp.dll
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\Views\AdminWindowView.baml
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\Views\PortfolioDetailsView.baml
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\Views\PortfolioListView.baml
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\Views\SecurityEditorView.baml
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\Views\TransactionHistoryView.baml
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\App.baml
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\MainWindow.g.cs
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\Views\AdminWindowView.g.cs
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\Views\PortfolioDetailsView.g.cs
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\Views\PortfolioListView.g.cs
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\Views\SecurityEditorView.g.cs
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\Views\TransactionHistoryView.g.cs
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\App.g.cs
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\InvestingManagerApp_MarkupCompile.cache
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\InvestingManagerApp_MarkupCompile.lref
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\InvestingManagerApp.dll
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\refint\InvestingManagerApp.dll
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\InvestingManagerApp.pdb
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\bin\Debug\net7.0-windows\InvestingManagerApp.exe
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\bin\Debug\net7.0-windows\InvestingManagerApp.deps.json
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\bin\Debug\net7.0-windows\InvestingManagerApp.runtimeconfig.json
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\bin\Debug\net7.0-windows\InvestingManagerApp.dll
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\bin\Debug\net7.0-windows\InvestingManagerApp.pdb
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\MainWindow.baml
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\InvestingManagerApp.g.resources
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\InvestingManagerApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\InvestingManagerApp.AssemblyInfoInputs.cache
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\InvestingManagerApp.AssemblyInfo.cs
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\InvestingManagerApp.csproj.CoreCompileInputs.cache
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\InvestingManagerApp.sourcelink.json
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\InvestingManagerApp.genruntimeconfig.cache
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\ref\InvestingManagerApp.dll

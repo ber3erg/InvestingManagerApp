@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Machenike\Source\Repos\InvestingManagerApp\obj\Debug\net7.0-windows\
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\
 InvestingManagerApp
 none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
-C:\Users\Machenike\Source\Repos\InvestingManagerApp\App.xaml
+C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\App.xaml
 6-2110168709
 
-29-101993451
-198-1133866272
+29-2016048704
+198650335325
 MainWindow.xaml;Views\AdminWindowView.xaml;Views\PortfolioDetailsView.xaml;Views\PortfolioListView.xaml;Views\SecurityEditorView.xaml;Views\TransactionHistoryView.xaml;
 
 False

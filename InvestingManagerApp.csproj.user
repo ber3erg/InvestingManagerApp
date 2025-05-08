@@ -7,18 +7,6 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="ViewModels\PortfolioListViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViewModels\PortfolioDetailsViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViewModels\TransactionHistoryViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViewModels\UserWindowViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="ViewModels\AdminWindowViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,15 +16,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AdminWindowView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\PortfolioDetailsView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\PortfolioListView.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\TransactionHistoryView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
