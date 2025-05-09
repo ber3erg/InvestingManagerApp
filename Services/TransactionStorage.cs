@@ -62,5 +62,19 @@ namespace InvestingManagerApp.Services
             return result;
         }
 
+        public static List<int> GetSecuritiesByPortfelId(int portfolioId)
+        {
+            // метод возвращает список идентификаторов ценных бумаг
+            // для начала получаем все транзакции по портфелю и проходимся по каждой
+            // затем с помощью условия добавляем каждый id ценной бумаги в список
+            List<int> result = new List<int>();
+            foreach (Transaction transaction in GetTransactionsByPortfolioId(portfolioId))
+            {
+                if (!result.Contains(transaction.SecurityId)) {
+                    result.Add(transaction.SecurityId);
+                }
+            }
+            return result;
+        }
     }
 }

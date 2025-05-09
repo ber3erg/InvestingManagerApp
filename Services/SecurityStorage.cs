@@ -24,6 +24,18 @@ namespace InvestingManagerApp.Services
             }
         }
 
+        public static Security? GetSecurityById(int id)
+        {
+            foreach (Security security in Securities)
+            {
+                if (security.Id == id)
+                {
+                    return security;
+                }
+            }
+            return null;
+        }
+
         public static List<Security> GetAllSecurities()
         {
             return new List<Security>(Securities); // Возвращаем копию
