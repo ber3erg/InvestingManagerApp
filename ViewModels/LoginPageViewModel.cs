@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using InvestingManagerApp.Views;
 
 namespace InvestingManagerApp.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class LoginPageViewModel : ViewModelBase
     {   
+        private readonly MainViewModel _mainViewModel;
         // Поля данного класса олицитворяют связку с xaml страничкой
         private string _username;
         private string _password;
@@ -40,6 +43,20 @@ namespace InvestingManagerApp.ViewModels
                 _errorMassage = value;
                 OnPropertyChanged($"{nameof(ErrorMassage)}");
             }
+        }
+        public LoginPageViewModel(MainViewModel mainViewModel)
+        {
+            _mainViewModel = mainViewModel;
+            LoginCommand = new RelayCommand(ToLogin);
+        }
+
+        public ICommand LoginCommand { get; }
+
+        public void ToLogin()
+        {
+            var adminViewModel = new AdminPageViewModel();
+            var adminPage = new AdminPage { DataContext = adminViewModel };
+            _mainViewModel.NavigateTo(adminPage);
         }
     }
 }

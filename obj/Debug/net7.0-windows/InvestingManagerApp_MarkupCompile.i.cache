@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\App.xaml
-21646622480
+3-328492930
 
-26840507809
+29-1638519405
 198650335325
-MainWindow.xaml;Views\AdminWindowView.xaml;
+MainWindow.xaml;Views\AdminPage.xaml;Views\LoginPage.xaml;
 
 False
 

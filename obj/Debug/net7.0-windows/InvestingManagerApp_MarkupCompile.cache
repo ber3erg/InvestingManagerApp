@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\App.xaml
-6-2110168709
+2-1384121677
 
-29-2016048704
+251011158951
 198650335325
-MainWindow.xaml;Views\AdminWindowView.xaml;Views\PortfolioDetailsView.xaml;Views\PortfolioListView.xaml;Views\SecurityEditorView.xaml;Views\TransactionHistoryView.xaml;
+LoginWindow.xaml;Views\AdminWindowView.xaml;
 
 False
 

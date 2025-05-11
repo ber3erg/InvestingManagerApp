@@ -3,75 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InvestingManagerApp"
+        xmlns:viewModels="clr-namespace:InvestingManagerApp.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <StackPanel Width="250"
-                    Orientation="Vertical"
-                    Margin="80">
-            <TextBlock Text="Войти"
-                       FontFamily="Montserrat"
-                       FontSize="24"
-                       FontWeight="ExtraBlack"
-                       HorizontalAlignment="Center"/>
-            <TextBlock Text="Login"
-                       FontSize="12"
-                       FontFamily="Montserrat"
-                       FontWeight="Bold"
-                       Margin="12, 20, 12, 6"/>
-            <TextBox x:Name="EnteredLogin"
-                     Text="{Binding Username}"
-                     FontFamily="Montserrat"
-                     FontWeight="Medium"
-                     Height="24"
-                     FontSize="12"/>
-            
-            <TextBlock Text="Password"
-                       FontSize="12"
-                       FontFamily="Montserrat"
-                       FontWeight="Bold"
-                       Margin="12, 12, 12, 6"/>
-            <TextBox x:Name="EnteredPassword"
-                         
-                     FontFamily="Montserrat"
-                     FontWeight="Medium"
-                     Height="24"
-                     FontSize="12"
-                     Margin="10, 8, 10, 8"/>
-            <TextBlock Text="{Binding ErrorMessage}"
-                       Foreground="#D7596D"
-                       FontSize="8"
-                       FontWeight="Medium"
-                       Margin="12, 0, 12, 0"
-                       TextWrapping="Wrap"/>
-            
-            <Button x:Name="btnLogin"
-                    BorderThickness="0"
-                    Content="Войти"
-                    Foreground="#fff"
-                    Background="#532267"
-                    FontFamily="Montserrat"
-                    FontWeight="Medium"
-                    FontSize="10"
-                    Width="100"
-                    Height="32"
-                    Cursor="Hand"
-                    Click="btnLogin_Click"
-                    Margin="12,8, 12, 8"></Button>
-            
-            <Button x:Name="btnSignUp"
-                    BorderThickness="0"
-                    Content="Зарегестрироваться"
-                    Foreground="#532267"
-                    Background="#fff"
-                    FontFamily="Montserrat"
-                    FontSize="10"
-                    FontWeight="Medium"
-                    Width="140"
-                    Cursor="Hand"
-                    Click="btnSignUp_Click"
-                    Margin="0"></Button>        
-        </StackPanel>
-    </Grid>
+    <Window.DataContext>
+        <viewModels:MainViewModel />
+    </Window.DataContext>
+
+    <Frame Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden"/>
 </Window>

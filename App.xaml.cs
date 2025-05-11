@@ -9,8 +9,8 @@ namespace InvestingManagerApp
             base.OnStartup(e);
 
             // Создаем и показываем главное окно (MainWindow)
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
         }
     }
 }
