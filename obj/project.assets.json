@@ -8,19 +8,24 @@
     "net7.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\ПК\\.nuget\\packages\\": {}
+    "C:\\Users\\Пётр Иванов\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ПК\\Desktop\\учёба\\3 семестр\\ООП\\КП\\InvestingApp\\InvestingManagerApp.csproj",
+      "projectUniqueName": "C:\\Users\\Пётр Иванов\\Desktop\\учёба\\3 семестр\\ООП\\InvestingApp\\InvestingManagerApp.csproj",
       "projectName": "InvestingManagerApp",
-      "projectPath": "C:\\Users\\ПК\\Desktop\\учёба\\3 семестр\\ООП\\КП\\InvestingApp\\InvestingManagerApp.csproj",
-      "packagesPath": "C:\\Users\\ПК\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ПК\\Desktop\\учёба\\3 семестр\\ООП\\КП\\InvestingApp\\obj\\",
+      "projectPath": "C:\\Users\\Пётр Иванов\\Desktop\\учёба\\3 семестр\\ООП\\InvestingApp\\InvestingManagerApp.csproj",
+      "packagesPath": "C:\\Users\\Пётр Иванов\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Пётр Иванов\\Desktop\\учёба\\3 семестр\\ООП\\InvestingApp\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\ПК\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Пётр Иванов\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -45,7 +50,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net7.0-windows7.0": {
@@ -69,7 +75,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

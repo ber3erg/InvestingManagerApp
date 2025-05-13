@@ -9,7 +9,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <TextBlock Text="Управление ценными бумагами" 
@@ -20,48 +19,111 @@
 
             <!-- Добавление новой ценной бумаги -->
             <StackPanel Grid.Row="0" Margin="0,10,0,10" Orientation="Horizontal">
-                <TextBox Text="{Binding NewSecurity.Ticker, UpdateSourceTrigger=PropertyChanged}" Width="100" Margin="0,0,10,0"/>
-                <TextBox Text="{Binding NewSecurity.Name, UpdateSourceTrigger=PropertyChanged}" Width="150" Margin="0,0,10,0"/>
-                <TextBox Text="{Binding NewSecurity.Company, UpdateSourceTrigger=PropertyChanged}" Width="150" Margin="0,0,10,0"/>
+                <TextBox Text="{Binding NewTicker, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="100" Margin="0,0,10,0"/>
+                <TextBox Text="{Binding NewName, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="150" Margin="0,0,10,0"/>
+                <TextBox Text="{Binding NewCompany, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="150" Margin="0,0,10,0"/>
                 <ComboBox Text="{Binding TypeOfNewSecurityText, UpdateSourceTrigger=PropertyChanged}" Width="150" Margin="0,0,10,0">
                     <ComboBoxItem Content="Акция" />
                     <ComboBoxItem Content="Облигация" />
                     <ComboBoxItem Content="Фонд" />
                 </ComboBox>
-                <TextBox Text="{Binding NewSecurity.CurrentPrice, UpdateSourceTrigger=PropertyChanged}" Width="100" Margin="0,0,10,0"/>
+                <TextBox Text="{Binding CurrentPriceText, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="100" Margin="0,0,10,0"/>
                 <Button Content="Добавить" Width="100" Height="30" Command="{Binding SaveCommand}"/>
             </StackPanel>
 
             <!-- Список существующих ценных бумаг -->
             <DataGrid Grid.Row="1" 
+                      RowHeight="36"
                       ItemsSource="{Binding Securities}" 
                       AutoGenerateColumns="False" 
                       IsReadOnly="True"
                       Margin="0,10,0,10"
-                      x:Name="DataGrid">
+                      x:Name="DataGrid"
+                      FontFamily="Montserrat"
+                      HeadersVisibility="Column"
+                      ColumnHeaderHeight="35"
+                      HorizontalContentAlignment="Center"
+                      VerticalContentAlignment="Center"
+                      CanUserResizeRows="False"
+                      CanUserResizeColumns="False">
+                <DataGrid.Resources>
+                    <!-- Центрирование текста в ячейках -->
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="TextBlock.TextAlignment" Value="Left"/>
+                        <Setter Property="Padding" Value="4"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                    </Style>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="IsTabStop" Value="False"/>
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="SnapsToDevicePixels" Value="True"/>
+                    </Style>
+                </DataGrid.Resources>
+
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Тикер" Binding="{Binding Ticker}" Width="Auto"/>
+                    <DataGridTextColumn Header="Тикер" Binding="{Binding Ticker}" Width="50"/>
                     <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"/>
-                    <DataGridTextColumn Header="Тип" Binding="{Binding Type}" Width="Auto"/>
-                    <DataGridTextColumn Header="Текущая стоимость" Binding="{Binding CurrentPrice, StringFormat=\{0:C\}}" Width="Auto"/>
-                    <DataGridTemplateColumn Header="Действия">
+                    <DataGridTextColumn Header="Тип" Binding="{Binding Type}" Width="50"/>
+                    <DataGridTemplateColumn Header="Текущая стоимость" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock  Text="{Binding CurrentPrice, StringFormat={}{0:N2} ₽}"
+                                            Visibility="{Binding IsEditing, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding newCurrentPrice, UpdateSourceTrigger=PropertyChanged}"
+                                         Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Действия" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Content="Редактировать" Width="80"/>
-                                    <Button Content="Удалить" Width="80" Margin="10,0,0,0"/>
+                                    <!-- Далее создаётся две отдельных стоковых панели одна открыта, когда происходит редактирование акции, 
+                                    Другая, когда редактирование не происходит -->
+                                    <!-- Data context обозначает, что мы обращаемся к команде в VM, а не к полю типа security -->
+                                    <StackPanel Visibility="{Binding DataContext.EditingSecurity, 
+                                                                RelativeSource={RelativeSource AncestorType=Page}, 
+                                                                Converter={StaticResource ObjectEqualityToVisibilityConverter}, 
+                                                                ConverterParameter=false}">
+                                        <Button Content="{Binding IsEditing, Converter={StaticResource EditSaveTextConverter}}"
+                                                Command="{Binding DataContext.EditItemCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                                CommandParameter="{Binding}"
+                                                Width="30" Height="25" Margin="2"/>
+                                    
+                                        <!-- Кнопка удалить вызывает комманду удалить и передаёт в качестве параметра объект типа security -->
+                                        <Button Command="{Binding DataContext.DeleteItemCommand, RelativeSource={RelativeSource AncestorType=Page}}" 
+                                                CommandParameter="{Binding}" Content="🗑" Width="30" Height="25" Margin="2"
+                                                Visibility="{Binding IsEditing, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
+                                        
+                                    </StackPanel>
+                                    <StackPanel Visibility="{Binding DataContext.EditingSecurity, 
+                                                            RelativeSource={RelativeSource AncestorType=Page}, 
+                                                            Converter={StaticResource ObjectEqualityToVisibilityConverter}, 
+                                                            ConverterParameter=true}">
+                                        <Button Content="💾"
+                                                Command="{Binding DataContext.SaveEditCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                                CommandParameter="{Binding}" 
+                                                Width="30" Margin="2"/>
+                                        <Button Content="✖"
+                                                Command="{Binding DataContext.CancelEditCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                                Width="30" Margin="2"/>
+
+                                    </StackPanel>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-
-            <!-- Кнопки для редактирования стоимости -->
-            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBox x:Name="EditPriceTextBox" Width="100" Margin="0,0,10,0"/>
-                <Button Content="Изменить цену" Width="120" Height="30"/>
-            </StackPanel>
         </Grid>
     </DockPanel>
 </Page>

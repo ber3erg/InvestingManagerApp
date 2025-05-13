@@ -1,15 +1,21 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace InvestingManagerApp.Models
 {
     public abstract class Person
     {
         private static int counter = 0;
-        public int Id { get; private set; }
-        public string? Name { get; private set; }
+        [JsonInclude]
+        public int Id { get; protected set; }
+        [JsonInclude]
+        public string? Name { get; protected set; }
+        [JsonInclude]
         public string Login { get; private set; } = string.Empty;
+        [JsonInclude]
         public bool IsAdmin { get; protected set; } = false;
-        public string Password { get; private set; } = string.Empty;
+        [JsonInclude]
+        public string Password { get; protected set; } = string.Empty;
 
         public Person(string name, string login, string password)
         {
@@ -23,6 +29,8 @@ namespace InvestingManagerApp.Models
         public Person()
         {
             Id = 0;
+            Login = string.Empty;
+            Password = string.Empty;
         }
         public virtual void ChangeName(string name){
             if (string.IsNullOrWhiteSpace(name)){
@@ -30,6 +38,11 @@ namespace InvestingManagerApp.Models
             } else {
                 Name = name;
             }
+        }
+        public static void SetCounter(int value)
+        {
+            if (value > counter)
+                counter = value;
         }
     }
 }

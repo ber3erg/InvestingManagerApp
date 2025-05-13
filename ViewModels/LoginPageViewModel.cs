@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using InvestingManagerApp.Views;
+using InvestingManagerApp.Services;
+using InvestingManagerApp.Models;
 
 namespace InvestingManagerApp.ViewModels
 {
@@ -12,18 +14,19 @@ namespace InvestingManagerApp.ViewModels
     {   
         private readonly MainViewModel _mainViewModel;
         // Поля данного класса олицитворяют связку с xaml страничкой
-        private string _username;
+        private string _login;
         private string _password;
-        private string _errorMassage;
+        private string _errorMessage;
+        private List<User> otherUsers;
 
 
-        public string Username
+        public string Login
         {
-            get => _username;
+            get => _login;
             set
             {
-                _username = value;
-                OnPropertyChanged(nameof(Username));
+                _login = value;
+                OnPropertyChanged(nameof(Login));
             }
         }
         public string Password
@@ -35,28 +38,55 @@ namespace InvestingManagerApp.ViewModels
                 OnPropertyChanged(nameof(Password));
             }
         }
-        public string ErrorMassage
+        public string ErrorMessage
         {
-            get => _errorMassage;
+            get => _errorMessage;
             set
             {
-                _errorMassage = value;
-                OnPropertyChanged($"{nameof(ErrorMassage)}");
+                _errorMessage = value;
+                OnPropertyChanged($"{nameof(ErrorMessage)}");
             }
         }
         public LoginPageViewModel(MainViewModel mainViewModel)
         {
             _mainViewModel = mainViewModel;
+            otherUsers = JsonDataStorage.GetUsersFromJsonFile();
+            
             LoginCommand = new RelayCommand(ToLogin);
+            RegisterCommand = new RelayCommand(NavigateToRegister);
         }
 
         public ICommand LoginCommand { get; }
+        public ICommand RegisterCommand { get; }
 
+        Admin admin = new Admin("Пётр", "terb", "1234");
         public void ToLogin()
         {
-            var adminViewModel = new AdminPageViewModel();
-            var adminPage = new AdminPage { DataContext = adminViewModel };
-            _mainViewModel.NavigateTo(adminPage);
+            if (Login == admin.Login && Password == admin.Password)
+            {
+
+                var adminPage = new AdminPageViewModel(_mainViewModel);
+                _mainViewModel.NavigateTo(new AdminPage { DataContext = adminPage });
+            } else
+            {
+                foreach (User user in otherUsers)
+                {
+                    if (user.Login == Login && Password == user.Password)
+                    {
+                        _mainViewModel.CurrentUser.Login(user);
+                        var userPage = new UserPageViewModel(_mainViewModel);
+                        _mainViewModel.NavigateTo(new UserPage { DataContext = userPage });
+                        
+                    }
+                }
+            }
+            ErrorMessage = "Пользователь не найден";
+        }
+
+        public void NavigateToRegister()
+        {
+            var registerPage = new RegisterViewModel(_mainViewModel);
+            _mainViewModel.NavigateTo(new RegisterPage { DataContext = registerPage });
         }
     }
 }

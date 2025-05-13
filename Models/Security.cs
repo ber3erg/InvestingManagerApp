@@ -1,15 +1,22 @@
-﻿using InvestingManagerApp.Services;
+﻿using System.Text.Json.Serialization;
+using InvestingManagerApp.Services;
 
 namespace InvestingManagerApp.Models
 {
     public class Security
     {
         private static int counter = 0;
+        [JsonInclude]
         public int Id { get; private set; }
+        [JsonInclude]
         public string Ticker { get; private set; }
+        [JsonInclude]
         public string Name { get; private set; }
+        [JsonInclude]
         public string Company { get; private set; }
+        [JsonInclude]
         public SecurityType Type { get; private set; }
+        [JsonInclude]
         public decimal CurrentPrice { get; private set; }
 
 
@@ -32,24 +39,17 @@ namespace InvestingManagerApp.Models
             Company = company;
             Type = type;
             CurrentPrice = currentPrice;
-
-            SecurityStorage.AddSecurity(this);
-        }
-
-        // Упрощённый конструктор
-        public Security(string ticker, string name)
-        {   
-            Id = ++counter;
-            Ticker = ticker;
-            Name = name;
-            Company = "Не указано";
-            Type = SecurityType.Stock; // По умолчанию
-            CurrentPrice = 0;
         }
         
         public void ChangeCurrentPrice(decimal currentPrice)
         {
             CurrentPrice = currentPrice;
+        }
+
+        public static void SetCounter(int value)
+        {
+            if (value > counter)
+                counter = value;
         }
 
     }

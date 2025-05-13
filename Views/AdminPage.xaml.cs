@@ -6,13 +6,12 @@ using System.Windows.Controls;
 
 namespace InvestingManagerApp.Views
 {
-    public partial class AdminPage : Window
+    public partial class AdminPage : Page
     {
         
         public AdminPage()
         {
             InitializeComponent();
-            DataContext = new AdminPageViewModel();
         }
 
     }

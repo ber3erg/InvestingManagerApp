@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\obj\Debug\net7.0-windows\
+C:\Users\Пётр Иванов\Desktop\учёба\3 семестр\ООП\InvestingApp\obj\Debug\net7.0-windows\
 InvestingManagerApp
 none
 false
-TRACE;DEBUG;NET;NET7_0;NETCOREAPP
-C:\Users\ПК\Desktop\учёба\3 семестр\ООП\КП\InvestingApp\App.xaml
-3-328492930
+TRACE;DEBUG;NET;NET7_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
+C:\Users\Пётр Иванов\Desktop\учёба\3 семестр\ООП\InvestingApp\App.xaml
+51711968576
 
-29-1638519405
-198650335325
-MainWindow.xaml;Views\AdminPage.xaml;Views\LoginPage.xaml;
+33-518315749
+198-1133866272
+MainWindow.xaml;Views\AdminPage.xaml;Views\LoginPage.xaml;Views\RegisterPage.xaml;Views\UserPage.xaml;
 
 False
 

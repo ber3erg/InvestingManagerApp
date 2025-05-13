@@ -16,12 +16,42 @@ namespace InvestingManagerApp.Services
             // для начала прочитаем содержимое файла
             // А также проведём десериализацию данных
             // Прочитанные данные помещаем в список
-            string objectsJson = File.ReadAllText(filename, Encoding.UTF8);
-            List<T> _objects = new List<T>();
-            if (!string.IsNullOrWhiteSpace(objectsJson)){
-                _objects = JsonSerializer.Deserialize<List<T>>(objectsJson)!;
+            if (!File.Exists(filename))
+            {
+                return new List<T>(); // Возвращаем пустой список, если файл не найден
             }
-            return _objects;
+
+            try
+            {
+                string objectsJson = File.ReadAllText(filename, Encoding.UTF8);
+                if (string.IsNullOrWhiteSpace(objectsJson))
+                {
+                    return new List<T>(); // Возвращаем пустой список, если файл пуст
+                }
+
+                // Десериализация JSON в список
+                List<T> resultList = JsonSerializer.Deserialize<List<T>>(objectsJson);
+                return resultList ?? new List<T>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка чтения файла: {ex.Message}");
+                return new List<T>(); // Возвращаем пустой список в случае ошибки
+            }
+
+        }
+
+        public static void WriteItemsToJsonFile<T>(List<T> items, string filePath)
+        {
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            };
+
+            string jsonString = JsonSerializer.Serialize(items, options);
+            var utf8WithBom = new UTF8Encoding(encoderShouldEmitUTF8Identifier: true);
+            File.WriteAllText(filePath, jsonString, utf8WithBom);
         }
 
         public static List<Admin> GetAdminsFromJsonFile()
@@ -32,7 +62,12 @@ namespace InvestingManagerApp.Services
         public static List<User> GetUsersFromJsonFile()
         {
             List<User> usersFromJson = GetAllFromFile<User>(JsonFilePaths.users);
-            return usersFromJson;
+            if (usersFromJson.Count > 0)
+            {
+                int maxId = usersFromJson.Max(s => s.Id);
+                User.SetCounter(maxId);
+            }
+            return new List<User>(usersFromJson);
         }
 
         public static List<Portfolio> GetPortfoliosFromJsonFile()
@@ -69,7 +104,15 @@ namespace InvestingManagerApp.Services
 
             string jsonString = JsonSerializer.Serialize(items, options);
             var utf8WithBom = new UTF8Encoding(encoderShouldEmitUTF8Identifier: true);
-            File.WriteAllText(filePath, jsonString, utf8WithBom);
+            try
+            {
+                // Записываем в файл, используя правильную кодировку
+                File.WriteAllText(filePath, jsonString, Encoding.UTF8);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка записи в файл: {ex.Message}");
+            }
         }
         public static void AddAdminToJsonFile(Admin _admin)
         {
@@ -78,7 +121,9 @@ namespace InvestingManagerApp.Services
 
         public static void AddUserToJsonFile(User _user)
         {
-            AddItemToJsonFile<User>(_user, JsonFilePaths.users);
+            List<User> users = GetUsersFromJsonFile();
+            users.Add(_user);
+            WriteItemsToJsonFile<User>(users, JsonFilePaths.users);
         }
 
         public static void AddPortfolioToJsonFile(Portfolio _portfolio)
@@ -103,7 +148,16 @@ namespace InvestingManagerApp.Services
         public static void DeleteItemFromJsonFile<T>(T item, string filePath)
         {
             List<T> items = GetAllFromFile<T>(filePath);
-            items.Remove(item);
+            for (int i = 0; i < items.Count; i++)
+            {
+                //if (items[i].Id == securityId)
+                //{
+                //    var security = Securities[i];
+                //    Securities.RemoveAt(i);
+                //    JsonDataStorage.DeleteSecurityFromJsonFile(security);
+                //    break; // Выход, если Id уникальный
+                //}
+            }
 
             var options = new JsonSerializerOptions
             {
@@ -121,7 +175,7 @@ namespace InvestingManagerApp.Services
             DeleteItemFromJsonFile<Person>(_user, JsonFilePaths.users);
         }
 
-        public static void DeleteUserFromJsonFile(Admin _admin)
+        public static void DeleteAdminFromJsonFile(Admin _admin)
         {
             DeleteItemFromJsonFile<Admin>(_admin, JsonFilePaths.admin);
         }
@@ -130,10 +184,7 @@ namespace InvestingManagerApp.Services
         {
             DeleteItemFromJsonFile<Portfolio>(_portfolio, JsonFilePaths.portfolios);
         } 
-        public static void DeleteSecurityFromJsonFile(Security _security)
-        {
-            DeleteItemFromJsonFile<Security>(_security, JsonFilePaths.securities);
-        } 
+        
 
         public static void DeleteTransactionFromJsonFile(Transaction _transaction)
         {

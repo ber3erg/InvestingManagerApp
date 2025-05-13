@@ -1,22 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\\u041F\u041A\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\\u041A\u041F\\InvestingApp\\",
+  "WorkspaceRootPath": "C:\\Users\\\u041F\u0451\u0442\u0440 \u0418\u0432\u0430\u043D\u043E\u0432\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\\u043F\u043A\\desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u043E\u043E\u043F\\\u043A\u043F\\investingapp\\loginwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:loginwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\\u043F\u0451\u0442\u0440 \u0438\u0432\u0430\u043D\u043E\u0432\\desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u043E\u043E\u043F\\investingapp\\views\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:views\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\\u043F\u043A\\desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u043E\u043E\u043F\\\u043A\u043F\\investingapp\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\\u043F\u0451\u0442\u0440 \u0438\u0432\u0430\u043D\u043E\u0432\\desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u043E\u043E\u043F\\investingapp\\viewmodels\\loginpageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:viewmodels\\loginpageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\\u043F\u043A\\desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u043E\u043E\u043F\\\u043A\u043F\\investingapp\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\\u043F\u0451\u0442\u0440 \u0438\u0432\u0430\u043D\u043E\u0432\\desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u043E\u043E\u043F\\investingapp\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\\u043F\u043A\\desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u043E\u043E\u043F\\\u043A\u043F\\investingapp\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\\u043F\u0451\u0442\u0440 \u0438\u0432\u0430\u043D\u043E\u0432\\desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u043E\u043E\u043F\\investingapp\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\\u043F\u0451\u0442\u0440 \u0438\u0432\u0430\u043D\u043E\u0432\\desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u043E\u043E\u043F\\investingapp\\services\\usersession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:services\\usersession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,52 +62,66 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LoginWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\\u041F\u041A\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\\u041A\u041F\\InvestingApp\\LoginWindow.xaml.cs",
-              "RelativeDocumentMoniker": "LoginWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\\u041F\u041A\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\\u041A\u041F\\InvestingApp\\LoginWindow.xaml.cs",
-              "RelativeToolTip": "LoginWindow.xaml.cs",
-              "ViewState": "AQIAABQAAAAAAAAAAAAxwBgAAAAiAAAA",
+              "DocumentIndex": 3,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\\u041F\u0451\u0442\u0440 \u0418\u0432\u0430\u043D\u043E\u0432\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingApp\\ViewModels\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\MainViewModel.cs",
+              "ToolTip": "C:\\Users\\\u041F\u0451\u0442\u0440 \u0418\u0432\u0430\u043D\u043E\u0432\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingApp\\ViewModels\\MainViewModel.cs",
+              "RelativeToolTip": "ViewModels\\MainViewModel.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAA5wBkAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T18:34:11.122Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "LoginWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\\u041F\u041A\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\\u041A\u041F\\InvestingApp\\LoginWindow.xaml",
-              "RelativeDocumentMoniker": "LoginWindow.xaml",
-              "ToolTip": "C:\\Users\\\u041F\u041A\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\\u041A\u041F\\InvestingApp\\LoginWindow.xaml",
-              "RelativeToolTip": "LoginWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-10T18:33:51.283Z",
+              "WhenOpened": "2025-05-13T03:12:23.874Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "App.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\\u041F\u041A\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\\u041A\u041F\\InvestingApp\\App.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\\u041F\u0451\u0442\u0440 \u0418\u0432\u0430\u043D\u043E\u0432\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingApp\\App.xaml.cs",
               "RelativeDocumentMoniker": "App.xaml.cs",
-              "ToolTip": "C:\\Users\\\u041F\u041A\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\\u041A\u041F\\InvestingApp\\App.xaml.cs",
+              "ToolTip": "C:\\Users\\\u041F\u0451\u0442\u0440 \u0418\u0432\u0430\u043D\u043E\u0432\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingApp\\App.xaml.cs",
               "RelativeToolTip": "App.xaml.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAfAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T18:32:26.507Z",
+              "WhenOpened": "2025-05-13T03:09:28.465Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "App.xaml",
-              "DocumentMoniker": "C:\\Users\\\u041F\u041A\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\\u041A\u041F\\InvestingApp\\App.xaml",
-              "RelativeDocumentMoniker": "App.xaml",
-              "ToolTip": "C:\\Users\\\u041F\u041A\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\\u041A\u041F\\InvestingApp\\App.xaml",
-              "RelativeToolTip": "App.xaml",
+              "DocumentIndex": 4,
+              "Title": "UserSession.cs",
+              "DocumentMoniker": "C:\\Users\\\u041F\u0451\u0442\u0440 \u0418\u0432\u0430\u043D\u043E\u0432\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingApp\\Services\\UserSession.cs",
+              "RelativeDocumentMoniker": "Services\\UserSession.cs",
+              "ToolTip": "C:\\Users\\\u041F\u0451\u0442\u0440 \u0418\u0432\u0430\u043D\u043E\u0432\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingApp\\Services\\UserSession.cs",
+              "RelativeToolTip": "Services\\UserSession.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T03:08:46.343Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoginPageViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\\u041F\u0451\u0442\u0440 \u0418\u0432\u0430\u043D\u043E\u0432\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingApp\\ViewModels\\LoginPageViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\LoginPageViewModel.cs",
+              "ToolTip": "C:\\Users\\\u041F\u0451\u0442\u0440 \u0418\u0432\u0430\u043D\u043E\u0432\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingApp\\ViewModels\\LoginPageViewModel.cs",
+              "RelativeToolTip": "ViewModels\\LoginPageViewModel.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAvwEkAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T02:59:49.729Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LoginPage.xaml",
+              "DocumentMoniker": "C:\\Users\\\u041F\u0451\u0442\u0440 \u0418\u0432\u0430\u043D\u043E\u0432\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingApp\\Views\\LoginPage.xaml",
+              "RelativeDocumentMoniker": "Views\\LoginPage.xaml",
+              "ToolTip": "C:\\Users\\\u041F\u0451\u0442\u0440 \u0418\u0432\u0430\u043D\u043E\u0432\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingApp\\Views\\LoginPage.xaml",
+              "RelativeToolTip": "Views\\LoginPage.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-05-10T18:30:21.612Z",
+              "WhenOpened": "2025-05-13T02:59:30.789Z",
               "EditorCaption": ""
             }
           ]

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using InvestingManagerApp.Services;
 
 namespace InvestingManagerApp
 {
@@ -9,8 +10,8 @@ namespace InvestingManagerApp
             base.OnStartup(e);
 
             // Создаем и показываем главное окно (MainWindow)
-            LoginWindow loginWindow = new LoginWindow();
-            loginWindow.Show();
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
         }
     }
 }

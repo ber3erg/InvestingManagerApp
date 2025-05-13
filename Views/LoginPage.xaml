@@ -1,10 +1,13 @@
-﻿<Page x:Class="InvestingManagerApp.LoginWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        Title="Login" Height="450" Width="800">
+﻿<Page x:Class="InvestingManagerApp.Views.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InvestingManagerApp.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="LoginPage">
+
     <Grid>
         <StackPanel Width="250"
                     Orientation="Vertical"
@@ -19,20 +22,18 @@
                        FontFamily="Montserrat"
                        FontWeight="Bold"
                        Margin="12, 20, 12, 6"/>
-            <TextBox x:Name="EnteredLogin"
-                     Text="{Binding Username}"
+            <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"
                      FontFamily="Montserrat"
                      FontWeight="Medium"
                      Height="24"
                      FontSize="12"/>
-            
+
             <TextBlock Text="Password"
                        FontSize="12"
                        FontFamily="Montserrat"
                        FontWeight="Bold"
                        Margin="12, 12, 12, 6"/>
-            <TextBox x:Name="EnteredPassword"
-                         
+            <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"                         
                      FontFamily="Montserrat"
                      FontWeight="Medium"
                      Height="24"
@@ -44,7 +45,7 @@
                        FontWeight="Medium"
                        Margin="12, 0, 12, 0"
                        TextWrapping="Wrap"/>
-            
+
             <Button Command="{Binding LoginCommand}"
                     BorderThickness="0"
                     Content="Войти"
@@ -56,10 +57,9 @@
                     Width="100"
                     Height="32"
                     Cursor="Hand"
-                    Click="btnLogin_Click"
                     Margin="12,8, 12, 8"></Button>
-            
-            <Button x:Name="btnSignUp"
+
+            <Button Command="{Binding RegisterCommand}"
                     BorderThickness="0"
                     Content="Зарегестрироваться"
                     Foreground="#532267"
@@ -69,8 +69,7 @@
                     FontWeight="Medium"
                     Width="140"
                     Cursor="Hand"
-                    Click="btnSignUp_Click"
-                    Margin="0"></Button>        
+                    Margin="0"></Button>
         </StackPanel>
     </Grid>
 </Page>

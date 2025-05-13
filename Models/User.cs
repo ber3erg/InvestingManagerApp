@@ -5,6 +5,11 @@ namespace InvestingManagerApp.Models
     public class User : Person
     {
 
+        public User() : base() { }
+        public User(string name, string login, string password) : base(name, login, password)
+        {
+
+        }
         public decimal GetTotalInvestment(){
             // Метод просматривает каждый портфель в памяти
             // и сравнивает userId в портфеле с id пользователя

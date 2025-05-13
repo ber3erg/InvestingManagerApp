@@ -4,7 +4,7 @@ namespace InvestingManagerApp.Services
 {
     public static class SecurityStorage
     {
-        public static List<Security> Securities { get; private set; } = JsonDataStorage.GetSecuritiesFromJsonFile();
+        public static List<Security> Securities { get; private set; }
 
         public static void AddSecurity(Security security)
         {
@@ -12,14 +12,28 @@ namespace InvestingManagerApp.Services
             JsonDataStorage.AddSecurityToJsonFile(security);
         }
 
-        public static void RemoveSecurity(int securityId)
-        {   
-            foreach (Security security in Securities) 
+        public static void RemoveSecurityFromJson(int securityId)
+        {
+            for (int i = 0; i < Securities.Count; i++)
             {
-                if (security.Id == securityId)
+                if (Securities[i].Id == securityId)
                 {
-                    Securities.Remove(security);
-                    JsonDataStorage.DeleteSecurityFromJsonFile(security);
+                    Securities.RemoveAt(i);
+                    JsonDataStorage.WriteItemsToJsonFile<Security>(Securities, JsonFilePaths.securities);
+                    break; // Выход, если Id уникальный
+                }
+            }
+        }
+
+        public static void ChangeSecurityPrice(int securityId, decimal newPrice)
+        {
+            for (int i = 0; i < Securities.Count; i++)
+            {
+                if (Securities[i].Id == securityId)
+                {
+                    Securities[i].ChangeCurrentPrice(newPrice);
+                    JsonDataStorage.WriteItemsToJsonFile<Security>(Securities, JsonFilePaths.securities);
+                    break;
                 }
             }
         }
@@ -38,7 +52,13 @@ namespace InvestingManagerApp.Services
 
         public static List<Security> GetAllSecurities()
         {
-            return new List<Security>(Securities); // Возвращаем копию
+            Securities = JsonDataStorage.GetSecuritiesFromJsonFile();
+            if (Securities.Count > 0)
+            {
+                int maxId = Securities.Max(s => s.Id);
+                Security.SetCounter(maxId);
+            }
+            return new List<Security>(Securities);
         }
     }
 }
