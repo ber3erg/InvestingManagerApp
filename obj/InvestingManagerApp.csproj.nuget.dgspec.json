@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Пётр Иванов\\Desktop\\учёба\\3 семестр\\ООП\\InvestingApp\\InvestingManagerApp.csproj": {}
+    "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\учёба\\3 семестр\\ООП\\InvestingManagerApp\\InvestingManagerApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Пётр Иванов\\Desktop\\учёба\\3 семестр\\ООП\\InvestingApp\\InvestingManagerApp.csproj": {
+    "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\учёба\\3 семестр\\ООП\\InvestingManagerApp\\InvestingManagerApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Пётр Иванов\\Desktop\\учёба\\3 семестр\\ООП\\InvestingApp\\InvestingManagerApp.csproj",
+        "projectUniqueName": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\учёба\\3 семестр\\ООП\\InvestingManagerApp\\InvestingManagerApp.csproj",
         "projectName": "InvestingManagerApp",
-        "projectPath": "C:\\Users\\Пётр Иванов\\Desktop\\учёба\\3 семестр\\ООП\\InvestingApp\\InvestingManagerApp.csproj",
-        "packagesPath": "C:\\Users\\Пётр Иванов\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Пётр Иванов\\Desktop\\учёба\\3 семестр\\ООП\\InvestingApp\\obj\\",
+        "projectPath": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\учёба\\3 семестр\\ООП\\InvestingManagerApp\\InvestingManagerApp.csproj",
+        "packagesPath": "C:\\Users\\Ber3erg\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\учёба\\3 семестр\\ООП\\InvestingManagerApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Пётр Иванов\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ber3erg\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,11 +44,23 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net7.0-windows7.0": {
           "targetAlias": "net7.0-windows",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[7.0.19, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.19, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -60,6 +72,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[7.0.20, 7.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[7.0.20, 7.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[7.0.20, 7.0.20]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[7.0.20, 7.0.20]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
@@ -68,7 +98,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.311\\RuntimeIdentifierGraph.json"
         }
       }
     }

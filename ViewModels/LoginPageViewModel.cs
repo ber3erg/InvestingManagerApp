@@ -1,12 +1,14 @@
-﻿using System;
+﻿using InvestingManagerApp.Data;
+using InvestingManagerApp.Models;
+using InvestingManagerApp.Services;
+using InvestingManagerApp.Views;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using InvestingManagerApp.Views;
-using InvestingManagerApp.Services;
-using InvestingManagerApp.Models;
 
 namespace InvestingManagerApp.ViewModels
 {
@@ -18,6 +20,7 @@ namespace InvestingManagerApp.ViewModels
         private string _password;
         private string _errorMessage;
         private List<User> otherUsers;
+        public ObservableCollection<Person> People { get; set; }
 
 
         public string Login
@@ -54,6 +57,9 @@ namespace InvestingManagerApp.ViewModels
             
             LoginCommand = new RelayCommand(ToLogin);
             RegisterCommand = new RelayCommand(NavigateToRegister);
+
+            using var db = new AppDBContext();
+            People = new ObservableCollection<Person>(db.Persons.ToList());
         }
 
         public ICommand LoginCommand { get; }

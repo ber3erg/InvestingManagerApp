@@ -5,7 +5,7 @@ namespace InvestingManagerApp.Models
     public class Portfolio
     {
         private static int counter = 0; // static счётчик
-        public int Id { get; }          // readonly свойство
+        public int Id { get; private set; }          // readonly свойство
         public int UserId { get; private set; }
 
         public string Name { get; private set; }

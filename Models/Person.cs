@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace InvestingManagerApp.Models
 {
-    public abstract class Person
+    public class Person
     {
         private static int counter = 0;
         [JsonInclude]

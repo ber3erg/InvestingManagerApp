@@ -3,7 +3,7 @@
     public class Transaction
     {
         private static int counter = 0; // Сделай static, иначе каждый экземпляр будет считать заново
-        public int Id { get; }          // readonly свойство
+        public int Id { get; private set; }          
         public TransactionType Type { get; private set; }
         public int PortfolioId { get; private set; }
         public int SecurityId { get; private set; } // Связь с ценной бумагой
