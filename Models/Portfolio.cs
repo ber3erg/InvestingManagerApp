@@ -1,22 +1,19 @@
-﻿using InvestingManagerApp.Services;
-
-namespace InvestingManagerApp.Models
+﻿namespace InvestingManagerApp.Models
 {
     public class Portfolio
     {
-        private static int counter = 0; // static счётчик
-        public int Id { get; private set; }          // readonly свойство
-        public int UserId { get; private set; }
+        public int Id { get; set; }
+        public int PersonId { get; set; }
 
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
-        public Portfolio(string name, int userId)
+        public Portfolio()
         {
-            Id = ++counter;
+        }
+        public Portfolio(string name, int personId)
+        {
             Name = name;
-            UserId = userId;
-
-            PortfolioStorage.AddPortfolio(this);
+            PersonId = personId;
         }
 
         public void ChangeName(string name)

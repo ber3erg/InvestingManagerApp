@@ -2,27 +2,25 @@
 {
     public class Transaction
     {
-        private static int counter = 0; // Сделай static, иначе каждый экземпляр будет считать заново
-        public int Id { get; private set; }          
-        public TransactionType Type { get; private set; }
-        public int PortfolioId { get; private set; }
-        public int SecurityId { get; private set; } // Связь с ценной бумагой
-        public DateTime Date { get; private set; }
-        public int Amount { get; private set; } // Кол-во ценных бумаг
-        public decimal PricePerUnit { get; private set; } // плата за единицу ценной бумаги
+        public int Id { get; set; }          
+        public TransactionType Type { get; set; }
+        public int PortfolioId { get; set; }
+        public int SecurityId { get; set; } // Связь с ценной бумагой
+        public DateTime Date { get; set; }
+        public int Amount { get; set; } // Кол-во ценных бумаг
+        public decimal PricePerUnit { get; set; } // плата за единицу ценной бумаги
 
         public Transaction()
         {
-            Id = ++counter;
         }
 
-        private Transaction(int securityId, int portfolioId, TransactionType type, int amount, decimal pricePerUnit, DateTime dateTime)
+        public Transaction(int portfolioId, int securityId, TransactionType type, int amount, decimal pricePerUnit, DateTime dateTime)
             : this()
         {
+            PortfolioId = portfolioId;
             SecurityId = securityId;
             Type = type;
             Amount = amount;
-            Type = type;
             Date = dateTime;
             PricePerUnit = pricePerUnit;
         }
