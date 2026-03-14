@@ -2,7 +2,7 @@
 
 namespace InvestingManagerApp.Services
 {
-    public static class PortfolioAnalyzer
+    public static class PortfolioAnalyticsService
     {
         public static decimal CalculatePortfelValue(int portfolioId)
         {

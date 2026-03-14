@@ -19,7 +19,7 @@ namespace InvestingManagerApp.Models
             foreach (Portfolio portfel in PortfolioStorage.Portfolios) {
                 if (portfel.UserId == Id) 
                 {
-                    result += PortfolioAnalyzer.CalculatePortfelValue(portfel.Id);
+                    result += PortfolioAnalyticsService.CalculatePortfelValue(portfel.Id);
                 }
             }
             return result;
@@ -35,7 +35,7 @@ namespace InvestingManagerApp.Models
             {
                 if (portfel.UserId == Id)
                 {
-                    result += PortfolioAnalyzer.CalculatePortfelProfit(portfel.Id);
+                    result += PortfolioAnalyticsService.CalculatePortfelProfit(portfel.Id);
                 }
             }
             return result;
