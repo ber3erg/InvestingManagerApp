@@ -15,13 +15,38 @@ namespace InvestingManagerApp.Services
 
         public Person? AuthenticatePerson(string login, string password)
         {
-
-            return new Person();
+            Person? finded = GetPersonByLogin(login);
+            if (GetPersonByLogin(login) == null)
+            {
+                return null;
+            }
+            else
+            {
+                if (finded.Password == password)
+                {
+                    return new Person();
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
-        public bool RegisterPerson(string login, string password)
+        public bool RegisterPerson(string name, string login, string password)
         {
-            return true;
+            if (!string.IsNullOrWhiteSpace(login) & GetPersonByLogin(login) == null)
+            {
+                using var db = new AppDBContext();                      // Создание контекста БД с автоматическим освобождением ресурсов после завершения работы
+                Person newPerson = new Person(name, login, password);   // создаём человека по введённым данным
+                db.Persons.Add(newPerson);                              // добавляет в контекст 
+                db.SaveChanges();                                       // сохраняет изменения в базу
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public Person? GetPersonByLogin(string login) { 
