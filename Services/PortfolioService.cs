@@ -1,4 +1,5 @@
-﻿using InvestingManagerApp.Models;
+﻿using InvestingManagerApp.Data;
+using InvestingManagerApp.Models;
 
 namespace InvestingManagerApp.Services
 {
@@ -8,26 +9,33 @@ namespace InvestingManagerApp.Services
         // 1. Получения портфелей по пользователюID
         // 2. удаление портфеля
 
-        public static Portfolio[] GetPortfoliosByPerson()
+        public List<Portfolio> GetPortfoliosByPersonId(int personId)
         {
-            return new Portfolio[0];
+            using var db = new AppDBContext();                                          // создание контекста
+            var resultList = db.Portfolios.Where(p => p.PersonId == personId).ToList(); // все портфели, где совпадает personId добавляются в итоговый список
+            return resultList;
         }
 
-        public static Portfolio AddPortfolio()
+        public void AddPortfolio(Portfolio portfolio)
         {
-            return new Portfolio();
+            using var db = new AppDBContext();
+            db.Portfolios.Add(portfolio);
+            db.SaveChanges();
         }
 
-        public static Portfolio RemovePortfolio()
+        public void RemovePortfolio(int portfolioId)
         {
-            return new Portfolio();
+            using var db = new AppDBContext();
+            var portfolio = db.Portfolios.FirstOrDefault(p => p.Id == portfolioId);
+            if (portfolio != null) {
+                db.Portfolios.Remove(portfolio);
+                db.SaveChanges();
+            }
         }
-
-        public static Portfolio GetPortfolioById() 
+        public Portfolio? GetPortfolioById(int portfolioId)
         {
-            return new Portfolio();
+            using var db = new AppDBContext();
+            return db.Portfolios.FirstOrDefault(p => p.Id == portfolioId);
         }
-
-        // GetPortfolioByPerson
     }
 }
