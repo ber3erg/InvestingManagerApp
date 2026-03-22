@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace InvestingManagerApp.Models
 {
     // Класс нужен, чтобы хранить в нём информацию по одной ценной бумаге в портфеле
-    internal class PortfolioAsset
+    public class PortfolioAsset
     {
         public int Id { get; set; }
         public int PortfolioId { get; set; }
@@ -28,5 +28,6 @@ namespace InvestingManagerApp.Models
             PortfolioId = portfolioId;
             SecurityId = securityId;
         }
+
     }
 }

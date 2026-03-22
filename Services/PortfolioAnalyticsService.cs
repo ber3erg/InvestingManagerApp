@@ -1,8 +1,9 @@
 ﻿using InvestingManagerApp.Models;
+using InvestingManagerApp.Data;
 
 namespace InvestingManagerApp.Services
 {
-    public static class PortfolioAnalyticsService
+    public class PortfolioAnalyticsService
     {
         // Сервис аналитики содержимого портфеля и заталкивания данных в portfolioassets
         // 1. Подсчёт суммарной покупки -
@@ -16,117 +17,160 @@ namespace InvestingManagerApp.Services
         // 9. Подсчёт общей прибыли бумаги в портфеле -
         // 
 
-        public static decimal BuildPortfolioAssets()
-        {
-            return 0m;
-        }
-        public static decimal CalculatePortfolioSummary(int portfolioId)
-        {
-            // сначала посчитаем вложенное каждой ценной бумагой, а потом суммируем
-            decimal result = 0;
-            List<int> securitiesIds = TransactionStorage.GetSecuritiesByPortfelId(portfolioId);
-            foreach (int id in securitiesIds)
-            {
-                result += CalcSecurityValueInPortfolio(portfolioId, id);
-            }
 
-            return result;
-        }
-        public static decimal CalculateSecurityMetrics()
-        {
-            return 0m;
-        }
-        public static decimal CalculatePortfelTotalProfit(int portfolioId)
+        public decimal CalculatePortfolioTotalValue(int portfolioId)
         {
             // сначала посчитаем вложенное каждой ценной бумагой, а потом суммируем
-            decimal result = 0;
-            List<int> securitiesIds = TransactionStorage.GetSecuritiesByPortfelId(portfolioId);
-            foreach (int id in securitiesIds)
+            decimal result = 0m;
+            List<PortfolioAsset> assets = BuildPortfolioAssets(portfolioId);
+
+            foreach (var asset in assets)
             {
-                result += CalcSecurityProfitInPortfolio(portfolioId, id);
+                result += CalcTotalSecurityPrice(asset);
             }
 
             return result;
         }
 
-        public static int CalcTotalSecurityQuantityInPortf(int portfId, int secId)
+        public decimal CalculatePortfolioTotalProfit(int portfolioId)
+        {
+            // для посчёта суммарной прибыли по портфелю, будем вызывать buildPortfolioAssets
+            // и по assets будем считать итоги
+
+            decimal result = 0m;
+            List<PortfolioAsset> assets = BuildPortfolioAssets(portfolioId);
+
+            foreach (var asset in assets) 
+            {
+                result += CalcTotalSecurityProfit(asset);
+            }
+
+            return result;
+        }
+
+
+        public List<PortfolioAsset> BuildPortfolioAssets(int portfolioId)
+        {
+            using var db = new AppDBContext();              // создаём контект
+
+            // создадим выборку transactions по портфелю
+            List<Transaction> transactions = db.Transactions.Where(tr => tr.PortfolioId == portfolioId).ToList();
+
+            // создадим выборку всех secId внутри портфеля
+            List<int> securityIds = transactions.Select(tr => tr.SecurityId).       // select выбирает только поля selectId
+                                                            Distinct().ToList();    // distinct убирает дубликаты
+
+            // создадим выборку securities нужных нам
+            var securities = db.Securities.Where(s => securityIds.Contains(s.Id)).ToDictionary(s => s.Id);
+
+            List<PortfolioAsset> assets = new List<PortfolioAsset>();
+
+            // далее мы строим portfolioAsset по каждой ценной бумаге
+            foreach (var securityId in securityIds)
+            {
+                var secTransactions = transactions.Where(t => t.SecurityId == securityId).ToList();
+                assets.Add(CalculateSecurityMetrics(portfolioId, secTransactions, securities[securityId].CurrentPrice, securityId));
+            }
+
+            return assets;
+        }
+
+        // Считает прибыль с ценной бумаги по портфелю
+        public decimal CalcTotalSecurityProfit(PortfolioAsset asset)
+        {
+            // По логике расчётов:
+            // cуммарнаяПродажа + Кол-во * настоящаяЦена + ПолученнаяСторонняяПрибыль - Суммарная цена покупки = общая прибыль в портфеле
+            decimal result = asset.TotalSellPrice + asset.Quantity * asset.CurrentPrice + asset.IncomeRecieved - asset.TotalBuyPrice;
+
+            return result;
+        }
+
+        // считает стоимость акций, которые сейчас в портфеле (непроданные)
+        public decimal CalcTotalSecurityPrice(PortfolioAsset asset)
+        {
+            decimal result = asset.CurrentPrice * asset.Quantity;
+
+            return result;
+        }
+
+        public PortfolioAsset CalculateSecurityMetrics(int portfolioId, List<Transaction> transactions, decimal currentSecurityPrice, int securityId)
+        {
+            // это единственный сервис, который работает с portfolioasset
+            // поэтому мы можем загонять данные в ассет из-вне
+            PortfolioAsset asset = new PortfolioAsset(portfolioId, securityId);
+
+            asset.Quantity = CalcSecurityQuantityInPortf(transactions);
+            asset.TotalBuyPrice = CalcTotalBuyPrice(transactions);
+            asset.CurrentPrice = currentSecurityPrice;
+            asset.TotalSellPrice = CalcTotalSellPrice(transactions);
+            asset.IncomeRecieved = CalcTotalIncomeProfit(transactions);
+            
+            return asset;
+        }
+
+
+        // считается кол-во определённой ценной бумаги в портфеле
+        public int CalcSecurityQuantityInPortf(List<Transaction> transactions)
         {
             int result = 0;
-            foreach (Transaction transaction in TransactionStorage.GetTransactionsByPortfolioId(portfId))
+            foreach (Transaction transaction in transactions)
             {
-                if (transaction.SecurityId == secId)
+                if (transaction.Type == TransactionType.Buy)
                 {
-                    if (transaction.Type == TransactionType.Buy)
-                    {
-                        result += transaction.Amount;
-                    }
-                    else if (transaction.Type == TransactionType.Sell)
-                    {
-                        result -= transaction.Amount;
-                    }
+                    result += transaction.Amount;
+                }
+                else if (transaction.Type == TransactionType.Sell)
+                {
+                    result -= transaction.Amount;
                 }
             }
             return result;
         }
 
-        public static decimal CalcTotalSecurityPrice(int portfolioId, int secId) 
+
+        // считается суммарная стоимость покупок
+        public decimal CalcTotalBuyPrice(List<Transaction> transactions)
         {
-            int amount = CalcSecurityAmount(portfolioId, secId);
-            Security sec = (Security)SecurityStorage.GetSecurityById(secId)!;
-            decimal result = amount * sec.CurrentPrice;
+            var buyTransactions = transactions.Where(p => p.Type == TransactionType.Buy).ToList();
 
-            return result;
-        }
-
-        public static decimal CalcTotalSecurityProfit(int portfolioId, int secId)
-        {
-            // подсчёт прибыли происходит следующим образом
-            // 1. высчитывается потенциальная прибыль (кол-во купленного за всё время * настояющую цену)
-            // 2. высчитывается потерянная прибыль (из настоящей цены вычитается цена продажи и прибавляется к общему значению)
-            // 3. потенциальная прибыль - потерянная прибыль
-
-            Security _security = SecurityStorage.GetSecurityById(secId)!;
-
-            decimal potencialProfit = CalcSecurityAmount(portfolioId, secId) 
-                * _security.CurrentPrice;
-
-            decimal lostProfit = 0;
-
-            // в получаемом списке есть транзакции только связанные с портфелем и ценной бумагой
-            List<Transaction> _transactions = TransactionStorage.Transactions
-                .Where(t => t.PortfolioId == portfolioId && t.SecurityId == secId)
-                .ToList();
-            
-            foreach (Transaction transaction in _transactions)
+            decimal totalBuyPrice = 0m;
+            foreach (Transaction transaction in buyTransactions) 
             {
-                if (transaction.Type == TransactionType.Sell)
-                {
-                    lostProfit += (_security.CurrentPrice - transaction.PricePerUnit) * transaction.Amount;
-                } else if (transaction.Type == TransactionType.Dividend || transaction.Type == TransactionType.Coupon)
-                {
-                    potencialProfit += transaction.PricePerUnit * transaction.Amount;
-                }
+                totalBuyPrice += transaction.PricePerUnit * transaction.Amount;
             }
 
-            return potencialProfit - lostProfit;
+            return totalBuyPrice;
         }
 
-        public static decimal CalcTotalBuyPrice()
+
+        // считается суммарная стоимость продаж
+        public decimal CalcTotalSellPrice(List<Transaction> transactions)
         {
-            decimal result = 0;
-            return result;
+            var sellTransactions = transactions.Where(p => p.Type == TransactionType.Sell).ToList();
+
+            decimal totalSellPrice = 0m;
+            foreach (Transaction transaction in sellTransactions)
+            {
+                totalSellPrice += transaction.PricePerUnit * transaction.Amount;
+            }
+
+            return totalSellPrice;
         }
 
-        public static decimal CalcTotalSellPrice()
-        {
-            decimal result = 0;
-            return result;
-        }
 
-        public static decimal CalcTotalIncomeProfit()
+        // считается суммарный доход полученный с девидендов и купонов
+        public decimal CalcTotalIncomeProfit(List<Transaction> transactions)
         {
-            decimal result = 0;
-            return result;
+            var incomeTransactions = transactions.Where(p => p.Type == TransactionType.Dividend ||
+                                                            p.Type == TransactionType.Coupon).ToList();
+
+            decimal totalIncomeProfit = 0m;
+            foreach (Transaction transaction in incomeTransactions)
+            {
+                totalIncomeProfit += transaction.PricePerUnit * transaction.Amount;
+            }
+
+            return totalIncomeProfit;
         }
     }
 }
