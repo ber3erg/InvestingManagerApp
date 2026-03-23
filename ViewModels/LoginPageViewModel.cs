@@ -2,12 +2,6 @@
 using InvestingManagerApp.Models;
 using InvestingManagerApp.Services;
 using InvestingManagerApp.Views;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace InvestingManagerApp.ViewModels
@@ -19,8 +13,8 @@ namespace InvestingManagerApp.ViewModels
         private string _login;
         private string _password;
         private string _errorMessage;
-        private List<User> otherUsers;
-        public ObservableCollection<Person> People { get; set; }
+        private readonly AuthService _authService;
+        private readonly PersonSession _personSession;
 
 
         public string Login
@@ -50,48 +44,37 @@ namespace InvestingManagerApp.ViewModels
                 OnPropertyChanged($"{nameof(ErrorMessage)}");
             }
         }
-        public LoginPageViewModel(MainViewModel mainViewModel)
+        public LoginPageViewModel(MainViewModel mainViewModel, AuthService authService, PersonSession personSession)
         {
             _mainViewModel = mainViewModel;
-            otherUsers = JsonDataStorage.GetUsersFromJsonFile();
+            _authService = authService;
+            _personSession = personSession;
             
             LoginCommand = new RelayCommand(ToLogin);
             RegisterCommand = new RelayCommand(NavigateToRegister);
-
-            using var db = new AppDBContext();
-            People = new ObservableCollection<Person>(db.Persons.ToList());
         }
 
         public ICommand LoginCommand { get; }
         public ICommand RegisterCommand { get; }
 
-        Admin admin = new Admin("Пётр", "terb", "1234");
         public void ToLogin()
         {
-            if (Login == admin.Login && Password == admin.Password)
+            var person = _authService.AuthenticatePerson(Login, Password);
+            if (person != null)
             {
-
-                var adminPage = new AdminPageViewModel(_mainViewModel);
-                _mainViewModel.NavigateTo(new AdminPage { DataContext = adminPage });
-            } else
-            {
-                foreach (User user in otherUsers)
-                {
-                    if (user.Login == Login && Password == user.Password)
-                    {
-                        _mainViewModel.CurrentUser.Login(user);
-                        var userPage = new UserPageViewModel(_mainViewModel);
-                        _mainViewModel.NavigateTo(new UserPage { DataContext = userPage });
-                        
-                    }
-                }
+                _personSession.SignIn(person);
+                var mainPage = new MainPageViewModel(_mainViewModel, _personSession);
+                _mainViewModel.NavigateTo(new MainPage { DataContext = mainPage });
             }
-            ErrorMessage = "Пользователь не найден";
+            else
+            {
+                ErrorMessage = "Пользователь не найден";
+            }
         }
 
         public void NavigateToRegister()
         {
-            var registerPage = new RegisterViewModel(_mainViewModel);
+            var registerPage = new RegisterViewModel(_mainViewModel, _authService, _personSession);
             _mainViewModel.NavigateTo(new RegisterPage { DataContext = registerPage });
         }
     }

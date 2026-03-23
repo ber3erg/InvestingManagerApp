@@ -13,12 +13,13 @@ namespace InvestingManagerApp.ViewModels
     public class RegisterViewModel : ViewModelBase
     {
         public MainViewModel _mainViewModel;
+        private readonly AuthService _authService;
+        private readonly PersonSession _personSession;
         private string _userName;
         private string _login;
         private string _password;
         private string _confirmingPassword;
         private string? _errorMessage;
-        private List<User> _otherUsers;
 
         public string UserName
         {
@@ -104,45 +105,38 @@ namespace InvestingManagerApp.ViewModels
                 OnPropertyChanged(nameof(ErrorMessage));
             }
         }
-        public List<User> OtherUsers
-        {
-            get => _otherUsers;
-            set
-            {
-                _otherUsers = value;
-            }
-        }
 
         public ICommand RegisterCommand { get; set; }
         public ICommand NavigateToLoginCommand { get; set; }
 
-        public RegisterViewModel(MainViewModel mainViewModel)
+        public RegisterViewModel(MainViewModel mainViewModel, AuthService authService, PersonSession personSession)
         {
             _mainViewModel = mainViewModel;
-            OtherUsers = JsonDataStorage.GetUsersFromJsonFile();
+            _authService = authService;
+            _personSession = personSession;
             RegisterCommand = new RelayCommand(RegisterUser);
             NavigateToLoginCommand = new RelayCommand(NavigateToLoginPage);
         }
 
         public void RegisterUser()
         {
-            foreach (User user in OtherUsers)
-            {
-                if (user.Login == Login)
-                {
-                    ErrorMessage = "Пользователь с таким логином уже существует";
-                }
-            }
-            if (!string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Login) && !string.IsNullOrEmpty(Password) && ErrorMessage == null)
-            {
-                JsonDataStorage.AddUserToJsonFile(new User(UserName, Login, Password));
-                NavigateToLoginPage();
-            }
+            //foreach (User user in OtherUsers)
+            //{
+            //    if (user.Login == Login)
+            //    {
+            //        ErrorMessage = "Пользователь с таким логином уже существует";
+            //    }
+            //}
+            //if (!string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Login) && !string.IsNullOrEmpty(Password) && ErrorMessage == null)
+            //{
+            //    JsonDataStorage.AddUserToJsonFile(new User(UserName, Login, Password));
+            //    NavigateToLoginPage();
+            //}
         }
 
         public void NavigateToLoginPage()
         {
-            var loginPage = new LoginPageViewModel(_mainViewModel);
+            var loginPage = new LoginPageViewModel(_mainViewModel, _authService, _personSession);
             _mainViewModel.NavigateTo(new LoginPage { DataContext=loginPage });
         }
     }

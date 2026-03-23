@@ -16,6 +16,7 @@ namespace InvestingManagerApp.Models
         // По логике расчётов:
         // cуммарнаяПродажа + Кол-во * настоящаяЦена + ПолученнаяСторонняяПрибыль - Суммарная цена покупки = общая прибыль в портфеле
         public decimal TotalBuyPrice { get; set; }
+        public decimal CurrentPrice { get; set; }
         public decimal TotalSellPrice { get; set; }
         public decimal IncomeRecieved { get; set; }
 

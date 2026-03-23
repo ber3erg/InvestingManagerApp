@@ -45,8 +45,6 @@
                        FontWeight="Medium"
                        Margin="12, 0, 12, 0"
                        TextWrapping="Wrap"/>
-            <DataGrid ItemsSource="{Binding People}"
-                  AutoGenerateColumns="True" />
 
             <Button Command="{Binding LoginCommand}"
                     BorderThickness="0"
