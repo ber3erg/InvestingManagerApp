@@ -132,7 +132,7 @@ namespace InvestingManagerApp.ViewModels
         public AdminPageViewModel(MainViewModel mainViewModel)
         {
             _mainViewModel = mainViewModel;
-            Securities = new ObservableCollection<Security>(SecurityStorage.GetAllSecurities());
+            Securities = new ObservableCollection<Security>();
             SaveCommand = new RelayCommand(SaveData);
             DeleteItemCommand = new RelayCommand<Security>(DeleteSecurity);
             EditItemCommand = new RelayCommand<Security>(EditSecurityPrice);
@@ -141,7 +141,7 @@ namespace InvestingManagerApp.ViewModels
         private void SaveData()
         {
             Security newSecurity = new Security(NewTicker, NewName, NewCompany, _newSecurityType, DecimalCurrentPrice);
-            SecurityStorage.AddSecurity(newSecurity);
+            //SecurityStorage.AddSecurity(newSecurity);
             Securities.Add(newSecurity);
 
             NewTicker = "";
@@ -153,7 +153,7 @@ namespace InvestingManagerApp.ViewModels
 
         private void DeleteSecurity(Security security)
         {
-            SecurityStorage.RemoveSecurityFromJson(security.Id);
+            //SecurityStorage.RemoveSecurityFromJson(security.Id);
             Securities.Remove(security);
         }
         private void EditSecurityPrice(Security security)

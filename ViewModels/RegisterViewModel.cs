@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using InvestingManagerApp.Services;
 using InvestingManagerApp.Models;
 using InvestingManagerApp.Views;
@@ -12,14 +7,14 @@ namespace InvestingManagerApp.ViewModels
 {
     public class RegisterViewModel : ViewModelBase
     {
-        public MainViewModel _mainViewModel;
+        private readonly MainViewModel _mainViewModel;
         private readonly AuthService _authService;
         private readonly PersonSession _personSession;
         private string _userName;
         private string _login;
         private string _password;
         private string _confirmingPassword;
-        private string? _errorMessage;
+        private string? _errorMessage = null;
 
         public string UserName
         {
@@ -28,13 +23,6 @@ namespace InvestingManagerApp.ViewModels
             {
                 _userName = value;
                 OnPropertyChanged(nameof(UserName));
-                if (string.IsNullOrEmpty(value))
-                {
-                    ErrorMessage = "Остались незаполненные поля";
-                } else
-                {
-                    ErrorMessage = null;
-                }
             }
         }
         public string Login
@@ -44,22 +32,6 @@ namespace InvestingManagerApp.ViewModels
             { 
                 _login = value;
                 OnPropertyChanged(nameof(Login));
-
-                if (string.IsNullOrEmpty(value))
-                {
-                    ErrorMessage = "Остались незаполненные поля";
-                }
-                else
-                {
-                    ErrorMessage = null;
-                    foreach (User user in OtherUsers)
-                    {
-                        if (user.Login == value)
-                        {
-                            ErrorMessage = "Пользователь с таким логином уже существует";
-                        }
-                    }
-                }
             }
         }
         public string Password
@@ -69,14 +41,6 @@ namespace InvestingManagerApp.ViewModels
             {
                 _password = value;
                 OnPropertyChanged(nameof(Password));
-                if (string.IsNullOrEmpty(value))
-                {
-                    ErrorMessage = "Остались незаполненные поля";
-                }
-                else
-                {
-                    ErrorMessage = null;
-                }
             }
         }
         public string ConfirmingPassword
@@ -86,13 +50,6 @@ namespace InvestingManagerApp.ViewModels
             {
                 _confirmingPassword = value;
                 OnPropertyChanged(nameof(ConfirmingPassword));
-                if (Password != value || string.IsNullOrEmpty(value))
-                {
-                    ErrorMessage = "Пароли должны совпадать";
-                } else
-                {
-                    ErrorMessage = null;
-                }
             }
         }
 
@@ -120,18 +77,26 @@ namespace InvestingManagerApp.ViewModels
 
         public void RegisterUser()
         {
-            //foreach (User user in OtherUsers)
-            //{
-            //    if (user.Login == Login)
-            //    {
-            //        ErrorMessage = "Пользователь с таким логином уже существует";
-            //    }
-            //}
-            //if (!string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Login) && !string.IsNullOrEmpty(Password) && ErrorMessage == null)
-            //{
-            //    JsonDataStorage.AddUserToJsonFile(new User(UserName, Login, Password));
-            //    NavigateToLoginPage();
-            //}
+            if (string.IsNullOrEmpty(Login) || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(ConfirmingPassword) || string.IsNullOrEmpty(UserName)) 
+            {
+                ErrorMessage = "Остались незаполненные поля";
+            } 
+            else if (Password != ConfirmingPassword)
+            {
+                ErrorMessage = "Пароли должные совпадать";
+            }
+            else    // если error massage ничего не содержит, то проводим регистрацию пользователя
+            {
+                bool flag = _authService.RegisterPerson(UserName, Login, Password);     // регистрация пользователя возвращает bool значение, при успехе - true
+                if (flag)
+                {
+                    NavigateToLoginPage();
+                }
+                else
+                {
+                    ErrorMessage = "Что-то пошло не так";
+                }
+            }
         }
 
         public void NavigateToLoginPage()
