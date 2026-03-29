@@ -7,45 +7,150 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainPage">
-
+    <!--общий грид-->
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100px"/>
+        <Grid.ColumnDefinitions> 
+            <ColumnDefinition Width="100px"/> <!-- меню навигации -->
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <!-- Border для различных свойств границ блока -->
         <Border Grid.Column="0"
                 Background="#313131">
+            <!-- StackPanel позволяет собрать элементы меню вертикально -->
             <StackPanel Orientation="Vertical"
                         Margin="10px, 0">
-                
+                <!-- Каждая кнопка - команда -->
                 <Button Command="{Binding NavigateToMainCommand}"
                         Margin="0, 24px, 0, 0"
-                        Height="75px">
-                    <TextBlock Text="Главная"/>
-                    
+                        Height="80px"
+                        Width="80px">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border"
+                    Background="Transparent"
+                    CornerRadius="12">
+                                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                                    <Image x:Name="MenuIcon"
+                           Source="/Images/mainIcon.png"
+                           Width="48"
+                           Height="48"
+                           Margin="0,0,0,6"/>
+                                    <TextBlock Text="Главная"
+                               Foreground="White"
+                               FontSize="11"
+                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/MainIconBlue.png"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+
+
                 </Button>
                 <Button Command="{Binding NavigateToHistoryCommand}"
-                        Height="75px"
+                        Height="80px"
+                        Width="80px"
                         Margin="0, 24px, 0, 0">
-                    <TextBlock Text="История"/>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border"
+Background="Transparent"
+CornerRadius="12">
+                                <StackPanel HorizontalAlignment="Center"
+        VerticalAlignment="Center">
+                                    <Image x:Name="MenuIcon"
+                                           Source="/Images/SearchIcon.png"
+                                           Width="48"
+                                           Height="48"
+                                           Margin="0,0,0,6"/>
+                                    <TextBlock Text="Поиск ценных бумаг"
+                                               TextWrapping="Wrap"
+                                               Foreground="White"
+                                               FontSize="11"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/SearchIconBlue.png"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
 
                 </Button>
                 <Button Command="{Binding NavigateToSearchCommand}"
                         Height="75px"
                         Margin="0, 24px, 0, 0">
-                    <TextBlock Text="Поиск"/>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border"
+Background="Transparent"
+CornerRadius="12">
+                                <StackPanel HorizontalAlignment="Center"
+        VerticalAlignment="Center">
+                                    <Image x:Name="MenuIcon"
+                                           Source="/Images/HistoryIcon.png"
+                                           Width="48"
+                                           Height="48"
+                                           Margin="0,0,0,6"/>
+                                    <TextBlock Text="История"
+                                               TextWrapping="Wrap"
+                                               Foreground="White"
+                                               FontSize="11"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/HistoryIconBlue.png"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
 
                 </Button>
             </StackPanel>
         </Border>
+        
+        
+        <!-- Грид для основной части экрана -->
         <Grid Grid.Column="1"
               Background="#272727">
             <Grid Margin="64px, 32px">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>  <!-- Строка для загаловка страницы -->
+                    <RowDefinition Height="*"/>     <!-- строка для портфелей пользователя -->
+                    <RowDefinition Height="Auto"/>  <!-- Строка для кнопки добавления портфеля -->
                 </Grid.RowDefinitions>
+                
+                <!-- Загаловок страницы -->
                 <TextBlock Grid.Row="0"
                            Margin="0,0,0,20px"
                            Text="Ваши портфели"
@@ -54,41 +159,102 @@
                            FontFamily="Montserrat"
                            FontWeight="Bold"/>
                 
-                <ItemsControl Grid.Row="1" 
-                              ItemsSource="{Binding PortfolioCards}">
+                <!-- Раздел с портфелями пользователя -->
+                <!-- ItemsControl тег для отображения списка данных -->
+                <ItemsControl Grid.Row="1"                              
+                              ItemsSource="{Binding PortfolioCards}"> <!-- через ItemsSource задаётся принимаемая observeableCollection  -->
+                    
+                    <!-- itemsPanel меняет способ размещения элементов: в ряд, сеткой или стопкой -->
                     <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal"/>
+                        <ItemsPanelTemplate>                        <!-- тег для задания шаблона -->
+                            <WrapPanel Orientation="Horizontal"/>   <!-- WrapPanel располагает в ряд (или столбик) и переносит на новую строку -->
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
+                    
+                    <!-- ItemTemplate задаёт шаблон для вида каждого объекта -->
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Button Width="150px"
-                                    Height="120px"
-                                    Margin="0,0,20,20"
-                                    Background="#313131"
-                                    Command="{Binding DataContext.OpenPortfolioCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                    CommandParameter="{Binding}"
-                                    BorderThickness="0">
+                            <Grid Width="150"
+                                  Height="120"
+                                  Margin="0,0,20,20">
 
-                                <Border CornerRadius="12">
-                                    <StackPanel>
+                                <Border CornerRadius="12"
+                                        Cursor="Hand">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="#313131"/>
+                                            <Setter Property="Cursor" Value="Arrow"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#555555"/>
+                                                    <Setter Property="Cursor" Value="Hand"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <Border.InputBindings>
+                                        <MouseBinding MouseAction="LeftClick"
+                                                        Command="{Binding DataContext.OpenPortfolioCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                                        CommandParameter="{Binding}"/>
+                                    </Border.InputBindings>
+
+                                    <StackPanel Margin="12">
                                         <TextBlock Text="{Binding Name}"
-                                                       Foreground="White"
-                                                       FontSize="16"
-                                                       FontWeight="SemiBold"
-                                                       Margin="0,0,0,12"/>
+                            Foreground="White"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            Margin="0,0,0,12"/>
 
                                         <TextBlock Text="{Binding TotalValue, StringFormat=Стоимость: {0:F2}}"
-                                                       Foreground="White"
-                                                       Margin="0,0,0,6"/>
+                            Foreground="White"
+                            FontSize="12"
+                            Margin="0,0,0,6"/>
 
                                         <TextBlock Text="{Binding TotalProfit, StringFormat=Прибыль/убыток: {0:F2}}"
-                                                       Foreground="White"/>
+                            Foreground="White"
+                            FontSize="12"/>
                                     </StackPanel>
                                 </Border>
 
-                            </Button>
+                                <Button Width="24"
+                                        Height="24"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Top"
+                                        Margin="0,8,8,0"
+                                        FontSize="12"
+                                        Padding="0"
+                                        Command="{Binding DataContext.RemovePortfolioCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                        CommandParameter="{Binding}"
+                                        Background="Transparent"
+                                        BorderThickness="0">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="border"
+                                                    Background="{TemplateBinding Background}"
+                                                    CornerRadius="3">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="border" Property="Background" Value="#969696"/>
+                                                    <Setter Property="Cursor" Value="Hand"/>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter TargetName="border" Property="Background" Value="Transparent"/>
+                                                    <Setter Property="Cursor" Value="Hand"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                    <TextBlock Text="X"
+                                               Foreground="White"
+                                               FontSize="14"
+                                               FontWeight="Bold"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+                                </Button>
+                            </Grid>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
 
@@ -101,14 +267,32 @@
                         Background="#313131"
                         Command="{Binding AddNewPortfolioCommand}"
                         BorderThickness="0">
+                    <!-- Button.Template позволяет полностью видоизменить кнопку -->
                     <Button.Template>
+                        <!--ControlTemplate - обёртка структуры кнопки -->
                         <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}"
+                            <Border x:Name="Border"
+                                    Background="{TemplateBinding Background}"
                                     CornerRadius="12">
                                 <ContentPresenter HorizontalAlignment="Center"
                                                   VerticalAlignment="Center"/>
                             </Border>
+                            <!-- Triggers позволяет работать различными событиями кнопки -->
+                            <ControlTemplate.Triggers>
+                                <!-- Событие: Мышь наведена -->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="#555555"/> <!-- Позвляет настроить цвет фона -->
+                                    <Setter Property="Cursor" Value="Hand"/>                                <!-- Заменяет курсор мыши -->
+                                </Trigger>
+
+                                <!-- Событие: Кнопка нажата -->
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="#313131"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
                         </ControlTemplate>
+                        
                     </Button.Template>
                     <Border Background="#2B2B2B"
                                 CornerRadius="12"

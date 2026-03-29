@@ -9,11 +9,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\HistoryIcon.png" />
+    <None Remove="Images\HistoryIconBlue.png" />
+    <None Remove="Images\mainIcon.png" />
+    <None Remove="Images\MainIconBlue.png" />
+    <None Remove="Images\SearchIcon.png" />
+    <None Remove="Images\SearchIconBlue.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.19" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.19">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\HistoryIcon.png" />
+    <Resource Include="Images\HistoryIconBlue.png" />
+    <Resource Include="Images\mainIcon.png" />
+    <Resource Include="Images\MainIconBlue.png" />
+    <Resource Include="Images\SearchIcon.png" />
+    <Resource Include="Images\SearchIconBlue.png" />
   </ItemGroup>
 
   <ItemGroup>
