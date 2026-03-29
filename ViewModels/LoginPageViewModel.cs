@@ -13,8 +13,6 @@ namespace InvestingManagerApp.ViewModels
         private string _login;
         private string _password;
         private string _errorMessage;
-        private readonly AuthService _authService;
-        private readonly PersonSession _personSession;
 
 
         public string Login
@@ -44,11 +42,9 @@ namespace InvestingManagerApp.ViewModels
                 OnPropertyChanged($"{nameof(ErrorMessage)}");
             }
         }
-        public LoginPageViewModel(MainViewModel mainViewModel, AuthService authService, PersonSession personSession)
+        public LoginPageViewModel(MainViewModel mainViewModel)
         {
             _mainViewModel = mainViewModel;
-            _authService = authService;
-            _personSession = personSession;
             
             LoginCommand = new RelayCommand(ToLogin);
             RegisterCommand = new RelayCommand(NavigateToRegister);
@@ -59,11 +55,11 @@ namespace InvestingManagerApp.ViewModels
 
         public void ToLogin()
         {
-            var person = _authService.AuthenticatePerson(Login, Password);
+            var person = _mainViewModel.AuthService.AuthenticatePerson(Login, Password);
             if (person != null)
             {
-                _personSession.SignIn(person);
-                var mainPage = new MainPageViewModel(_mainViewModel, _personSession);
+                _mainViewModel.PersonSession.SignIn(person);
+                var mainPage = new MainPageViewModel(_mainViewModel);
                 _mainViewModel.NavigateTo(new MainPage { DataContext = mainPage });
             }
             else
@@ -74,7 +70,7 @@ namespace InvestingManagerApp.ViewModels
 
         public void NavigateToRegister()
         {
-            var registerPage = new RegisterViewModel(_mainViewModel, _authService, _personSession);
+            var registerPage = new RegisterViewModel(_mainViewModel);
             _mainViewModel.NavigateTo(new RegisterPage { DataContext = registerPage });
         }
     }

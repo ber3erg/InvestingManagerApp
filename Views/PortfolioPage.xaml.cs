@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace InvestingManagerApp.Views
 {
     /// <summary>
-    /// Логика взаимодействия для PortfelPage.xaml
+    /// Логика взаимодействия для PortfolioPage.xaml
     /// </summary>
-    public partial class PortfelPage : Page
+    public partial class PortfolioPage : Page
     {
-        public PortfelPage()
+        public PortfolioPage()
         {
             InitializeComponent();
         }

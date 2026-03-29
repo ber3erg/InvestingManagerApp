@@ -8,8 +8,6 @@ namespace InvestingManagerApp.ViewModels
     public class RegisterViewModel : ViewModelBase
     {
         private readonly MainViewModel _mainViewModel;
-        private readonly AuthService _authService;
-        private readonly PersonSession _personSession;
         private string _userName;
         private string _login;
         private string _password;
@@ -66,11 +64,9 @@ namespace InvestingManagerApp.ViewModels
         public ICommand RegisterCommand { get; set; }
         public ICommand NavigateToLoginCommand { get; set; }
 
-        public RegisterViewModel(MainViewModel mainViewModel, AuthService authService, PersonSession personSession)
+        public RegisterViewModel(MainViewModel mainViewModel)
         {
             _mainViewModel = mainViewModel;
-            _authService = authService;
-            _personSession = personSession;
             RegisterCommand = new RelayCommand(RegisterUser);
             NavigateToLoginCommand = new RelayCommand(NavigateToLoginPage);
         }
@@ -87,7 +83,7 @@ namespace InvestingManagerApp.ViewModels
             }
             else    // если error massage ничего не содержит, то проводим регистрацию пользователя
             {
-                bool flag = _authService.RegisterPerson(UserName, Login, Password);     // регистрация пользователя возвращает bool значение, при успехе - true
+                bool flag = _mainViewModel.AuthService.RegisterPerson(UserName, Login, Password);     // регистрация пользователя возвращает bool значение, при успехе - true
                 if (flag)
                 {
                     NavigateToLoginPage();
@@ -101,7 +97,7 @@ namespace InvestingManagerApp.ViewModels
 
         public void NavigateToLoginPage()
         {
-            var loginPage = new LoginPageViewModel(_mainViewModel, _authService, _personSession);
+            var loginPage = new LoginPageViewModel(_mainViewModel);
             _mainViewModel.NavigateTo(new LoginPage { DataContext=loginPage });
         }
     }

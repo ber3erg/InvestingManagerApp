@@ -9,6 +9,118 @@
       Title="MainPage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100px"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0"
+                Background="#313131">
+            <StackPanel Orientation="Vertical"
+                        Margin="10px, 0">
+                
+                <Button Command="{Binding NavigateToMainCommand}"
+                        Margin="0, 24px, 0, 0"
+                        Height="75px">
+                    <TextBlock Text="Главная"/>
+                    
+                </Button>
+                <Button Command="{Binding NavigateToHistoryCommand}"
+                        Height="75px"
+                        Margin="0, 24px, 0, 0">
+                    <TextBlock Text="История"/>
+
+                </Button>
+                <Button Command="{Binding NavigateToSearchCommand}"
+                        Height="75px"
+                        Margin="0, 24px, 0, 0">
+                    <TextBlock Text="Поиск"/>
+
+                </Button>
+            </StackPanel>
+        </Border>
+        <Grid Grid.Column="1"
+              Background="#272727">
+            <Grid Margin="64px, 32px">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                           Margin="0,0,0,20px"
+                           Text="Ваши портфели"
+                           Foreground="#FFFFFF"
+                           FontSize="32px"
+                           FontFamily="Montserrat"
+                           FontWeight="Bold"/>
+                
+                <ItemsControl Grid.Row="1" 
+                              ItemsSource="{Binding PortfolioCards}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Width="150px"
+                                    Height="120px"
+                                    Margin="0,0,20,20"
+                                    Background="#313131"
+                                    Command="{Binding DataContext.OpenPortfolioCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                    CommandParameter="{Binding}"
+                                    BorderThickness="0">
+
+                                <Border CornerRadius="12">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Name}"
+                                                       Foreground="White"
+                                                       FontSize="16"
+                                                       FontWeight="SemiBold"
+                                                       Margin="0,0,0,12"/>
+
+                                        <TextBlock Text="{Binding TotalValue, StringFormat=Стоимость: {0:F2}}"
+                                                       Foreground="White"
+                                                       Margin="0,0,0,6"/>
+
+                                        <TextBlock Text="{Binding TotalProfit, StringFormat=Прибыль/убыток: {0:F2}}"
+                                                       Foreground="White"/>
+                                    </StackPanel>
+                                </Border>
+
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+                
+                <Button Grid.Row="2"
+                        Width="150"
+                        Height="120"
+                        Margin="0,20,20,0"
+                        Background="#313131"
+                        Command="{Binding AddNewPortfolioCommand}"
+                        BorderThickness="0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
+                                    CornerRadius="12">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Border Background="#2B2B2B"
+                                CornerRadius="12"
+                            Height="40px">
+                        <TextBlock Text="+"
+                                       Foreground="White"
+                                       FontSize="40"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                    </Border>
+                </Button>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

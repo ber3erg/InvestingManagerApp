@@ -25,7 +25,7 @@
     <Compile Update="Views\MainUserPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\PortfelPage.xaml.cs">
+    <Compile Update="Views\PortfolioPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\RegisterPage.xaml.cs">
