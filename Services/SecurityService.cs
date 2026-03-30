@@ -27,6 +27,12 @@ namespace InvestingManagerApp.Services
                 .ToList();                              // по итогу если хоть где-то совпадение, то будет добавлен в список
         }
 
+        public Security GetSecurityById(int securityId)
+        {
+            using var db = new AppDBContext();
+            return db.Securities.FirstOrDefault(s => securityId == s.Id);
+        }
+
 
         //public List<Security> GetSecuritiesByTicker(string ticker)
         //{

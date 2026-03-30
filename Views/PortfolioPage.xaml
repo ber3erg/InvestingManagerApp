@@ -6,9 +6,225 @@
       xmlns:local="clr-namespace:InvestingManagerApp.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PortfolioPage">
-
+      Title="PortfolioPage"
+      Foreground="#FFF"
+      FontFamily="Montserrat">
+    <Page.Resources>
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Margin" Value="0,24px,0,0"/>
+        </Style>
+        <Style x:Key="MenuIconStyle" TargetType="Image">
+            <Setter Property="Height" Value="48"/>
+            <Setter Property="Width" Value="48"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+        </Style>
+        <Style x:Key="MenuTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        <Style x:Key="Header1" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,0,0,20px"/>
+            <Setter Property="FontSize" Value="32px"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Page.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100px"/>
+            <!-- меню навигации -->
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Border для различных свойств границ блока -->
+        <Border Grid.Column="0"
+                Background="#313131">
+            <!-- StackPanel позволяет собрать элементы меню вертикально -->
+            <StackPanel Orientation="Vertical"
+                        Margin="10px, 0">
+                <!-- Каждая кнопка - команда -->
+                <Button Command="{Binding NavigateToMainCommand}"
+                        Style="{StaticResource MenuButtonStyle}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border"
+                                    Background="Transparent"
+                                    CornerRadius="12">
+                                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                                    <Image x:Name="MenuIcon"
+                                            Source="/Images/mainIcon.png"
+                                            Style="{StaticResource MenuIconStyle}"/>
+                                    <TextBlock Text="Главная"
+                                               Style="{StaticResource MenuTextStyle}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/MainIconBlue.png"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+
+
+                </Button>
+                <Button Command="{Binding NavigateToHistoryCommand}"
+                        Style="{StaticResource MenuButtonStyle}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border"
+Background="Transparent"
+CornerRadius="12">
+                                <StackPanel HorizontalAlignment="Center"
+        VerticalAlignment="Center">
+                                    <Image x:Name="MenuIcon"
+                                           Source="/Images/SearchIcon.png"
+                                           Style="{StaticResource MenuIconStyle}"/>
+                                    <TextBlock Text="Поиск ценных бумаг"
+                                               Style="{StaticResource MenuTextStyle}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/SearchIconBlue.png"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                </Button>
+                <Button Command="{Binding NavigateToSearchCommand}"
+                        Style="{StaticResource MenuButtonStyle}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border"
+Background="Transparent"
+CornerRadius="12">
+                                <StackPanel HorizontalAlignment="Center"
+        VerticalAlignment="Center">
+                                    <Image x:Name="MenuIcon"
+                                           Source="/Images/HistoryIcon.png"
+                                           Style="{StaticResource MenuIconStyle}"/>
+                                    <TextBlock Text="История"
+                                               Style="{StaticResource MenuTextStyle}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/HistoryIconBlue.png"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Column="1"
+              Background="#272727">
+            <Grid Margin="64px, 32px">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Мои ценные бумаги"
+                           Grid.Row="0"
+                           Style="{StaticResource Header1}"/>
+                <StackPanel Grid.Row="1"
+                            HorizontalAlignment="Left">
+                    <Button Command="{Binding AddNewTransactionCommand}"
+                            Margin="0,0,0,24"
+                            Content="Добавить операцию"
+                            FontSize="10"
+                            Background="#256EA2"
+                            Foreground="#fff"
+                            FontWeight="DemiBold"
+                            Height="36"
+                            Width="150"
+                            BorderThickness="0" 
+                            Click="Button_Click">
+                    </Button>
+                </StackPanel>
+                
+                <DataGrid Grid.Row="2"
+                          Background="#313131"
+                          ItemsSource="{Binding AssetsForTables}"
+                          AutoGenerateColumns="False"
+                          HeadersVisibility="Column"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="False"
+                          IsReadOnly="True"
+                          BorderThickness="0"
+                          Padding="8px" SelectionChanged="DataGrid_SelectionChanged">
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#313131"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="FontSize" Value="10"/>
+                            <Setter Property="Height" Value="25px"/>
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}"
+                                                   TextWrapping="Wrap"
+                                                   TextAlignment="Left"/>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Название бумаги"
+                                            Binding="{Binding PortfolioName}"
+                                            Width="180"/>
+                        <DataGridTextColumn Header="Кол-во"
+                                            Binding="{Binding PortfolioAsset.Quantity}"
+                                            Width="50"/>
+                        <DataGridTextColumn Header="Цена бумаги"
+                                            Binding="{Binding PortfolioAsset.CurrentPrice}"
+                                            Width="90"/>
+                        <DataGridTextColumn Header="Стоимость"
+                                            Width="90"
+                                            Binding="{Binding totalValue}"/>
+                        <DataGridTextColumn Header="Доп.прибыль"
+                                            Width="80"
+                                            Binding="{Binding PortfolioAsset.IncomeProfit}"/>
+                        <DataGridTextColumn Header="Общая прибыль"
+                                            Width="80"
+                                            Binding="{Binding totalProfit}"/>
+                    </DataGrid.Columns>
+                    
+                </DataGrid>
+            </Grid>
+        </Grid>
+
     </Grid>
 </Page>

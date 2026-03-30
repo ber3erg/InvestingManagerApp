@@ -78,7 +78,7 @@ namespace InvestingManagerApp.ViewModels
 
         public void OpenPortfolio(PortfolioCardModel portfolioCard) 
         {
-            var portfolioPage = new PortfolioPageViewModel(_mainViewModel);
+            var portfolioPage = new PortfolioPageViewModel(_mainViewModel, portfolioCard.PortfolioId);
             _mainViewModel.NavigateTo(new PortfolioPage { DataContext = portfolioPage });
         }
         public void NavigateToMain() 

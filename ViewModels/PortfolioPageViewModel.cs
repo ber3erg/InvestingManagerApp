@@ -1,19 +1,107 @@
-﻿using InvestingManagerApp.Services;
+﻿using InvestingManagerApp.Models;
+using InvestingManagerApp.Services;
+using InvestingManagerApp.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace InvestingManagerApp.ViewModels
 {
-    public class PortfolioPageViewModel
+    public class PortfolioPageViewModel : ViewModelBase
     {
+        private readonly MainViewModel _mainViewModel;
+        private readonly int _portfolioId;
 
-        public PortfolioPageViewModel(MainViewModel mainViewModel)
-        { 
-            
+        private ObservableCollection<PortfolioAssetForTable> _assetsForTable;
+
+        public ObservableCollection<PortfolioAssetForTable> AssetsForTables
+        {
+            get => _assetsForTable;
+            set
+            {
+                _assetsForTable = value;
+                OnPropertyChanged(nameof(AssetsForTables));
+            }
         }
 
+        public ICommand AddTransactionCommand { get; }
+        public ICommand OpenSecurityCommand { get; }
+        public ICommand NavigateToMainCommand { get; }
+        public ICommand NavigateToHistoryCommand { get; }
+        public ICommand NavigateToSearchCommand { get; }
+
+        public PortfolioPageViewModel(MainViewModel mainViewModel, int portfolioId)
+        {
+            _mainViewModel = mainViewModel;
+            _portfolioId = portfolioId;
+
+            NavigateToMainCommand = new RelayCommand(NavigateToMain);
+            NavigateToHistoryCommand = new RelayCommand(NavigateToHistory);
+            NavigateToSearchCommand = new RelayCommand(NavigateToSearch);
+
+            AddTransactionCommand = new RelayCommand(NavigateToAddTransactionPage);
+            OpenSecurityCommand = new RelayCommand<PortfolioAssetForTable>(OpenSecurity);
+
+            AssetsForTables = BuildAssetsForTable();
+
+        }
+        
+        public ObservableCollection<PortfolioAssetForTable> BuildAssetsForTable()
+        {
+            ObservableCollection<PortfolioAssetForTable> result = new ObservableCollection<PortfolioAssetForTable>();
+
+            List<PortfolioAsset> portfolioAssets = _mainViewModel.PortfolioAnalyticsService.BuildPortfolioAssets(_portfolioId);
+
+            foreach (PortfolioAsset asset in portfolioAssets) 
+            {
+                PortfolioAssetForTable currentAssetTable = new PortfolioAssetForTable();
+                currentAssetTable.PortfolioAsset = asset;
+                currentAssetTable.SecurityName = _mainViewModel.SecurityService.GetSecurityById(asset.SecurityId).Name;
+                result.Add(currentAssetTable);
+            }
+            return result;
+        }
+
+        public void NavigateToAddTransactionPage()
+        {
+            var createTransactionPageViewModel = new CreateTransactionPageViewModel(_mainViewModel, _portfolioId);
+            _mainViewModel.NavigateTo(new CreateTransactionPage { DataContext = createTransactionPageViewModel });
+        }
+
+        public void NavigateToMain()
+        {
+            var mainPageViewModel = new MainPageViewModel(_mainViewModel);
+            _mainViewModel.NavigateTo(new MainPage { DataContext = mainPageViewModel });
+        }
+        public void NavigateToHistory()
+        {
+            var historyPageViewModel = new HistoryPageViewModel(_mainViewModel);
+            _mainViewModel.NavigateTo(new HistoryPage { DataContext = historyPageViewModel });
+        }
+        public void NavigateToSearch()
+        {
+            var searchPageViewModel = new SearchPageViewModel(_mainViewModel);
+            _mainViewModel.NavigateTo(new SearchPage { DataContext = searchPageViewModel });
+        }
+
+
+        public void OpenSecurity(PortfolioAssetForTable portfolioAsset)
+        {
+            var securityPageViewModel = new SecurityPageViewModel(_mainViewModel, portfolioAsset.PortfolioAsset.SecurityId);
+            _mainViewModel.NavigateTo(new SecurityPage { DataContext = securityPageViewModel });
+        }
+
+    }
+
+    public class PortfolioAssetForTable
+    {
+        public string SecurityName { get; set; } = "";
+        public PortfolioAsset PortfolioAsset { get; set; }
+        public decimal totalValue => PortfolioAsset.CurrentPrice * PortfolioAsset.Quantity;
+        public decimal totalProfit => PortfolioAsset.TotalSellPrice + PortfolioAsset.CurrentPrice * PortfolioAsset.Quantity + PortfolioAsset.IncomeRecieved - PortfolioAsset.TotalBuyPrice;
     }
 }

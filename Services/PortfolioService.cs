@@ -27,7 +27,12 @@ namespace InvestingManagerApp.Services
         {
             using var db = new AppDBContext();
             var portfolio = db.Portfolios.FirstOrDefault(p => p.Id == portfolioId);
+            var transactions = db.Transactions.Where(t => t.Id == portfolioId).ToList();
             if (portfolio != null) {
+                foreach (var transaction in transactions) 
+                { 
+                    db.Transactions.Remove(transaction);
+                }
                 db.Portfolios.Remove(portfolio);
                 db.SaveChanges();
             }

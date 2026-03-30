@@ -16,23 +16,13 @@ using System.Windows.Shapes;
 namespace InvestingManagerApp.Views
 {
     /// <summary>
-    /// Логика взаимодействия для PortfolioPage.xaml
+    /// Логика взаимодействия для CreateTransactionPage.xaml
     /// </summary>
-    public partial class PortfolioPage : Page
+    public partial class CreateTransactionPage : Page
     {
-        public PortfolioPage()
+        public CreateTransactionPage()
         {
             InitializeComponent();
-        }
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

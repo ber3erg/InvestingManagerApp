@@ -13,6 +13,9 @@
     <Compile Update="ViewModels\AdminPageViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\CreateTransactionPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\HistoryPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -32,6 +35,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\SearchPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SecurityPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\UserPage.xaml.cs">

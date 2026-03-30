@@ -6,8 +6,34 @@
       xmlns:local="clr-namespace:InvestingManagerApp.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MainPage">
+      Title="MainPage"
+      FontFamily="Monserrat"
+      Foreground="White">
     <!--общий грид-->
+    <Page.Resources>
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Margin" Value="0,24px,0,0"/>
+        </Style>
+        <Style x:Key="MenuIconStyle" TargetType="Image">
+            <Setter Property="Height" Value="48"/>
+            <Setter Property="Width" Value="48"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+        </Style>
+        <Style x:Key="MenuTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        <Style x:Key="Header1" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,0,0,20px"/>
+            <Setter Property="FontSize" Value="32px"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions> 
             <ColumnDefinition Width="100px"/> <!-- меню навигации -->
@@ -21,25 +47,19 @@
                         Margin="10px, 0">
                 <!-- Каждая кнопка - команда -->
                 <Button Command="{Binding NavigateToMainCommand}"
-                        Margin="0, 24px, 0, 0"
-                        Height="80px"
-                        Width="80px">
+                        Style="{StaticResource MenuButtonStyle}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border x:Name="Border"
-                    Background="Transparent"
-                    CornerRadius="12">
+                                    Background="Transparent"
+                                    CornerRadius="12">
                                 <StackPanel HorizontalAlignment="Center"
                             VerticalAlignment="Center">
                                     <Image x:Name="MenuIcon"
-                           Source="/Images/mainIcon.png"
-                           Width="48"
-                           Height="48"
-                           Margin="0,0,0,6"/>
+                                            Source="/Images/mainIcon.png"
+                                            Style="{StaticResource MenuIconStyle}"/>
                                     <TextBlock Text="Главная"
-                               Foreground="White"
-                               FontSize="11"
-                               HorizontalAlignment="Center"/>
+                                               Style="{StaticResource MenuTextStyle}"/>
                                 </StackPanel>
                             </Border>
 
@@ -60,9 +80,7 @@
 
                 </Button>
                 <Button Command="{Binding NavigateToHistoryCommand}"
-                        Height="80px"
-                        Width="80px"
-                        Margin="0, 24px, 0, 0">
+                        Style="{StaticResource MenuButtonStyle}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border x:Name="Border"
@@ -72,14 +90,9 @@ CornerRadius="12">
         VerticalAlignment="Center">
                                     <Image x:Name="MenuIcon"
                                            Source="/Images/SearchIcon.png"
-                                           Width="48"
-                                           Height="48"
-                                           Margin="0,0,0,6"/>
+                                           Style="{StaticResource MenuIconStyle}"/>
                                     <TextBlock Text="Поиск ценных бумаг"
-                                               TextWrapping="Wrap"
-                                               Foreground="White"
-                                               FontSize="11"
-                                               HorizontalAlignment="Center"/>
+                                               Style="{StaticResource MenuTextStyle}"/>
                                 </StackPanel>
                             </Border>
 
@@ -99,8 +112,7 @@ CornerRadius="12">
 
                 </Button>
                 <Button Command="{Binding NavigateToSearchCommand}"
-                        Height="75px"
-                        Margin="0, 24px, 0, 0">
+                        Style="{StaticResource MenuButtonStyle}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border x:Name="Border"
@@ -110,14 +122,9 @@ CornerRadius="12">
         VerticalAlignment="Center">
                                     <Image x:Name="MenuIcon"
                                            Source="/Images/HistoryIcon.png"
-                                           Width="48"
-                                           Height="48"
-                                           Margin="0,0,0,6"/>
+                                           Style="{StaticResource MenuIconStyle}"/>
                                     <TextBlock Text="История"
-                                               TextWrapping="Wrap"
-                                               Foreground="White"
-                                               FontSize="11"
-                                               HorizontalAlignment="Center"/>
+                                               Style="{StaticResource MenuTextStyle}"/>
                                 </StackPanel>
                             </Border>
 
@@ -151,13 +158,9 @@ CornerRadius="12">
                 </Grid.RowDefinitions>
                 
                 <!-- Загаловок страницы -->
-                <TextBlock Grid.Row="0"
-                           Margin="0,0,0,20px"
-                           Text="Ваши портфели"
-                           Foreground="#FFFFFF"
-                           FontSize="32px"
-                           FontFamily="Montserrat"
-                           FontWeight="Bold"/>
+                <TextBlock Text="Ваши портфели"
+                           Grid.Row="0"
+                           Style="{StaticResource Header1}"/>
                 
                 <!-- Раздел с портфелями пользователя -->
                 <!-- ItemsControl тег для отображения списка данных -->
