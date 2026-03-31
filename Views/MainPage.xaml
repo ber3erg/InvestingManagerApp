@@ -79,7 +79,7 @@
 
 
                 </Button>
-                <Button Command="{Binding NavigateToHistoryCommand}"
+                <Button Command="{Binding NavigateToSearchCommand}"
                         Style="{StaticResource MenuButtonStyle}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -111,7 +111,7 @@ CornerRadius="12">
                     </Button.Template>
 
                 </Button>
-                <Button Command="{Binding NavigateToSearchCommand}"
+                <Button Command="{Binding NavigateToHistoryCommand}"
                         Style="{StaticResource MenuButtonStyle}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">

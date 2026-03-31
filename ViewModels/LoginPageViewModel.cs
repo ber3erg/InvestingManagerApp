@@ -58,9 +58,18 @@ namespace InvestingManagerApp.ViewModels
             var person = _mainViewModel.AuthService.AuthenticatePerson(Login, Password);
             if (person != null)
             {
-                _mainViewModel.PersonSession.SignIn(person);
-                var mainPage = new MainPageViewModel(_mainViewModel);
-                _mainViewModel.NavigateTo(new MainPage { DataContext = mainPage });
+                if (person.IsAdmin)
+                {
+                    _mainViewModel.PersonSession.SignIn(person);
+                    var adminPage = new AdminPageViewModel(_mainViewModel);
+                    _mainViewModel.NavigateTo(new AdminPage { DataContext = adminPage });
+                }
+                else
+                {
+                    _mainViewModel.PersonSession.SignIn(person);
+                    var mainPage = new MainPageViewModel(_mainViewModel);
+                    _mainViewModel.NavigateTo(new MainPage { DataContext = mainPage });
+                }
             }
             else
             {

@@ -4,11 +4,304 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InvestingManagerApp.Views"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="CreateTransactionPage">
+      Title="CreateTransactionPage"
+      Background="#272727"
+      FontFamily="Montserrat"
+      Foreground="#fff">
+    <Page.Resources>
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Margin" Value="0,24px,0,0"/>
+        </Style>
+        <Style x:Key="MenuIconStyle" TargetType="Image">
+            <Setter Property="Height" Value="48"/>
+            <Setter Property="Width" Value="48"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+        </Style>
+        <Style x:Key="MenuTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        <Style x:Key="Header1" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,0,0,20px"/>
+            <Setter Property="FontSize" Value="32px"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="DarkComboBoxItemStyle" TargetType="ComboBoxItem">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#313131"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border x:Name="ItemBorder"
+                        Background="{TemplateBinding Background}">
+                            <ContentPresenter Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="True">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="#555555"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="ItemBorder" Property="Background" Value="#1F6FB2"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DarkComboBoxToggleButton" TargetType="ToggleButton">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="ClickMode" Value="Press"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="Transparent">
+                            <TextBlock Text="▼"
+                               Foreground="White"
+                               FontSize="11"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="comboBox" TargetType="ComboBox">
+            <Setter Property="Background" Value="#313131"/>
+            <Setter Property="Foreground" Value="#fff"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="BorderBrush" Value="#A0a0a0"/>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource DarkComboBoxItemStyle}"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <Border x:Name="MainBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="8"/>
 
+                            <Grid Margin="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="36"/>
+                                </Grid.ColumnDefinitions>
+
+                                <ContentPresenter Grid.Column="0"
+                                          Margin="10,0,6,0"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Left"
+                                          Content="{TemplateBinding SelectionBoxItem}"
+                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                          ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                                          RecognizesAccessKey="True"/>
+
+                                <ToggleButton Grid.Column="1"
+                                      Style="{StaticResource DarkComboBoxToggleButton}"
+                                      IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            </Grid>
+
+                            <Popup x:Name="PART_Popup"
+                           Placement="Bottom"
+                           AllowsTransparency="True"
+                           Focusable="False"
+                           PopupAnimation="Slide"
+                           IsOpen="{TemplateBinding IsDropDownOpen}">
+                                <Grid MinWidth="{TemplateBinding ActualWidth}"
+                              MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder"
+                                    Background="#313131"
+                                    BorderBrush="#A0A0A0"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    Margin="0,4,0,0">
+                                        <ScrollViewer Margin="4,6,4,6"
+                                              SnapsToDevicePixels="True">
+                                            <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                        </ScrollViewer>
+                                    </Border>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasItems" Value="False">
+                                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="24"/>
+                            </Trigger>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="MainBorder" Property="Background" Value="#3A3A3A"/>
+                            </Trigger>
+
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                <Setter TargetName="MainBorder" Property="BorderBrush" Value="#1F6FB2"/>
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="#808080"/>
+                                <Setter TargetName="MainBorder" Property="Background" Value="#2A2A2A"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="textBox" TargetType="TextBox">
+            <Setter Property="Foreground" Value="#fff"/>
+            <Setter Property="Background" Value="#313131"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="BorderBrush" Value="#A0a0a0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="12,8"/>
+        </Style>
+        <Style x:Key="datePicker" TargetType="DatePicker">
+            <Setter Property="Background" Value="#313131"/>
+            <Setter Property="BorderBrush" Value="#A0A0A0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Padding" Value="8,4"/>
+        </Style>
+    </Page.Resources>
     <Grid>
-        
+        <Grid Margin="56, 24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       Grid.ColumnSpan="3"
+                       Text="Добавить Сделку"
+                       Style="{StaticResource Header1}"/>
+
+            <StackPanel Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,16,20">
+                <TextBlock Text="Портфель"
+                               Foreground="White"
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,8"/>
+                <ComboBox ItemsSource="{Binding Portfolios}"
+                              SelectedItem="{Binding SelectedPortfolio}"
+                              DisplayMemberPath="Name"
+                              Style="{StaticResource comboBox}">
+                    
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="0,0,16,20">
+                    <TextBlock Text="Ценная бумага"
+                               Foreground="White"
+                               FontSize="12"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,8"/>
+                    <ComboBox ItemsSource="{Binding Securities}"
+                              SelectedItem="{Binding SelectedSecurity}"
+                              DisplayMemberPath="Name"
+                              Style="{StaticResource comboBox}"/>
+                </StackPanel>
+            <StackPanel Grid.Row="1"
+                            Grid.Column="2"
+                            Margin="0,0,0,20">
+                <TextBlock Text="Тип сделки"
+                               Foreground="White"
+                               FontSize="12"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,8"/>
+                <ComboBox ItemsSource="{Binding TransactionTypes}"
+                              SelectedItem="{Binding SelectedTransactionType}"
+                              Style="{StaticResource comboBox}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="0,0,16,20">
+                <TextBlock Text="Цена за единицу"
+                               Foreground="White"
+                               FontSize="12"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,8"/>
+                <TextBox Text="{Binding PricePerUnit, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource textBox}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2"
+                            Grid.Column="1"
+                            Margin="0,0,16,20">
+                <TextBlock Text="Количество"
+                               Foreground="White"
+                               FontSize="12"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,8"/>
+                <TextBox Text="{Binding Amount, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource textBox}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="0,0,16,20">
+                <TextBlock Text="Дата"
+                               Foreground="White"
+                               FontSize="12"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,8"/>
+                <DatePicker SelectedDate="{Binding SelectedDate}"
+                            Style="{StaticResource datePicker}">
+                </DatePicker>
+            </StackPanel>
+            <StackPanel Grid.Row="3"
+                            Grid.Column="1"
+                            Margin="0,0,16,20">
+                <TextBlock Text="Время"
+                               Foreground="White"
+                               FontSize="12"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,8"/>
+                <TextBox Text="{Binding SelectedTime, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource textBox}"/>
+            </StackPanel>
+            <TextBlock Grid.Row="4"
+                           Grid.ColumnSpan="3"
+                           Text="{Binding ErrorMessage}"
+                           Foreground="#FF5F5F"
+                           FontSize="12"
+                           Margin="0,0,0,20"
+                           TextWrapping="Wrap"/>
+            <Button Grid.Row="5"
+                        Grid.Column="0"
+                        Width="140"
+                        Height="42"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Content="Сохранить"
+                        Command="{Binding SaveTransactionCommand}"
+                        Background="#1F6FB2"
+                        Foreground="White"
+                        BorderThickness="0"
+                        FontSize="14"
+                        FontWeight="SemiBold"/>
+        </Grid>
     </Grid>
 </Page>

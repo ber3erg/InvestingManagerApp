@@ -27,12 +27,11 @@ namespace InvestingManagerApp.ViewModels
             }
         }
 
-
+        public ICommand RemoveTransactionCommand { get; }
         public ICommand AddTransactionCommand { get; }
         public ICommand NavigateToMainCommand { get; }
         public ICommand NavigateToHistoryCommand { get; }
         public ICommand NavigateToSearchCommand { get; }
-
 
         public HistoryPageViewModel(MainViewModel mainViewModel)
         {
@@ -43,6 +42,7 @@ namespace InvestingManagerApp.ViewModels
             NavigateToSearchCommand = new RelayCommand(NavigateToSearch);
 
             AddTransactionCommand = new RelayCommand(NavigateToAddTransactionPage);
+            RemoveTransactionCommand = new RelayCommand<TransactionInfoForTable>(RemoveTransaction);
 
             TransactionsAssets = BuildTransactionInfoForTables();
 
@@ -58,7 +58,7 @@ namespace InvestingManagerApp.ViewModels
             {
                 var CurrentTransactionInfo = new TransactionInfoForTable();
                 CurrentTransactionInfo.CurrentTransaction = transaction;
-                CurrentTransactionInfo.SecurityName = _mainViewModel.SecurityService.GetSecurityById(transaction.SecurityId).Name;
+                CurrentTransactionInfo.CurrentSecurity = _mainViewModel.SecurityService.GetSecurityById(transaction.SecurityId);
 
                 var currentPortfolio = _mainViewModel.PortfolioService.GetPortfolioById(transaction.PortfolioId);
                 if (currentPortfolio != null) 
@@ -73,11 +73,19 @@ namespace InvestingManagerApp.ViewModels
 
         }
 
+        public void RemoveTransaction(TransactionInfoForTable transaction)
+        {
+            _mainViewModel.TransactionService.RemoveTransaction(transaction.CurrentTransaction.Id);
+            TransactionsAssets = BuildTransactionInfoForTables();
+        }
+
         public void NavigateToAddTransactionPage()
         {
             var createTransactionPageViewModel = new CreateTransactionPageViewModel(_mainViewModel);
             _mainViewModel.NavigateTo(new CreateTransactionPage { DataContext = createTransactionPageViewModel });
         }
+
+        
 
         public void NavigateToMain()
         {
@@ -99,8 +107,25 @@ namespace InvestingManagerApp.ViewModels
     public class TransactionInfoForTable 
     { 
         public Transaction CurrentTransaction { get; set; }
-        public string SecurityName { get; set; }
+        public Security CurrentSecurity { get; set;  }
+        public string SecurityName => CurrentSecurity.Name;
         public string PortfolioName { get; set; }
         public decimal TotalPrice => CurrentTransaction.PricePerUnit * CurrentTransaction.Amount;
+        public string TransactionTypeText =>
+        CurrentTransaction.Type switch
+        {
+            TransactionType.Buy => "Покупка",
+            TransactionType.Sell => "Продажа",
+            TransactionType.Dividend => "Дивиденд",
+            TransactionType.Coupon => "Купон",
+            _ => ""
+        };
+        public string SecurityTypeText =>
+        CurrentSecurity.Type switch
+        {
+            SecurityType.Stock => "Акция",
+            SecurityType.Bond => "Облигация",
+            SecurityType.Fund => "Фонд",
+        };
     }
 }

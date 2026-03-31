@@ -33,6 +33,12 @@ namespace InvestingManagerApp.Services
             return db.Securities.FirstOrDefault(s => securityId == s.Id);
         }
 
+        public List<Security> GetSecurities()
+        {
+            using var db = new AppDBContext();
+            return db.Securities.ToList();
+        }
+
 
         //public List<Security> GetSecuritiesByTicker(string ticker)
         //{

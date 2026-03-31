@@ -79,7 +79,7 @@
 
 
                 </Button>
-                <Button Command="{Binding NavigateToHistoryCommand}"
+                <Button Command="{Binding NavigateToSearchCommand}"
                         Style="{StaticResource MenuButtonStyle}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -111,7 +111,7 @@ CornerRadius="12">
                     </Button.Template>
 
                 </Button>
-                <Button Command="{Binding NavigateToSearchCommand}"
+                <Button Command="{Binding NavigateToHistoryCommand}"
                         Style="{StaticResource MenuButtonStyle}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -159,7 +159,7 @@ CornerRadius="12">
                            Style="{StaticResource Header1}"/>
                 <StackPanel Grid.Row="1"
                             HorizontalAlignment="Left">
-                    <Button Command="{Binding AddNewTransactionCommand}"
+                    <Button Command="{Binding AddTransactionCommand}"
                             Margin="0,0,0,24"
                             Content="Добавить операцию"
                             FontSize="10"
