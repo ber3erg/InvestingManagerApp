@@ -48,6 +48,7 @@ namespace InvestingManagerApp.ViewModels
             
             LoginCommand = new RelayCommand(ToLogin);
             RegisterCommand = new RelayCommand(NavigateToRegister);
+            using var db = new AppDBContext();
         }
 
         public ICommand LoginCommand { get; }

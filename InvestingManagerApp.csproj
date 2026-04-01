@@ -13,8 +13,12 @@
     <None Remove="Images\HistoryIconBlue.png" />
     <None Remove="Images\mainIcon.png" />
     <None Remove="Images\MainIconBlue.png" />
+    <None Remove="Images\personIcon.png" />
+    <None Remove="Images\personIconBlue.png" />
     <None Remove="Images\SearchIcon.png" />
     <None Remove="Images\SearchIconBlue.png" />
+    <None Remove="Images\securityIcon.png" />
+    <None Remove="Images\SecurityIconBlue.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,8 +34,12 @@
     <Resource Include="Images\HistoryIconBlue.png" />
     <Resource Include="Images\mainIcon.png" />
     <Resource Include="Images\MainIconBlue.png" />
+    <Resource Include="Images\personIcon.png" />
+    <Resource Include="Images\personIconBlue.png" />
     <Resource Include="Images\SearchIcon.png" />
     <Resource Include="Images\SearchIconBlue.png" />
+    <Resource Include="Images\securityIcon.png" />
+    <Resource Include="Images\SecurityIconBlue.png" />
   </ItemGroup>
 
   <ItemGroup>

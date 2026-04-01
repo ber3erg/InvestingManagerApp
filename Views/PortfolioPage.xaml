@@ -32,6 +32,60 @@
             <Setter Property="FontSize" Value="32px"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
+        <Style x:Key="DataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#313131"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="9"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="BorderBrush" Value="#444444"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"
+                   TextWrapping="Wrap"
+                   TextAlignment="Left"
+                   VerticalAlignment="Center"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DataGridCellStyle" TargetType="DataGridCell">
+            <Setter Property="Background" Value="#313131"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="FontSize" Value="9"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#3A4A58"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="DataGridRowStyle" TargetType="DataGridRow">
+            <Setter Property="Background" Value="#313131"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Height" Value="46"/>
+            <Setter Property="BorderBrush" Value="#444444"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#383838"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#3A4A58"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -168,8 +222,7 @@ CornerRadius="12">
                             FontWeight="DemiBold"
                             Height="36"
                             Width="150"
-                            BorderThickness="0" 
-                            Click="Button_Click">
+                            BorderThickness="0">
                     </Button>
                 </StackPanel>
                 
@@ -180,45 +233,38 @@ CornerRadius="12">
                           HeadersVisibility="Column"
                           CanUserAddRows="False"
                           CanUserDeleteRows="False"
+                          CanUserResizeColumns="False"
                           IsReadOnly="True"
+                        RowBackground="#313131"
+                        AlternatingRowBackground="#353535"
+                        GridLinesVisibility="Horizontal"
+                        HorizontalGridLinesBrush="#444444"
+                        VerticalGridLinesBrush="Transparent"
                           BorderThickness="0"
-                          Padding="8px" SelectionChanged="DataGrid_SelectionChanged">
-                    <DataGrid.ColumnHeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="Background" Value="#313131"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="FontWeight" Value="Bold"/>
-                            <Setter Property="FontSize" Value="10"/>
-                            <Setter Property="Height" Value="25px"/>
-                            <Setter Property="ContentTemplate">
-                                <Setter.Value>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding}"
-                                                   TextWrapping="Wrap"
-                                                   TextAlignment="Left"/>
-                                    </DataTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </DataGrid.ColumnHeaderStyle>
+                          RowStyle="{StaticResource DataGridRowStyle}"
+                          CellStyle="{StaticResource DataGridCellStyle}"
+                          ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                          SelectionMode="Single"
+                          SelectionUnit="FullRow">
+                    
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Название бумаги"
-                                            Binding="{Binding PortfolioName}"
-                                            Width="180"/>
+                                            Binding="{Binding SecurityName}"
+                                            Width="2*"/>
                         <DataGridTextColumn Header="Кол-во"
                                             Binding="{Binding PortfolioAsset.Quantity}"
-                                            Width="50"/>
+                                            Width="*"/>
                         <DataGridTextColumn Header="Цена бумаги"
                                             Binding="{Binding PortfolioAsset.CurrentPrice}"
-                                            Width="90"/>
+                                            Width="1.2*"/>
                         <DataGridTextColumn Header="Стоимость"
-                                            Width="90"
+                                            Width="1.2*"
                                             Binding="{Binding totalValue}"/>
                         <DataGridTextColumn Header="Доп.прибыль"
-                                            Width="80"
+                                            Width="1.2*"
                                             Binding="{Binding PortfolioAsset.IncomeProfit}"/>
                         <DataGridTextColumn Header="Общая прибыль"
-                                            Width="80"
+                                            Width="1.2*"
                                             Binding="{Binding totalProfit}"/>
                     </DataGrid.Columns>
                     

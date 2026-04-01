@@ -24,7 +24,7 @@ namespace InvestingManagerApp.Services
             {
                 if (finded.Password == password)
                 {
-                    return new Person();
+                    return finded;
                 }
                 else
                 {

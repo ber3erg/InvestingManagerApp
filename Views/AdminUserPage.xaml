@@ -1,4 +1,4 @@
-﻿<Page x:Class="InvestingManagerApp.Views.HistoryPage"
+﻿<Page x:Class="InvestingManagerApp.Views.AdminUserPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,10 +6,10 @@
       xmlns:local="clr-namespace:InvestingManagerApp.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="HistoryPage"
-      Foreground="#FFF"
-      FontFamily="Montserrat"
-      UseLayoutRounding="True">
+      Title="AdminUserPage"
+      Background="#272727"
+        Foreground="#fff"
+        FontFamily="Montserrat">
     <Page.Resources>
         <Style x:Key="MenuButtonStyle" TargetType="Button">
             <Setter Property="BorderThickness" Value="0"/>
@@ -33,6 +33,44 @@
             <Setter Property="FontSize" Value="32px"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
+        <Style x:Key="DataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#313131"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="9"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="BorderBrush" Value="#444444"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"
+           TextWrapping="Wrap"
+           TextAlignment="Left"
+           VerticalAlignment="Center"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DataGridCellStyle" TargetType="DataGridCell">
+            <Setter Property="Background" Value="#313131"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="FontSize" Value="9"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#3A4A58"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="DeleteButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="28"/>
             <Setter Property="Height" Value="28"/>
@@ -44,60 +82,19 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="DeleteBorder"
-                                Background="{TemplateBinding Background}"
-                                CornerRadius="6">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="6">
                             <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
+                                      VerticalAlignment="Center"/>
                         </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="DeleteBorder" Property="Background" Value="#D95757"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
-        <Style x:Key="DataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="#313131"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="8"/>
-            <Setter Property="Height" Value="32"/>
-            <Setter Property="Padding" Value="10,6"/>
-            <Setter Property="BorderBrush" Value="#444444"/>
-            <Setter Property="BorderThickness" Value="0,0,0,1"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="ContentTemplate">
-                <Setter.Value>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding}"
-                           TextWrapping="Wrap"
-                           TextAlignment="Left"
-                           VerticalAlignment="Center"/>
-                    </DataTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="DataGridCellStyle" TargetType="DataGridCell">
-            <Setter Property="Background" Value="#313131"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Padding" Value="10,8"/>
-            <Setter Property="FontSize" Value="11"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Style.Triggers>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="#3A4A58"/>
-                    <Setter Property="Foreground" Value="White"/>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#D95757"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
-
         <Style x:Key="DataGridRowStyle" TargetType="DataGridRow">
             <Setter Property="Background" Value="#313131"/>
             <Setter Property="Foreground" Value="White"/>
@@ -113,6 +110,36 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#313131"/>
+            <Setter Property="BorderBrush" Value="#8E8E8E"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="Padding" Value="14,10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#256EA2"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#363636"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -127,7 +154,7 @@
             <StackPanel Orientation="Vertical"
                         Margin="10px, 0">
                 <!-- Каждая кнопка - команда -->
-                <Button Command="{Binding NavigateToMainCommand}"
+                <Button Command="{Binding NavigateToSecuritiesCommand}"
                         Style="{StaticResource MenuButtonStyle}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -137,9 +164,9 @@
                                 <StackPanel HorizontalAlignment="Center"
                             VerticalAlignment="Center">
                                     <Image x:Name="MenuIcon"
-                                            Source="/Images/mainIcon.png"
+                                            Source="/Images/securityIcon.png"
                                             Style="{StaticResource MenuIconStyle}"/>
-                                    <TextBlock Text="Главная"
+                                    <TextBlock Text="Ценные бумаги"
                                                Style="{StaticResource MenuTextStyle}"/>
                                 </StackPanel>
                             </Border>
@@ -147,7 +174,7 @@
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter TargetName="Border" Property="Background" Value="Transparent"/>
-                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/MainIconBlue.png"/>
+                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/SecurityIconBlue.png"/>
                                     <Setter Property="Cursor" Value="Hand"/>
                                 </Trigger>
 
@@ -160,7 +187,7 @@
 
 
                 </Button>
-                <Button Command="{Binding NavigateToSearchCommand}"
+                <Button Command="{Binding NavigateToUsersCommand}"
                         Style="{StaticResource MenuButtonStyle}">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
@@ -170,9 +197,9 @@ CornerRadius="12">
                                 <StackPanel HorizontalAlignment="Center"
         VerticalAlignment="Center">
                                     <Image x:Name="MenuIcon"
-                                           Source="/Images/SearchIcon.png"
+                                           Source="/Images/personIcon.png"
                                            Style="{StaticResource MenuIconStyle}"/>
-                                    <TextBlock Text="Поиск ценных бумаг"
+                                    <TextBlock Text="Пользователи"
                                                Style="{StaticResource MenuTextStyle}"/>
                                 </StackPanel>
                             </Border>
@@ -180,39 +207,7 @@ CornerRadius="12">
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter TargetName="Border" Property="Background" Value="Transparent"/>
-                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/SearchIconBlue.png"/>
-                                    <Setter Property="Cursor" Value="Hand"/>
-                                </Trigger>
-
-                                <Trigger Property="IsPressed" Value="True">
-                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Button.Template>
-
-                </Button>
-                <Button Command="{Binding NavigateToHistoryCommand}"
-                        Style="{StaticResource MenuButtonStyle}">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border x:Name="Border"
-Background="Transparent"
-CornerRadius="12">
-                                <StackPanel HorizontalAlignment="Center"
-        VerticalAlignment="Center">
-                                    <Image x:Name="MenuIcon"
-                                           Source="/Images/HistoryIcon.png"
-                                           Style="{StaticResource MenuIconStyle}"/>
-                                    <TextBlock Text="История"
-                                               Style="{StaticResource MenuTextStyle}"/>
-                                </StackPanel>
-                            </Border>
-
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
-                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/HistoryIconBlue.png"/>
+                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/personIconBlue.png"/>
                                     <Setter Property="Cursor" Value="Hand"/>
                                 </Trigger>
 
@@ -226,86 +221,53 @@ CornerRadius="12">
                 </Button>
             </StackPanel>
         </Border>
-        <Grid Grid.Column="1"
-              Background="#272727">
-            <Grid Margin="64px, 32px">
+        <Grid Grid.Column="1">
+            <Grid Margin="64,24">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0"
-                           Text="История транзакций"
-                           Style="{StaticResource Header1}"/>
-                <StackPanel Grid.Row="1"
-            HorizontalAlignment="Left">
-                    <Button Command="{Binding AddTransactionCommand}"
-                            Margin="0,0,0,24"
-                            Content="Добавить операцию"
-                            FontSize="10"
-                            Background="#256EA2"
-                            Foreground="#fff"
-                            FontWeight="DemiBold"
-                            Height="36"
-                            Width="150"
-                            BorderThickness="0">
-                    </Button>
-                </StackPanel>
-                <DataGrid Grid.Row="2"
-                          ItemsSource="{Binding TransactionsAssets}"
+                            Text="Панель пользователей"
+                            Style="{StaticResource Header1}"/>
+                <DataGrid Grid.Row="1"
+                          ItemsSource="{Binding People}"
                           Background="#313131"
                           AutoGenerateColumns="False"
                           HeadersVisibility="Column"
                           CanUserAddRows="False"
                           CanUserDeleteRows="False"
-                          CanUserResizeRows="False"
+                          CanUserResizeColumns="False"
                           IsReadOnly="True"
                           BorderThickness="0"
-                          Padding="8px"
-                          RowBackground="#313131"
-                            AlternatingRowBackground="#353535"
-                            GridLinesVisibility="Horizontal"
-                            HorizontalGridLinesBrush="#444444"
-                          VerticalGridLinesBrush="Transparent"
-                            RowStyle="{StaticResource DataGridRowStyle}"
-                            CellStyle="{StaticResource DataGridCellStyle}"
-                            ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-                          SelectionMode="Single"
-                          SelectionUnit="FullRow">
+                          RowStyle="{StaticResource DataGridRowStyle}"
+                          CellStyle="{StaticResource DataGridCellStyle}"
+                          ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                          Padding="8px">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Название бумаги"
-                                            Binding="{Binding SecurityName}"
-                                            Width="2*"/>
-                        <DataGridTextColumn Header="Тип транзакции"
-                                            Binding="{Binding TransactionTypeText}"
-                                            Width="1.4*"/>
-                        <DataGridTextColumn Header="Тип ценной бумаги"
-                                            Binding="{Binding SecurityTypeText}"
+                        <DataGridTextColumn Header="Имя"
+                        Binding="{Binding Name}"
+                        Width="2*"/>
+                        <DataGridTextColumn Header="Логин"
+                                            Binding="{Binding Login}"
                                             Width="1.2*"/>
-                        <DataGridTextColumn Header="Кол-во"
-                                            Width="*"
-                                            Binding="{Binding CurrentTransaction.Amount}"/>
-                        <DataGridTextColumn Header="Стоимость за штуку"
-                                            Width="1.2*"
-                                            Binding="{Binding CurrentTransaction.PricePerUnit}"/>
-                        <DataGridTextColumn Header="Общая стоимость"
-                                            Width="1.2*"
-                                            Binding="{Binding TotalPrice}"/>
-                        <DataGridTemplateColumn Width="40">
+
+                        <DataGridTemplateColumn Width="100">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Content="X"
-                                        Style="{StaticResource DeleteButtonStyle}"
-                                        Command="{Binding DataContext.RemoveTransactionCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                        CommandParameter="{Binding}" />
+                                            Style="{StaticResource DeleteButtonStyle}"
+                                            Command="{Binding DataContext.RemovePersonCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                            CommandParameter="{Binding}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
 
+                </DataGrid>
+
+            </Grid>
         </Grid>
-        
     </Grid>
 </Page>

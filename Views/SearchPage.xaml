@@ -6,9 +6,300 @@
       xmlns:local="clr-namespace:InvestingManagerApp.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="SearchPage">
+      Title="SearchPage"
+      Foreground="#FFF"
+      FontFamily="Montserrat">
+    <Page.Resources>
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Margin" Value="0,24px,0,0"/>
+        </Style>
+        <Style x:Key="MenuIconStyle" TargetType="Image">
+            <Setter Property="Height" Value="48"/>
+            <Setter Property="Width" Value="48"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+        </Style>
+        <Style x:Key="MenuTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        <Style x:Key="Header1" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,0,0,20px"/>
+            <Setter Property="FontSize" Value="32px"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="DataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#313131"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="9"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="BorderBrush" Value="#444444"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"
+               TextWrapping="Wrap"
+               TextAlignment="Left"
+               VerticalAlignment="Center"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-    <Grid>
+        <Style x:Key="DataGridCellStyle" TargetType="DataGridCell">
+            <Setter Property="Background" Value="#313131"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="FontSize" Value="9"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#3A4A58"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="DataGridRowStyle" TargetType="DataGridRow">
+            <Setter Property="Background" Value="#313131"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Height" Value="46"/>
+            <Setter Property="BorderBrush" Value="#444444"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#383838"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#3A4A58"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#313131"/>
+            <Setter Property="BorderBrush" Value="#8E8E8E"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Height" Value="42"/>
+            <Setter Property="Padding" Value="14,10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#256EA2"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#363636"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100px"/>
+            <!-- меню навигации -->
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Border для различных свойств границ блока -->
+        <Border Grid.Column="0"
+                Background="#313131">
+            <!-- StackPanel позволяет собрать элементы меню вертикально -->
+            <StackPanel Orientation="Vertical"
+                        Margin="10px, 0">
+                <!-- Каждая кнопка - команда -->
+                <Button Command="{Binding NavigateToMainCommand}"
+                        Style="{StaticResource MenuButtonStyle}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border"
+                                    Background="Transparent"
+                                    CornerRadius="12">
+                                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                                    <Image x:Name="MenuIcon"
+                                            Source="/Images/mainIcon.png"
+                                            Style="{StaticResource MenuIconStyle}"/>
+                                    <TextBlock Text="Главная"
+                                               Style="{StaticResource MenuTextStyle}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/MainIconBlue.png"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+
+
+                </Button>
+                <Button Command="{Binding NavigateToSearchCommand}"
+                        Style="{StaticResource MenuButtonStyle}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border"
+Background="Transparent"
+CornerRadius="12">
+                                <StackPanel HorizontalAlignment="Center"
+        VerticalAlignment="Center">
+                                    <Image x:Name="MenuIcon"
+                                           Source="/Images/SearchIcon.png"
+                                           Style="{StaticResource MenuIconStyle}"/>
+                                    <TextBlock Text="Поиск ценных бумаг"
+                                               Style="{StaticResource MenuTextStyle}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/SearchIconBlue.png"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                </Button>
+                <Button Command="{Binding NavigateToHistoryCommand}"
+                        Style="{StaticResource MenuButtonStyle}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border"
+Background="Transparent"
+CornerRadius="12">
+                                <StackPanel HorizontalAlignment="Center"
+        VerticalAlignment="Center">
+                                    <Image x:Name="MenuIcon"
+                                           Source="/Images/HistoryIcon.png"
+                                           Style="{StaticResource MenuIconStyle}"/>
+                                    <TextBlock Text="История"
+                                               Style="{StaticResource MenuTextStyle}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/HistoryIconBlue.png"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                </Button>
+            </StackPanel>
+        </Border>
+        <Grid Grid.Column="1"
+      Background="#272727">
+            <Grid Margin="88px, 32px">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Поиск ценных бумаг"
+                           Grid.Row="0"
+                           Style="{StaticResource Header1}"/>
+                <StackPanel Grid.Row="1"
+                            Orientation="Horizontal">
+                    <TextBox Width="200px"
+                             Margin="0,0,20,0"
+                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource TextBoxStyle}"/>
+                    <Button Command="{Binding SearchSecuritiesCommand}"
+                            Margin="0"
+                            Content="Найти"
+                            FontSize="10"
+                            Background="#256EA2"
+                            Foreground="#fff"
+                            FontWeight="DemiBold"
+                            Height="36"
+                            Width="100"
+                            BorderThickness="0">
+                    </Button>
+                </StackPanel>
+                <TextBlock Grid.Row="2"
+                           Text="{Binding ErrorMessage}"
+                           Foreground="#FF5F5F"
+                           FontSize="12"
+                           Margin="0,0,0,20"
+                           TextWrapping="Wrap"/>
+                <DataGrid Grid.Row="3"
+                          Background="#313131"
+                          ItemsSource="{Binding SearchedSecurities}"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto"
+                          AutoGenerateColumns="False"
+                          HeadersVisibility="Column"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="False"
+                          CanUserResizeColumns="False"
+                          IsReadOnly="True"
+                        RowBackground="#313131"
+                        AlternatingRowBackground="#353535"
+                        GridLinesVisibility="Horizontal"
+                        HorizontalGridLinesBrush="#444444"
+                        VerticalGridLinesBrush="Transparent"
+                          BorderThickness="0"
+                          RowStyle="{StaticResource DataGridRowStyle}"
+                          CellStyle="{StaticResource DataGridCellStyle}"
+                          ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                          SelectionMode="Single"
+                          SelectionUnit="FullRow">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Название бумаги"
+                        Binding="{Binding Name}"
+                        Width="2*"/>
+                        <DataGridTextColumn Header="Компания"
+                        Binding="{Binding Company}"
+                        Width="1.2*"/>
+                        <DataGridTextColumn Header="Тикер"
+                        Binding="{Binding Ticker}"
+                        Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

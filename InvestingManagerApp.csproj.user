@@ -13,6 +13,15 @@
     <Compile Update="ViewModels\AdminPageViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AdminSecurityPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AdminUserPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\CreateSecurityPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\CreateTransactionPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

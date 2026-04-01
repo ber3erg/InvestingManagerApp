@@ -23,8 +23,8 @@ namespace InvestingManagerApp.ViewModels
         private Portfolio? _selectedPortfolio;
         private Security? _selectedSecurity;
         private TransactionType _selectedTransactionType;
-        private decimal _pricePerUnit;
-        private int _amount;
+        private string _pricePerUnitText;
+        private string _amountText;
         private DateTime? _selectedDate;
         private string _selectedTime = "";
         private string _errorMessage = "";
@@ -86,22 +86,22 @@ namespace InvestingManagerApp.ViewModels
             }
         }
 
-        public decimal PricePerUnit
+        public string PricePerUnitText
         {
-            get => _pricePerUnit;
+            get => _pricePerUnitText;
             set
             {
-                _pricePerUnit = value;
-                OnPropertyChanged(nameof(PricePerUnit));
+                _pricePerUnitText = value;
+                OnPropertyChanged(nameof(PricePerUnitText));
             }
         }
-        public int Amount
+        public string AmountText
         {
-            get => _amount;
+            get => _amountText;
             set
             {
-                _amount = value;
-                OnPropertyChanged(nameof(Amount));
+                _amountText = value;
+                OnPropertyChanged(nameof(AmountText));
             }
         }
 
@@ -173,8 +173,17 @@ namespace InvestingManagerApp.ViewModels
                 ErrorMessage = "Неверный формат времени";
                 return;
             }
-
-            if (Amount <= 0 || PricePerUnit <= 0)
+            if (!int.TryParse(AmountText, out var amount))
+            {
+                ErrorMessage = "Неверное количество";
+                return;
+            }
+            if (!decimal.TryParse(PricePerUnitText, out var pricePerUnit))
+            {
+                ErrorMessage = "Неверная цена";
+                return;
+            }
+            if (amount <= 0 || pricePerUnit <= 0)
             {
                 ErrorMessage = "Количество и цена должны быть больше нуля";
                 return;
@@ -187,8 +196,8 @@ namespace InvestingManagerApp.ViewModels
                 PortfolioId = SelectedPortfolio.Id,
                 SecurityId = SelectedSecurity.Id,
                 Type = SelectedTransactionType,
-                Amount = Amount,
-                PricePerUnit = PricePerUnit,
+                Amount = amount,
+                PricePerUnit = pricePerUnit,
                 Date = transactionDateTime
             };
 

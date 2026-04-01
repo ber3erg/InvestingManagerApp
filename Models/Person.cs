@@ -15,6 +15,14 @@
             Password = password;
         }
 
+        public Person(string name, string login, string password, bool isAdmin)
+        {
+            Name = name;
+            Login = login;
+            Password = password;
+            IsAdmin = isAdmin;
+        }
+
         // Пустой конструктор, если нужно для десериализации или WPF привязки
         public Person()
         {

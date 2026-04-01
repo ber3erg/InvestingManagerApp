@@ -16,6 +16,7 @@ namespace InvestingManagerApp.ViewModels
     {
         public AuthService AuthService { get; set; } = new AuthService();
         public PersonSession PersonSession { get; set; } = new PersonSession();
+        public PersonService PersonService { get; set; } = new PersonService();
         public PortfolioAnalyticsService PortfolioAnalyticsService { get; set; } = new PortfolioAnalyticsService();
         public PortfolioService PortfolioService { get; set; } = new PortfolioService();
         public SecurityService SecurityService { get; set; } = new SecurityService();

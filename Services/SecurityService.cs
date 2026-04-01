@@ -39,26 +39,25 @@ namespace InvestingManagerApp.Services
             return db.Securities.ToList();
         }
 
+        public void RemoveSecurity(int securityId)
+        {
+            var db = new AppDBContext();
+            var security = db.Securities.First(s => securityId == s.Id);
+            var transactions = db.Transactions.Where(t => t.SecurityId == securityId).ToList();
+            foreach (var transaction in transactions)
+            {
+                db.Transactions.Remove(transaction);
+            }
+            db.Securities.Remove(security);
+            db.SaveChanges();
+        }
 
-        //public List<Security> GetSecuritiesByTicker(string ticker)
-        //{
-        //    using var db = new AppDBContext();
-        //    List<Security> returnArray = db.Securities.Where(p => p.Ticker.Contains(ticker.Trim())).ToList();
-        //    return returnArray;
-        //}
-
-        //public List<Security> GetSecuritiesByCompanyName(string companyName)
-        //{
-        //    using var db = new AppDBContext();
-        //    List<Security> returnArray = db.Companies.Where(p => p..Name(companyName.Trim())).ToList();
-        //    return returnArray;
-        //}
-        //public List<Security> GetSecuritiesByName(string name)
-        //{
-        //    using var db = new AppDBContext();
-        //    List<Security> returnArray = db.Securities.Where(p => p.Name.Contains(name.Trim())).ToList();
-        //    return returnArray;
-        //}
+        public void AddSecurity(Security security)
+        {
+            var db = new AppDBContext();
+            db.Securities.Add(security);
+            db.SaveChanges();
+        }
 
         public void EditCurrentPrice(int securityId, decimal newPrice)
         {
