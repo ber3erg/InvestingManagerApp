@@ -1,16 +1,30 @@
 ﻿using InvestingManagerApp.Services;
 using InvestingManagerApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace InvestingManagerApp.Data
 {
     public static class DataBaseSeeder
     {
-        public static void Seed(AppDbContext context)
+        public static void Seed(AppDBContext context)
         {
             context.Database.Migrate();
 
+            SeedAppState(context);
             SeedSecurities(context);
             SeedAdmin(context);
+        }
+
+
+        public static void SeedAppState(AppDBContext dbContext)
+        {
+            var appState = dbContext.AppStates.FirstOrDefault();
+            if (appState == null)
+            {
+                appState = new AppState();
+                dbContext.AppStates.Add(appState);
+                dbContext.SaveChanges();
+            }
         }
 
         public static void SeedAdmin(AppDBContext dbContext)

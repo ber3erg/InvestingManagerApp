@@ -1,15 +1,42 @@
 ﻿using InvestingManagerApp.Data;
 using InvestingManagerApp.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace InvestingManagerApp.Services
 {
     public class SecurityService
     {
+        
+        public SecurityService() { }
         // сервис для работы с ценными бумагами:
         // 1. получение по тикеру
         // 2. получение по названию компанию
         // 3. получение по названию бумаги
         // 4. редактирование настоящей стоимости
+
+        public async Task TryUpdatePricesAsync()
+        {
+            using var _context = new AppDBContext();
+            var _moexService = new MOEXService();
+            var appState = _context.AppStates.First();
+
+            if (appState.LastPricesUpdateUtc.HasValue &&
+                DateTimeOffset.UtcNow - appState.LastPricesUpdateUtc.Value < TimeSpan.FromMinutes(30))
+                return;
+
+            var securities = _context.Securities.ToList();
+
+            foreach (var security in securities)
+            {
+                var price = await _moexService.GetLastPriceAsync(security);
+                if (price.HasValue)
+                    security.CurrentPrice = price.Value;
+            }
+
+            appState.LastPricesUpdateUtc = DateTimeOffset.UtcNow;
+            await _context.SaveChangesAsync();
+        }
 
         public List<Security> SearchSecurities(string searchString)
         {

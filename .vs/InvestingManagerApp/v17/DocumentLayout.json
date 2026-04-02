@@ -3,12 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\ber3erg\\onedrive\\desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u043E\u043E\u043F\\investingmanagerapp\\data\\databaseseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:data\\databaseseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\ber3erg\\onedrive\\desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u043E\u043E\u043F\\investingmanagerapp\\services\\securityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:services\\securityservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\ber3erg\\onedrive\\desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u043E\u043E\u043F\\investingmanagerapp\\services\\personservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:services\\personservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\ber3erg\\onedrive\\desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u043E\u043E\u043F\\investingmanagerapp\\services\\moexservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:services\\moexservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\ber3erg\\onedrive\\desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u043E\u043E\u043F\\investingmanagerapp\\views\\portfoliopage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:views\\portfoliopage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\ber3erg\\onedrive\\desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u043E\u043E\u043F\\investingmanagerapp\\models\\portfolioasset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:models\\portfolioasset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\ber3erg\\onedrive\\desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u043E\u043E\u043F\\investingmanagerapp\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\ber3erg\\onedrive\\desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u043E\u043E\u043F\\investingmanagerapp\\data\\appdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:data\\appdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|c:\\users\\ber3erg\\onedrive\\desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u043E\u043E\u043F\\investingmanagerapp\\models\\appstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{851DBE00-E3BF-4ACA-A5D9-211341828533}|InvestingManagerApp.csproj|solutionrelative:models\\appstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,8 +38,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SecurityService.cs",
+              "DocumentMoniker": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\Services\\SecurityService.cs",
+              "RelativeDocumentMoniker": "Services\\SecurityService.cs",
+              "ToolTip": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\Services\\SecurityService.cs",
+              "RelativeToolTip": "Services\\SecurityService.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAIA7wB8AAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T23:44:16.803Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MOEXService.cs",
+              "DocumentMoniker": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\Services\\MOEXService.cs",
+              "RelativeDocumentMoniker": "Services\\MOEXService.cs",
+              "ToolTip": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\Services\\MOEXService.cs",
+              "RelativeToolTip": "Services\\MOEXService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T23:37:52.229Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -50,28 +96,66 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DataBaseSeeder.cs",
-              "DocumentMoniker": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\Data\\DataBaseSeeder.cs",
-              "RelativeDocumentMoniker": "Data\\DataBaseSeeder.cs",
-              "ToolTip": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\Data\\DataBaseSeeder.cs",
-              "RelativeToolTip": "Data\\DataBaseSeeder.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-02T20:03:33.526Z",
+              "DocumentIndex": 2,
+              "Title": "PortfolioPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\Views\\PortfolioPage.xaml",
+              "RelativeDocumentMoniker": "Views\\PortfolioPage.xaml",
+              "ToolTip": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\Views\\PortfolioPage.xaml",
+              "RelativeToolTip": "Views\\PortfolioPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-04-02T23:33:50.94Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PersonService.cs",
-              "DocumentMoniker": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\Services\\PersonService.cs",
-              "RelativeDocumentMoniker": "Services\\PersonService.cs",
-              "ToolTip": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\Services\\PersonService.cs",
-              "RelativeToolTip": "Services\\PersonService.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwCMAAAAaAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "PortfolioAsset.cs",
+              "DocumentMoniker": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\Models\\PortfolioAsset.cs",
+              "RelativeDocumentMoniker": "Models\\PortfolioAsset.cs",
+              "ToolTip": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\Models\\PortfolioAsset.cs",
+              "RelativeToolTip": "Models\\PortfolioAsset.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-01T23:01:49.825Z",
+              "WhenOpened": "2026-04-02T23:33:27.645Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "App.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\App.xaml.cs",
+              "RelativeDocumentMoniker": "App.xaml.cs",
+              "ToolTip": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\App.xaml.cs",
+              "RelativeToolTip": "App.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T22:30:39.873Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AppDB.cs",
+              "DocumentMoniker": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\Data\\AppDB.cs",
+              "RelativeDocumentMoniker": "Data\\AppDB.cs",
+              "ToolTip": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\Data\\AppDB.cs",
+              "RelativeToolTip": "Data\\AppDB.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T22:27:35.553Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AppState.cs",
+              "DocumentMoniker": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\Models\\AppState.cs",
+              "RelativeDocumentMoniker": "Models\\AppState.cs",
+              "ToolTip": "C:\\Users\\Ber3erg\\OneDrive\\Desktop\\\u0443\u0447\u0451\u0431\u0430\\3 \u0441\u0435\u043C\u0435\u0441\u0442\u0440\\\u041E\u041E\u041F\\InvestingManagerApp\\Models\\AppState.cs",
+              "RelativeToolTip": "Models\\AppState.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-02T22:25:11.17Z",
               "EditorCaption": ""
             }
           ]

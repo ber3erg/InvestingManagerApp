@@ -9,6 +9,7 @@ namespace InvestingManagerApp.Data
         public DbSet<Portfolio> Portfolios => Set<Portfolio>();
         public DbSet<Security> Securities => Set<Security>();
         public DbSet<Transaction> Transactions => Set<Transaction>();
+        public DbSet<AppState> AppStates => Set<AppState>();
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
