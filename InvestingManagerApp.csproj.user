@@ -13,6 +13,9 @@
     <Compile Update="ViewModels\AdminPageViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\AdminEditUserPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AdminSecurityPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -30,6 +30,7 @@ namespace InvestingManagerApp.ViewModels
         public ICommand NavigateToSecuritiesCommand { get; }
         public ICommand NavigateToUsersCommand { get; }
         public ICommand RemoveSecurityCommand { get; }
+        public ICommand EditSecurityCommand { get; }
         public ICommand AddNewSecurityCommand { get; }
 
         public AdminSecurityPageViewModel(MainViewModel mainViewModel)
@@ -40,11 +41,12 @@ namespace InvestingManagerApp.ViewModels
             NavigateToUsersCommand = new RelayCommand(NavigateToUsers);
             RemoveSecurityCommand = new RelayCommand<SecurityForTable>(RemoveSecurity);
             AddNewSecurityCommand = new RelayCommand(NavigateToAddNewSecurity);
+            EditSecurityCommand = new RelayCommand<SecurityForTable>(OpenSecurityEditor);
 
             Securities = BuildSecurityForTables();
             
         }
-
+        
         public ObservableCollection<SecurityForTable> BuildSecurityForTables()
         {
             var result = new ObservableCollection<SecurityForTable>();
@@ -58,6 +60,12 @@ namespace InvestingManagerApp.ViewModels
             }
 
             return result;
+        }
+
+        public void OpenSecurityEditor(SecurityForTable securityForTable)
+        {
+            var createSecurityPageViewModel = new CreateSecurityPageViewModel(_mainViewModel, securityForTable.TheSecurity.Id);
+            _mainViewModel.NavigateTo(new CreateSecurityPage { DataContext = createSecurityPageViewModel });
         }
 
         public void NavigateToAddNewSecurity()

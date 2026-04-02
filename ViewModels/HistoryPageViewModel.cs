@@ -29,6 +29,7 @@ namespace InvestingManagerApp.ViewModels
 
         public ICommand RemoveTransactionCommand { get; }
         public ICommand AddTransactionCommand { get; }
+        public ICommand EditTransactionCommand { get; }
         public ICommand NavigateToMainCommand { get; }
         public ICommand NavigateToHistoryCommand { get; }
         public ICommand NavigateToSearchCommand { get; }
@@ -41,6 +42,7 @@ namespace InvestingManagerApp.ViewModels
             NavigateToHistoryCommand = new RelayCommand(NavigateToHistory);
             NavigateToSearchCommand = new RelayCommand(NavigateToSearch);
 
+            EditTransactionCommand = new RelayCommand<TransactionInfoForTable>(EditTransactionNavigate);
             AddTransactionCommand = new RelayCommand(NavigateToAddTransactionPage);
             RemoveTransactionCommand = new RelayCommand<TransactionInfoForTable>(RemoveTransaction);
 
@@ -71,6 +73,12 @@ namespace InvestingManagerApp.ViewModels
             
             return result;
 
+        }
+
+        public void EditTransactionNavigate(TransactionInfoForTable transactionInfo)
+        {
+            var createTransactionPageViewModel = new CreateTransactionPageViewModel(_mainViewModel, transactionInfo.CurrentTransaction);
+            _mainViewModel.NavigateTo( new CreateTransactionPage { DataContext = createTransactionPageViewModel });
         }
 
         public void RemoveTransaction(TransactionInfoForTable transaction)

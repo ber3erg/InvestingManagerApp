@@ -52,6 +52,7 @@ namespace InvestingManagerApp.ViewModels
         public ICommand NavigateToMainCommand { get; }
         public ICommand NavigateToHistoryCommand { get; }
         public ICommand NavigateToSearchCommand { get; }
+        public ICommand BuySecurityCommand { get; }
         public ICommand SearchSecuritiesCommand { get; }
         public SearchPageViewModel(MainViewModel mainViewModel) 
         {
@@ -61,6 +62,7 @@ namespace InvestingManagerApp.ViewModels
             NavigateToHistoryCommand = new RelayCommand(NavigateToHistory);
             NavigateToSearchCommand = new RelayCommand(NavigateToSearch);
 
+            BuySecurityCommand = new RelayCommand<Security>(BuySecurityNavigate);
             SearchSecuritiesCommand = new RelayCommand(SearchSecurities);
 
             SearchedSecurities = new ObservableCollection<Security>();
@@ -81,6 +83,12 @@ namespace InvestingManagerApp.ViewModels
             {
                 SearchedSecurities.Add(security);
             }
+        }
+
+        public void BuySecurityNavigate(Security security)
+        {
+            var createTransactionPageViewModel = new CreateTransactionPageViewModel(_mainViewModel, security);
+            _mainViewModel.NavigateTo(new CreateTransactionPage { DataContext = createTransactionPageViewModel });
         }
 
         public void NavigateToMain()

@@ -30,7 +30,7 @@ namespace InvestingManagerApp.Services
         public Security GetSecurityById(int securityId)
         {
             using var db = new AppDBContext();
-            return db.Securities.FirstOrDefault(s => securityId == s.Id);
+            return db.Securities.First(s => securityId == s.Id);
         }
 
         public List<Security> GetSecurities()
@@ -41,7 +41,7 @@ namespace InvestingManagerApp.Services
 
         public void RemoveSecurity(int securityId)
         {
-            var db = new AppDBContext();
+            using var db = new AppDBContext();
             var security = db.Securities.First(s => securityId == s.Id);
             var transactions = db.Transactions.Where(t => t.SecurityId == securityId).ToList();
             foreach (var transaction in transactions)
@@ -54,8 +54,21 @@ namespace InvestingManagerApp.Services
 
         public void AddSecurity(Security security)
         {
-            var db = new AppDBContext();
+            using var db = new AppDBContext();
             db.Securities.Add(security);
+            db.SaveChanges();
+        }
+
+        public void EditSecurity(Security newSecurity)
+        {
+            using var db = new AppDBContext();
+            var oldSecurity = db.Securities.First(s => s.Id == newSecurity.Id);
+
+            oldSecurity.Ticker = newSecurity.Ticker;
+            oldSecurity.Company = newSecurity.Company;
+            oldSecurity.CurrentPrice = newSecurity.CurrentPrice;
+            oldSecurity.Type = newSecurity.Type;
+
             db.SaveChanges();
         }
 

@@ -68,7 +68,8 @@ namespace InvestingManagerApp.ViewModels
 
         public void NavigateToAddTransactionPage()
         {
-            var createTransactionPageViewModel = new CreateTransactionPageViewModel(_mainViewModel, _portfolioId);
+            var currentPortfolio = _mainViewModel.PortfolioService.GetPortfolioById(_portfolioId);
+            var createTransactionPageViewModel = new CreateTransactionPageViewModel(_mainViewModel, currentPortfolio);
             _mainViewModel.NavigateTo(new CreateTransactionPage { DataContext = createTransactionPageViewModel });
         }
 

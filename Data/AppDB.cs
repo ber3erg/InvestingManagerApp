@@ -3,7 +3,7 @@ using InvestingManagerApp.Models;
 
 namespace InvestingManagerApp.Data
 {
-    class AppDBContext : DbContext
+    public class AppDBContext : DbContext
     {
         public DbSet<Person> Persons => Set<Person>();
         public DbSet<Portfolio> Portfolios => Set<Portfolio>();

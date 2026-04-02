@@ -9,6 +9,7 @@ namespace InvestingManagerApp.ViewModels
     class CreateSecurityPageViewModel : ViewModelBase
     {
         private readonly MainViewModel _mainViewModel;
+        private readonly Security EditingSecurity;
         private string _name;
         private string _ticker;
         private string _company;
@@ -100,6 +101,17 @@ namespace InvestingManagerApp.ViewModels
                 Enum.GetValues(typeof(SecurityType)).Cast<SecurityType>());
         }
 
+        public CreateSecurityPageViewModel(MainViewModel mainViewModel, int securityId) : this(mainViewModel)
+        {
+            EditingSecurity = mainViewModel.SecurityService.GetSecurityById(securityId);
+
+            Name = EditingSecurity.Name;
+            Ticker = EditingSecurity.Ticker;
+            Company = EditingSecurity.Company;
+            TheSecurityType = EditingSecurity.Type;
+            CurrentPriceText = EditingSecurity.CurrentPrice.ToString();
+        }
+
         public void SaveSecurity()
         {
             if (string.IsNullOrWhiteSpace(Name) || string.IsNullOrWhiteSpace(Ticker) || string.IsNullOrWhiteSpace(Company)) 
@@ -121,6 +133,13 @@ namespace InvestingManagerApp.ViewModels
 
             var newSecurity = new Security(Ticker, Name, Company, TheSecurityType, currentPrice);
 
+            if (EditingSecurity != null) 
+            { 
+                newSecurity.Id = EditingSecurity.Id;
+                _mainViewModel.SecurityService.EditSecurity(newSecurity);
+                NavigateToAdminSecurities();
+                return;
+            }
             _mainViewModel.SecurityService.AddSecurity(newSecurity);
             NavigateToAdminSecurities();
 

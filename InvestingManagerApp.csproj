@@ -9,6 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\AddIcon.png" />
+    <None Remove="Images\EditIcon.png" />
+    <None Remove="Images\EditIconBlue.png" />
     <None Remove="Images\HistoryIcon.png" />
     <None Remove="Images\HistoryIconBlue.png" />
     <None Remove="Images\mainIcon.png" />
@@ -30,6 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\AddIcon.png" />
+    <Resource Include="Images\EditIcon.png" />
+    <Resource Include="Images\EditIconBlue.png" />
     <Resource Include="Images\HistoryIcon.png" />
     <Resource Include="Images\HistoryIconBlue.png" />
     <Resource Include="Images\mainIcon.png" />

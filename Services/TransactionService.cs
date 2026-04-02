@@ -28,6 +28,13 @@ namespace InvestingManagerApp.Services
 
         }
 
+        public Transaction GetTransactionById(int transactionId)
+        {
+            using var db = new AppDBContext();
+            var transaction = db.Transactions.First(t => t.Id == transactionId);
+            return transaction;
+        }
+
         public List<Transaction> GetTransactionsByPortfolio(int portfolioId)
         {
 

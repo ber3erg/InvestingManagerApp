@@ -333,6 +333,7 @@
                         Grid.Column="0"
                         Width="140"
                         Height="42"
+                        Margin="0,24,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         Content="Сохранить"
@@ -342,6 +343,20 @@
                         BorderThickness="0"
                         FontSize="14"
                         FontWeight="SemiBold"/>
+            <Button Grid.Row="5"
+                    Grid.Column="1"
+                    Width="140"
+                    Height="42"
+                    Margin="0,24,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Отмена"
+                    Command="{Binding NavigateToMainCommand}"
+                    Background="#969696"
+                    Foreground="White"
+                    BorderThickness="0"
+                    FontSize="14"
+                    FontWeight="SemiBold"/>
         </Grid>
     </Grid>
 </Page>

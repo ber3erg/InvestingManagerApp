@@ -19,7 +19,7 @@ namespace InvestingManagerApp.ViewModels
         private ObservableCollection<Portfolio> _portfolios;
         private ObservableCollection<Security> _securities;
         private ObservableCollection<TransactionType> _transactionTypes;
-
+        
         private Portfolio? _selectedPortfolio;
         private Security? _selectedSecurity;
         private TransactionType _selectedTransactionType;
@@ -155,9 +155,26 @@ namespace InvestingManagerApp.ViewModels
             SaveTransactionCommand = new RelayCommand(SaveTransaction);
             NavigateToMainCommand = new RelayCommand(NavigateToMain);
         }
-        public CreateTransactionPageViewModel(MainViewModel mainViewModel, int portfolioId) : this(mainViewModel)
-        {
 
+        public CreateTransactionPageViewModel(MainViewModel mainViewModel, Security security) : this(mainViewModel)
+        {
+            SelectedSecurity = Securities.FirstOrDefault(s => s.Id == security.Id);
+        }
+
+        public CreateTransactionPageViewModel(MainViewModel mainViewModel, Transaction oldTransaction) : this(mainViewModel)
+        {
+            SelectedSecurity = Securities.FirstOrDefault(s => s.Id == oldTransaction.SecurityId);
+            SelectedPortfolio = Portfolios.FirstOrDefault(p => p.Id == oldTransaction.PortfolioId);
+            SelectedTransactionType = TransactionTypes.First(tt => tt == oldTransaction.Type);
+            PricePerUnitText = oldTransaction.PricePerUnit.ToString();
+            AmountText = oldTransaction.Amount.ToString();
+            SelectedDate = oldTransaction.Date.Date;
+            SelectedTime = oldTransaction.Date.TimeOfDay.ToString();
+        }
+
+        public CreateTransactionPageViewModel(MainViewModel mainViewModel, Portfolio portfolio) : this(mainViewModel)
+        {
+            SelectedPortfolio = Portfolios.FirstOrDefault(p => p.Id == portfolio.Id);
         }
 
         public void SaveTransaction()

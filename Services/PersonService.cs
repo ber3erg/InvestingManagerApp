@@ -7,7 +7,7 @@ namespace InvestingManagerApp.Services
     {
         public void RemovePerson(int personId)
         {
-            var db = new AppDBContext();
+            using var db = new AppDBContext();
             var portfolios = db.Portfolios.Where(p => p.PersonId == personId).ToList();
             foreach (var portfolio in portfolios)
             {
@@ -22,12 +22,30 @@ namespace InvestingManagerApp.Services
             db.Persons.Remove(person);
             db.SaveChanges();
         }
+        public Person GetPersonById(int personId)
+        {
+            using var db = new AppDBContext();
+            var finded = db.Persons.First(p => p.Id == personId);
+            return finded;
+        }
 
         public List<Person> GetPeople()
         {
-            var db = new AppDBContext();
-            var people = db.Persons.ToList();
+            using var db = new AppDBContext();
+            var people = db.Persons.Where(p => p.IsAdmin == false).ToList();
             return people;
+        }
+
+        public void EditPerson(Person newPerson)
+        {
+            using var db = new AppDBContext();
+            var oldPerson = db.Persons.First(p => p.Id == newPerson.Id);
+
+            oldPerson.Login = newPerson.Login;
+            oldPerson.Password = newPerson.Password;
+            oldPerson.Name = newPerson.Name;
+
+            db.SaveChanges();
         }
     }
 }
