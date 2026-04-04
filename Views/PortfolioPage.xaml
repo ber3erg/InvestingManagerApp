@@ -97,11 +97,18 @@
         <Border Grid.Column="0"
                 Background="#313131">
             <!-- StackPanel позволяет собрать элементы меню вертикально -->
-            <StackPanel Orientation="Vertical"
-                        Margin="10px, 0">
+            <Grid Margin="10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
                 <!-- Каждая кнопка - команда -->
                 <Button Command="{Binding NavigateToMainCommand}"
-                        Style="{StaticResource MenuButtonStyle}">
+                        Style="{StaticResource MenuButtonStyle}"
+                        Grid.Row="0">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border x:Name="Border"
@@ -134,7 +141,8 @@
 
                 </Button>
                 <Button Command="{Binding NavigateToSearchCommand}"
-                        Style="{StaticResource MenuButtonStyle}">
+                        Style="{StaticResource MenuButtonStyle}"
+                        Grid.Row="1">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border x:Name="Border"
@@ -166,7 +174,8 @@ CornerRadius="12">
 
                 </Button>
                 <Button Command="{Binding NavigateToHistoryCommand}"
-                        Style="{StaticResource MenuButtonStyle}">
+                        Style="{StaticResource MenuButtonStyle}"
+                        Grid.Row="2">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border x:Name="Border"
@@ -197,7 +206,37 @@ CornerRadius="12">
                     </Button.Template>
 
                 </Button>
-            </StackPanel>
+                <Button Grid.Row="4"
+                        Command="{Binding LogoutCommand}"
+                        Style="{StaticResource MenuButtonStyle}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border"
+                                    Background="Transparent"
+                                    CornerRadius="12">
+                                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                                    <Image x:Name="MenuIcon"
+                                           Source="/Images/LogoutButton.png"
+                                           Style="{StaticResource MenuIconStyle}"/>
+                                    <TextBlock Text="Выход"
+                               Style="{StaticResource MenuTextStyle}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/LogoutButtonBlue.png"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
         </Border>
 
         <Grid Grid.Column="1"

@@ -24,6 +24,7 @@ namespace InvestingManagerApp.ViewModels
 
         public ICommand NavigateToSecuritiesCommand { get; }
         public ICommand NavigateToUsersCommand { get; }
+        public ICommand LogoutCommand { get; }
 
         public ICommand EditUserCommand { get; }
         public ICommand RemovePersonCommand { get; }
@@ -34,6 +35,8 @@ namespace InvestingManagerApp.ViewModels
 
             NavigateToSecuritiesCommand = new RelayCommand(NavigateToSecurities);
             NavigateToUsersCommand = new RelayCommand(NavigateToUsers);
+            LogoutCommand = new RelayCommand(Logout);
+
             RemovePersonCommand = new RelayCommand<Person>(RemovePerson);
             EditUserCommand = new RelayCommand<Person>(OpenUserEditor);
 
@@ -73,6 +76,12 @@ namespace InvestingManagerApp.ViewModels
         {
             var adminUserPageViewModel = new AdminUserPageViewModel(_mainViewModel);
             _mainViewModel.NavigateTo(new AdminUserPage { DataContext = adminUserPageViewModel });
+        }
+        private void Logout()
+        {
+            _mainViewModel.PersonSession.SignOut();
+            var loginPageViewModel = new LoginPageViewModel(_mainViewModel);
+            _mainViewModel.NavigateTo(new LoginPage { DataContext = loginPageViewModel });
         }
     }
 }

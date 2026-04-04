@@ -14,7 +14,7 @@ namespace InvestingManagerApp.Services
         public async Task<decimal?> GetLastPriceAsync(Security security)
         {
             var url = GetMoexUrl(security);
-
+ 
             using var response = await _httpClient.GetAsync(url);
             response.EnsureSuccessStatusCode();
 

@@ -43,11 +43,18 @@
         <Border Grid.Column="0"
                 Background="#313131">
             <!-- StackPanel позволяет собрать элементы меню вертикально -->
-            <StackPanel Orientation="Vertical"
-                        Margin="10px, 0">
+            <Grid Margin="10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
                 <!-- Каждая кнопка - команда -->
                 <Button Command="{Binding NavigateToMainCommand}"
-                        Style="{StaticResource MenuButtonStyle}">
+                        Style="{StaticResource MenuButtonStyle}"
+                        Grid.Row="0">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border x:Name="Border"
@@ -80,7 +87,8 @@
 
                 </Button>
                 <Button Command="{Binding NavigateToSearchCommand}"
-                        Style="{StaticResource MenuButtonStyle}">
+                        Style="{StaticResource MenuButtonStyle}"
+                        Grid.Row="1">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border x:Name="Border"
@@ -112,7 +120,8 @@ CornerRadius="12">
 
                 </Button>
                 <Button Command="{Binding NavigateToHistoryCommand}"
-                        Style="{StaticResource MenuButtonStyle}">
+                        Style="{StaticResource MenuButtonStyle}"
+                        Grid.Row="2">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border x:Name="Border"
@@ -143,7 +152,37 @@ CornerRadius="12">
                     </Button.Template>
 
                 </Button>
-            </StackPanel>
+                <Button Grid.Row="4"
+                        Command="{Binding LogoutCommand}"
+                        Style="{StaticResource MenuButtonStyle}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border"
+                                    Background="Transparent"
+                                    CornerRadius="12">
+                                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                                    <Image x:Name="MenuIcon"
+                                           Source="/Images/LogoutButton.png"
+                                           Style="{StaticResource MenuIconStyle}"/>
+                                    <TextBlock Text="Выход"
+                               Style="{StaticResource MenuTextStyle}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/LogoutButtonBlue.png"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
         </Border>
         
         
@@ -164,112 +203,230 @@ CornerRadius="12">
                 
                 <!-- Раздел с портфелями пользователя -->
                 <!-- ItemsControl тег для отображения списка данных -->
-                <ItemsControl Grid.Row="1"                              
-                              ItemsSource="{Binding PortfolioCards}"> <!-- через ItemsSource задаётся принимаемая observeableCollection  -->
+                <ScrollViewer Grid.Row="1"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <ItemsControl ItemsSource="{Binding PortfolioCards}"> <!-- через ItemsSource задаётся принимаемая observeableCollection  -->
                     
-                    <!-- itemsPanel меняет способ размещения элементов: в ряд, сеткой или стопкой -->
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>                        <!-- тег для задания шаблона -->
-                            <WrapPanel Orientation="Horizontal"/>   <!-- WrapPanel располагает в ряд (или столбик) и переносит на новую строку -->
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
+                        <!-- itemsPanel меняет способ размещения элементов: в ряд, сеткой или стопкой -->
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>                        <!-- тег для задания шаблона -->
+                                <WrapPanel Orientation="Horizontal"/>   <!-- WrapPanel располагает в ряд (или столбик) и переносит на новую строку -->
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
                     
-                    <!-- ItemTemplate задаёт шаблон для вида каждого объекта -->
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Width="180"
-                                  Height="120"
-                                  Margin="0,0,20,20">
+                        <!-- ItemTemplate задаёт шаблон для вида каждого объекта -->
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Width="170"
+                                      Height="120"
+                                      Margin="0,0,20,20">
 
-                                <Border CornerRadius="12"
-                                        Cursor="Hand">
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Setter Property="Background" Value="#313131"/>
-                                            <Setter Property="Cursor" Value="Arrow"/>
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="#555555"/>
-                                                    <Setter Property="Cursor" Value="Hand"/>
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Border.Style>
-                                    <Border.InputBindings>
-                                        <MouseBinding MouseAction="LeftClick"
-                                                        Command="{Binding DataContext.OpenPortfolioCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                                        CommandParameter="{Binding}"/>
-                                    </Border.InputBindings>
+                                    <Border CornerRadius="12"
+                                            Cursor="Hand">
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Setter Property="Background" Value="#313131"/>
+                                                <Setter Property="Cursor" Value="Arrow"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#555555"/>
+                                                        <Setter Property="Cursor" Value="Hand"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <Border.InputBindings>
+                                            <MouseBinding MouseAction="LeftClick"
+                                                            Command="{Binding DataContext.OpenPortfolioCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                                            CommandParameter="{Binding}"/>
+                                        </Border.InputBindings>
 
-                                    <StackPanel Margin="12">
-                                        <TextBlock Text="{Binding Name}"
-                            Foreground="White"
-                            FontSize="14"
-                            FontWeight="SemiBold"
-                            Margin="0,0,0,12"/>
+                                        <StackPanel Margin="12">
+                                            <Grid Margin="0,0,0,12">
+                                                <TextBlock Text="{Binding Name}"
+                                                           Foreground="White"
+                                                           FontSize="12"
+                                                           FontWeight="SemiBold">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsEditingName}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
 
-                                        <TextBlock Text="{Binding TotalValue, StringFormat=Стоимость: {0:F2}}"
-                            Foreground="White"
-                            FontSize="12"
-                            Margin="0,0,0,6"/>
+                                                <TextBox Text="{Binding EditableName, UpdateSourceTrigger=PropertyChanged}"
+                                                         Height="28"
+                                                         Padding="8,4"
+                                                         Background="#2B2B2B"
+                                                         Foreground="White"
+                                                         BorderBrush="#A0A0A0"
+                                                         BorderThickness="1">
+                                                    <TextBox.Style>
+                                                        <Style TargetType="TextBox">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsEditingName}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBox.Style>
+                                                </TextBox>
+                                            </Grid>
 
-                                        <TextBlock Text="{Binding TotalProfit, StringFormat=Прибыль/убыток: {0:F2}}"
-                            Foreground="White"
-                            FontSize="12"/>
-                                    </StackPanel>
-                                </Border>
+                                            <TextBlock Text="{Binding TotalValue, StringFormat=Стоимость: {0:F2}}"
+                                Foreground="White"
+                                FontSize="12"
+                                Margin="0,0,0,6"/>
 
-                                <Button Width="24"
-                                        Height="24"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Top"
-                                        Margin="0,8,8,0"
-                                        FontSize="12"
-                                        Padding="0"
-                                        Command="{Binding DataContext.RemovePortfolioCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                        CommandParameter="{Binding}"
-                                        Background="Transparent"
-                                        BorderThickness="0">
-                                    <Button.Template>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border x:Name="border"
-                                                    Background="{TemplateBinding Background}"
-                                                    CornerRadius="3">
-                                                <ContentPresenter HorizontalAlignment="Center"
-                                                                  VerticalAlignment="Center"/>
-                                            </Border>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="border" Property="Background" Value="#969696"/>
-                                                    <Setter Property="Cursor" Value="Hand"/>
-                                                </Trigger>
-                                                <Trigger Property="IsPressed" Value="True">
-                                                    <Setter TargetName="border" Property="Background" Value="Transparent"/>
-                                                    <Setter Property="Cursor" Value="Hand"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                    <TextBlock Text="X"
-                                               Foreground="White"
-                                               FontSize="14"
-                                               FontWeight="Bold"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center"/>
-                                </Button>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
+                                            <TextBlock Text="{Binding TotalProfit, StringFormat=Прибыль/убыток: {0:F2}}"
+                                Foreground="White"
+                                FontSize="12"/>
+                                        </StackPanel>
+                                    </Border>
 
-                </ItemsControl>
+                                    <Button Width="24"
+                                            Height="24"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            Margin="0,8,8,0"
+                                            FontSize="12"
+                                            Padding="0"
+                                            Command="{Binding DataContext.RemovePortfolioCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                            CommandParameter="{Binding}"
+                                            Background="Transparent"
+                                            BorderThickness="0">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsEditingName}" Value="True">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border x:Name="border"
+                                                        Background="{TemplateBinding Background}"
+                                                        CornerRadius="3">
+                                                    <ContentPresenter HorizontalAlignment="Center"
+                                                                      VerticalAlignment="Center"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="#969696"/>
+                                                        <Setter Property="Cursor" Value="Hand"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsPressed" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="Transparent"/>
+                                                        <Setter Property="Cursor" Value="Hand"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                        <TextBlock Text="X"
+                                                   Foreground="White"
+                                                   FontSize="14"
+                                                   FontWeight="Bold"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"/>
+                                    </Button>
+                                    <Button Width="24"
+                                            Height="24"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            Margin="0,8,8,0"
+                                            Padding="0"
+                                            Command="{Binding DataContext.SavePortfolioNameCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                            CommandParameter="{Binding}"
+                                            Background="Transparent"
+                                            BorderThickness="0">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsEditingName}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <TextBlock Text="✓"
+                                                    Foreground="White"
+                                                    FontSize="12"
+                                                    FontWeight="Bold"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"/>
+                                    </Button>
+                                    <Button Width="24"
+                                            Height="24"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            Margin="0,8,36,0"
+                                            Padding="0"
+                                            Command="{Binding DataContext.StartRenamePortfolioCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                            CommandParameter="{Binding}"
+                                            Background="Transparent"
+                                            BorderThickness="0">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsEditingName}" Value="True">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border x:Name="border"
+                                                        Background="{TemplateBinding Background}"
+                                                        CornerRadius="3">
+                                                    <ContentPresenter HorizontalAlignment="Center"
+                                                                      VerticalAlignment="Center"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="#969696"/>
+                                                        <Setter Property="Cursor" Value="Hand"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsPressed" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="Transparent"/>
+                                                        <Setter Property="Cursor" Value="Hand"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+
+                                        <Image Source="/Images/editIcon.png"
+                                               Width="14"
+                                               Height="14"
+                                               Stretch="Uniform"/>
+                                    </Button>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+
+                    </ItemsControl>
+                </ScrollViewer>
                 
                 <Button Grid.Row="2"
-                        Width="150"
-                        Height="120"
-                        Margin="0,20,20,0"
+                        Width="100"
+                        Height="80"
+                        Margin="0,0,20,0"
                         Background="#313131"
                         Command="{Binding AddNewPortfolioCommand}"
-                        BorderThickness="0">
+                        BorderThickness="0"
+                        HorizontalAlignment="Left">
                     <!-- Button.Template позволяет полностью видоизменить кнопку -->
                     <Button.Template>
                         <!--ControlTemplate - обёртка структуры кнопки -->

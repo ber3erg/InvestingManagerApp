@@ -30,9 +30,11 @@ namespace InvestingManagerApp.ViewModels
 
         public ICommand AddTransactionCommand { get; }
         public ICommand OpenSecurityCommand { get; }
+
         public ICommand NavigateToMainCommand { get; }
         public ICommand NavigateToHistoryCommand { get; }
         public ICommand NavigateToSearchCommand { get; }
+        public ICommand LogoutCommand { get; }
 
         public PortfolioPageViewModel(MainViewModel mainViewModel, int portfolioId)
         {
@@ -42,6 +44,7 @@ namespace InvestingManagerApp.ViewModels
             NavigateToMainCommand = new RelayCommand(NavigateToMain);
             NavigateToHistoryCommand = new RelayCommand(NavigateToHistory);
             NavigateToSearchCommand = new RelayCommand(NavigateToSearch);
+            LogoutCommand = new RelayCommand(Logout);
 
             AddTransactionCommand = new RelayCommand(NavigateToAddTransactionPage);
             OpenSecurityCommand = new RelayCommand<PortfolioAssetForTable>(OpenSecurity);
@@ -89,6 +92,12 @@ namespace InvestingManagerApp.ViewModels
             _mainViewModel.NavigateTo(new SearchPage { DataContext = searchPageViewModel });
         }
 
+        private void Logout()
+        {
+            _mainViewModel.PersonSession.SignOut();
+            var loginPageViewModel = new LoginPageViewModel(_mainViewModel);
+            _mainViewModel.NavigateTo(new LoginPage { DataContext = loginPageViewModel });
+        }
 
         public void OpenSecurity(PortfolioAssetForTable portfolioAsset)
         {

@@ -74,7 +74,7 @@ namespace InvestingManagerApp.ViewModels
             }
             else
             {
-                ErrorMessage = "Пользователь не найден";
+                ErrorMessage = "Неверные логин или пароль";
             }
         }
 

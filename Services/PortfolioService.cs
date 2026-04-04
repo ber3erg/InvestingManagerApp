@@ -1,5 +1,6 @@
 ﻿using InvestingManagerApp.Data;
 using InvestingManagerApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace InvestingManagerApp.Services
 {
@@ -36,6 +37,17 @@ namespace InvestingManagerApp.Services
                 db.Portfolios.Remove(portfolio);
                 db.SaveChanges();
             }
+        }
+
+        public void UpdatePortfolioName(int portfolioId, string newName)
+        {
+            using var context = new AppDBContext();
+            var portfolio = context.Portfolios.FirstOrDefault(p => p.Id == portfolioId);
+            if (portfolio == null)
+                return;
+
+            portfolio.Name = newName;
+            context.SaveChanges();
         }
         public Portfolio? GetPortfolioById(int portfolioId)
         {

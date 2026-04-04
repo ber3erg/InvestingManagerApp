@@ -12,6 +12,7 @@ namespace InvestingManagerApp.ViewModels
     {
         private readonly MainViewModel _mainViewModel;
         private ObservableCollection<PortfolioCardModel> _portfolioCards;
+
         public ObservableCollection<PortfolioCardModel> PortfolioCards
         {
             get => _portfolioCards;
@@ -26,8 +27,13 @@ namespace InvestingManagerApp.ViewModels
         public ICommand NavigateToMainCommand { get; }
         public ICommand NavigateToHistoryCommand { get; }
         public ICommand NavigateToSearchCommand { get; }
+        public ICommand LogoutCommand { get; }
+
         public ICommand AddNewPortfolioCommand { get; }
         public ICommand RemovePortfolioCommand { get; }
+
+        public ICommand StartRenamePortfolioCommand { get; }
+        public ICommand SavePortfolioNameCommand { get; }
 
         public MainPageViewModel(MainViewModel mainViewModel)
         {
@@ -36,9 +42,13 @@ namespace InvestingManagerApp.ViewModels
             OpenPortfolioCommand = new RelayCommand<PortfolioCardModel>(OpenPortfolio);
             RemovePortfolioCommand = new RelayCommand<PortfolioCardModel>(RemovePortfolio);
             AddNewPortfolioCommand = new RelayCommand(AddNewPortfolio);
+            StartRenamePortfolioCommand = new RelayCommand<PortfolioCardModel>(StartRenamePortfolio);
+            SavePortfolioNameCommand = new RelayCommand<PortfolioCardModel>(SavePortfolioName);
+
             NavigateToMainCommand = new RelayCommand(NavigateToMain);
             NavigateToHistoryCommand = new RelayCommand(NavigateToHistory);
             NavigateToSearchCommand = new RelayCommand(NavigateToSearch);
+            LogoutCommand = new RelayCommand(Logout);
 
             BuildPortfolioCardModels();
         }
@@ -64,6 +74,31 @@ namespace InvestingManagerApp.ViewModels
             }
         }
 
+        private void StartRenamePortfolio(PortfolioCardModel item)
+        {
+            if (item == null)
+                return;
+
+            item.EditableName = item.Name;
+            item.IsEditingName = true;
+        }
+
+        private void SavePortfolioName(PortfolioCardModel item)
+        {
+            if (item == null)
+                return;
+
+            var newName = item.EditableName?.Trim();
+
+            if (string.IsNullOrWhiteSpace(newName))
+                return;
+
+            item.Name = newName;
+            _mainViewModel.PortfolioService.UpdatePortfolioName(item.PortfolioId, newName);
+            item.IsEditingName = false;
+            BuildPortfolioCardModels();
+        }
+
         public void RemovePortfolio(PortfolioCardModel model)
         {
             _mainViewModel.PortfolioService.RemovePortfolio(model.PortfolioId);
@@ -86,6 +121,14 @@ namespace InvestingManagerApp.ViewModels
             var mainPageViewModel = new MainPageViewModel(_mainViewModel);
             _mainViewModel.NavigateTo(new MainPage { DataContext = mainPageViewModel });
         }
+
+        private void Logout()
+        {
+            _mainViewModel.PersonSession.SignOut();
+            var loginPageViewModel = new LoginPageViewModel(_mainViewModel);
+            _mainViewModel.NavigateTo(new LoginPage { DataContext = loginPageViewModel });
+        }
+
         public void NavigateToHistory() 
         {
             var historyPageViewModel = new HistoryPageViewModel(_mainViewModel);
@@ -99,13 +142,33 @@ namespace InvestingManagerApp.ViewModels
 
     }
 
-    public class PortfolioCardModel
+    public class PortfolioCardModel : ViewModelBase
     {
         public int PortfolioId { get; set; }
         public string Name { get; set; } = "";
         public decimal TotalValue { get; set; }
         public decimal TotalProfit { get; set; }
+        private bool _isEditingName;
+        private string _editableName;
+        public bool IsEditingName
+        {
+            get => _isEditingName;
+            set
+            {
+                _isEditingName = value;
+                OnPropertyChanged(nameof(IsEditingName));
+            }
+        }
 
+        public string EditableName
+        {
+            get => _editableName;
+            set
+            {
+                _editableName = value;
+                OnPropertyChanged(nameof(EditableName));
+            }
+        }
         public PortfolioCardModel() {}
     }
 }

@@ -14,6 +14,8 @@
     <None Remove="Images\EditIconBlue.png" />
     <None Remove="Images\HistoryIcon.png" />
     <None Remove="Images\HistoryIconBlue.png" />
+    <None Remove="Images\LogoutButton.png" />
+    <None Remove="Images\LogoutButtonBlue.png" />
     <None Remove="Images\mainIcon.png" />
     <None Remove="Images\MainIconBlue.png" />
     <None Remove="Images\personIcon.png" />
@@ -38,6 +40,8 @@
     <Resource Include="Images\EditIconBlue.png" />
     <Resource Include="Images\HistoryIcon.png" />
     <Resource Include="Images\HistoryIconBlue.png" />
+    <Resource Include="Images\LogoutButton.png" />
+    <Resource Include="Images\LogoutButtonBlue.png" />
     <Resource Include="Images\mainIcon.png" />
     <Resource Include="Images\MainIconBlue.png" />
     <Resource Include="Images\personIcon.png" />

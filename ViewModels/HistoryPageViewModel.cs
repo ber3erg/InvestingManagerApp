@@ -30,9 +30,11 @@ namespace InvestingManagerApp.ViewModels
         public ICommand RemoveTransactionCommand { get; }
         public ICommand AddTransactionCommand { get; }
         public ICommand EditTransactionCommand { get; }
+
         public ICommand NavigateToMainCommand { get; }
         public ICommand NavigateToHistoryCommand { get; }
         public ICommand NavigateToSearchCommand { get; }
+        public ICommand LogoutCommand { get; }
 
         public HistoryPageViewModel(MainViewModel mainViewModel)
         {
@@ -41,6 +43,7 @@ namespace InvestingManagerApp.ViewModels
             NavigateToMainCommand = new RelayCommand(NavigateToMain);
             NavigateToHistoryCommand = new RelayCommand(NavigateToHistory);
             NavigateToSearchCommand = new RelayCommand(NavigateToSearch);
+            LogoutCommand = new RelayCommand(Logout);
 
             EditTransactionCommand = new RelayCommand<TransactionInfoForTable>(EditTransactionNavigate);
             AddTransactionCommand = new RelayCommand(NavigateToAddTransactionPage);
@@ -93,7 +96,12 @@ namespace InvestingManagerApp.ViewModels
             _mainViewModel.NavigateTo(new CreateTransactionPage { DataContext = createTransactionPageViewModel });
         }
 
-        
+        private void Logout()
+        {
+            _mainViewModel.PersonSession.SignOut();
+            var loginPageViewModel = new LoginPageViewModel(_mainViewModel);
+            _mainViewModel.NavigateTo(new LoginPage { DataContext = loginPageViewModel });
+        }
 
         public void NavigateToMain()
         {

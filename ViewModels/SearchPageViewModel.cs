@@ -52,6 +52,8 @@ namespace InvestingManagerApp.ViewModels
         public ICommand NavigateToMainCommand { get; }
         public ICommand NavigateToHistoryCommand { get; }
         public ICommand NavigateToSearchCommand { get; }
+        public ICommand LogoutCommand { get; }
+
         public ICommand BuySecurityCommand { get; }
         public ICommand SearchSecuritiesCommand { get; }
         public SearchPageViewModel(MainViewModel mainViewModel) 
@@ -61,6 +63,7 @@ namespace InvestingManagerApp.ViewModels
             NavigateToMainCommand = new RelayCommand(NavigateToMain);
             NavigateToHistoryCommand = new RelayCommand(NavigateToHistory);
             NavigateToSearchCommand = new RelayCommand(NavigateToSearch);
+            LogoutCommand = new RelayCommand(Logout);
 
             BuySecurityCommand = new RelayCommand<Security>(BuySecurityNavigate);
             SearchSecuritiesCommand = new RelayCommand(SearchSecurities);
@@ -105,6 +108,12 @@ namespace InvestingManagerApp.ViewModels
         {
             var searchPageViewModel = new SearchPageViewModel(_mainViewModel);
             _mainViewModel.NavigateTo(new SearchPage { DataContext = searchPageViewModel });
+        }
+        private void Logout()
+        {
+            _mainViewModel.PersonSession.SignOut();
+            var loginPageViewModel = new LoginPageViewModel(_mainViewModel);
+            _mainViewModel.NavigateTo(new LoginPage { DataContext = loginPageViewModel });
         }
     }
 }
