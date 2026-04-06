@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using InvestingManagerApp.Views;
-using InvestingManagerApp.Services;
+﻿using InvestingManagerApp.Data;
 using InvestingManagerApp.Models;
+using InvestingManagerApp.Services;
+using InvestingManagerApp.Views;
+using System.Windows.Input;
 
 namespace InvestingManagerApp.ViewModels
 {
@@ -17,7 +13,6 @@ namespace InvestingManagerApp.ViewModels
         private string _login;
         private string _password;
         private string _errorMessage;
-        private List<User> otherUsers;
 
 
         public string Login
@@ -50,37 +45,37 @@ namespace InvestingManagerApp.ViewModels
         public LoginPageViewModel(MainViewModel mainViewModel)
         {
             _mainViewModel = mainViewModel;
-            otherUsers = JsonDataStorage.GetUsersFromJsonFile();
             
             LoginCommand = new RelayCommand(ToLogin);
             RegisterCommand = new RelayCommand(NavigateToRegister);
+            using var db = new AppDBContext();
         }
 
         public ICommand LoginCommand { get; }
         public ICommand RegisterCommand { get; }
 
-        Admin admin = new Admin("Пётр", "terb", "1234");
         public void ToLogin()
         {
-            if (Login == admin.Login && Password == admin.Password)
+            var person = _mainViewModel.AuthService.AuthenticatePerson(Login, Password);
+            if (person != null)
             {
-
-                var adminPage = new AdminPageViewModel(_mainViewModel);
-                _mainViewModel.NavigateTo(new AdminPage { DataContext = adminPage });
-            } else
-            {
-                foreach (User user in otherUsers)
+                if (person.IsAdmin)
                 {
-                    if (user.Login == Login && Password == user.Password)
-                    {
-                        _mainViewModel.CurrentUser.Login(user);
-                        var userPage = new UserPageViewModel(_mainViewModel);
-                        _mainViewModel.NavigateTo(new UserPage { DataContext = userPage });
-                        
-                    }
+                    _mainViewModel.PersonSession.SignIn(person);
+                    var adminPage = new AdminPageViewModel(_mainViewModel);
+                    _mainViewModel.NavigateTo(new AdminPage { DataContext = adminPage });
+                }
+                else
+                {
+                    _mainViewModel.PersonSession.SignIn(person);
+                    var mainPage = new MainPageViewModel(_mainViewModel);
+                    _mainViewModel.NavigateTo(new MainPage { DataContext = mainPage });
                 }
             }
-            ErrorMessage = "Пользователь не найден";
+            else
+            {
+                ErrorMessage = "Неверные логин или пароль";
+            }
         }
 
         public void NavigateToRegister()

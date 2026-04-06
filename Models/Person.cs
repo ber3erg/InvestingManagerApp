@@ -1,48 +1,36 @@
-﻿using System;
-using System.Text.Json.Serialization;
-
-namespace InvestingManagerApp.Models
+﻿namespace InvestingManagerApp.Models
 {
-    public abstract class Person
+    public class Person
     {
-        private static int counter = 0;
-        [JsonInclude]
-        public int Id { get; protected set; }
-        [JsonInclude]
-        public string? Name { get; protected set; }
-        [JsonInclude]
-        public string Login { get; private set; } = string.Empty;
-        [JsonInclude]
-        public bool IsAdmin { get; protected set; } = false;
-        [JsonInclude]
-        public string Password { get; protected set; } = string.Empty;
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Login { get; set; } = string.Empty;
+        public bool IsAdmin { get; set; } = false;
+        public string Password { get; set; } = string.Empty;
 
         public Person(string name, string login, string password)
         {
-            Id = ++counter;
             Name = name;
             Login = login;
             Password = password;
         }
 
+        public Person(string name, string login, string password, bool isAdmin)
+        {
+            Name = name;
+            Login = login;
+            Password = password;
+            IsAdmin = isAdmin;
+        }
+
         // Пустой конструктор, если нужно для десериализации или WPF привязки
         public Person()
         {
-            Id = 0;
-            Login = string.Empty;
-            Password = string.Empty;
         }
-        public virtual void ChangeName(string name){
-            if (string.IsNullOrWhiteSpace(name)){
-                Console.WriteLine("Имя не может быть пустым");
-            } else {
+        public void ChangeName(string name){
+            if (!string.IsNullOrWhiteSpace(name)){
                 Name = name;
             }
-        }
-        public static void SetCounter(int value)
-        {
-            if (value > counter)
-                counter = value;
         }
     }
 }

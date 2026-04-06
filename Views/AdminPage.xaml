@@ -1,129 +1,192 @@
 ﻿<Page x:Class="InvestingManagerApp.Views.AdminPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Управление ценными бумагами" Height="500" Width="850">
-    <DockPanel>
-
-        <!-- Основное содержимое -->
-        <Grid Margin="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <TextBlock Text="Управление ценными бумагами" 
-                       FontSize="20" 
-                       FontWeight="Bold" 
-                       HorizontalAlignment="Center"
-                       Margin="0,0,0,10"/>
-
-            <!-- Добавление новой ценной бумаги -->
-            <StackPanel Grid.Row="0" Margin="0,10,0,10" Orientation="Horizontal">
-                <TextBox Text="{Binding NewTicker, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="100" Margin="0,0,10,0"/>
-                <TextBox Text="{Binding NewName, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="150" Margin="0,0,10,0"/>
-                <TextBox Text="{Binding NewCompany, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="150" Margin="0,0,10,0"/>
-                <ComboBox Text="{Binding TypeOfNewSecurityText, UpdateSourceTrigger=PropertyChanged}" Width="150" Margin="0,0,10,0">
-                    <ComboBoxItem Content="Акция" />
-                    <ComboBoxItem Content="Облигация" />
-                    <ComboBoxItem Content="Фонд" />
-                </ComboBox>
-                <TextBox Text="{Binding CurrentPriceText, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="100" Margin="0,0,10,0"/>
-                <Button Content="Добавить" Width="100" Height="30" Command="{Binding SaveCommand}"/>
-            </StackPanel>
-
-            <!-- Список существующих ценных бумаг -->
-            <DataGrid Grid.Row="1" 
-                      RowHeight="36"
-                      ItemsSource="{Binding Securities}" 
-                      AutoGenerateColumns="False" 
-                      IsReadOnly="True"
-                      Margin="0,10,0,10"
-                      x:Name="DataGrid"
-                      FontFamily="Montserrat"
-                      HeadersVisibility="Column"
-                      ColumnHeaderHeight="35"
-                      HorizontalContentAlignment="Center"
-                      VerticalContentAlignment="Center"
-                      CanUserResizeRows="False"
-                      CanUserResizeColumns="False">
-                <DataGrid.Resources>
-                    <!-- Центрирование текста в ячейках -->
-                    <Style TargetType="DataGridCell">
-                        <Setter Property="TextBlock.TextAlignment" Value="Left"/>
-                        <Setter Property="Padding" Value="4"/>
-                        <Setter Property="BorderThickness" Value="0"/>
-                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                        <Setter Property="VerticalAlignment" Value="Center"/>
-                        <Setter Property="HorizontalAlignment" Value="Center"/>
-                    </Style>
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="IsTabStop" Value="False"/>
-                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                        <Setter Property="BorderThickness" Value="0"/>
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="SnapsToDevicePixels" Value="True"/>
-                    </Style>
-                </DataGrid.Resources>
-
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Тикер" Binding="{Binding Ticker}" Width="50"/>
-                    <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"/>
-                    <DataGridTextColumn Header="Тип" Binding="{Binding Type}" Width="50"/>
-                    <DataGridTemplateColumn Header="Текущая стоимость" Width="100">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock  Text="{Binding CurrentPrice, StringFormat={}{0:N2} ₽}"
-                                            Visibility="{Binding IsEditing, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                        <DataGridTemplateColumn.CellEditingTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding newCurrentPrice, UpdateSourceTrigger=PropertyChanged}"
-                                         Visibility="{Binding IsEditing, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellEditingTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Действия" Width="100">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <!-- Далее создаётся две отдельных стоковых панели одна открыта, когда происходит редактирование акции, 
-                                    Другая, когда редактирование не происходит -->
-                                    <!-- Data context обозначает, что мы обращаемся к команде в VM, а не к полю типа security -->
-                                    <StackPanel Visibility="{Binding DataContext.EditingSecurity, 
-                                                                RelativeSource={RelativeSource AncestorType=Page}, 
-                                                                Converter={StaticResource ObjectEqualityToVisibilityConverter}, 
-                                                                ConverterParameter=false}">
-                                        <Button Content="{Binding IsEditing, Converter={StaticResource EditSaveTextConverter}}"
-                                                Command="{Binding DataContext.EditItemCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                                CommandParameter="{Binding}"
-                                                Width="30" Height="25" Margin="2"/>
-                                    
-                                        <!-- Кнопка удалить вызывает комманду удалить и передаёт в качестве параметра объект типа security -->
-                                        <Button Command="{Binding DataContext.DeleteItemCommand, RelativeSource={RelativeSource AncestorType=Page}}" 
-                                                CommandParameter="{Binding}" Content="🗑" Width="30" Height="25" Margin="2"
-                                                Visibility="{Binding IsEditing, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
-                                        
-                                    </StackPanel>
-                                    <StackPanel Visibility="{Binding DataContext.EditingSecurity, 
-                                                            RelativeSource={RelativeSource AncestorType=Page}, 
-                                                            Converter={StaticResource ObjectEqualityToVisibilityConverter}, 
-                                                            ConverterParameter=true}">
-                                        <Button Content="💾"
-                                                Command="{Binding DataContext.SaveEditCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                                CommandParameter="{Binding}" 
-                                                Width="30" Margin="2"/>
-                                        <Button Content="✖"
-                                                Command="{Binding DataContext.CancelEditCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                                Width="30" Margin="2"/>
-
-                                    </StackPanel>
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:InvestingManagerApp.Views"
+        mc:Ignorable="d"
+        Title="Управление ценными бумагами" d:DesignHeight="450" d:DesignWidth="800"
+        Background="#272727"
+      Foreground="#fff"
+      FontFamily="Montserrat">
+    <Page.Resources>
+        <Style x:Key="MenuButtonStyle" TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Margin" Value="0,24px,0,0"/>
+        </Style>
+        <Style x:Key="MenuIconStyle" TargetType="Image">
+            <Setter Property="Height" Value="48"/>
+            <Setter Property="Width" Value="48"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+        </Style>
+        <Style x:Key="MenuTextStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        <Style x:Key="Header1" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,0,0,20px"/>
+            <Setter Property="FontSize" Value="32px"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100px"/>
+            <!-- меню навигации -->
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!-- Border для различных свойств границ блока -->
+        <Border Grid.Column="0"
+                Background="#313131">
+            <!-- StackPanel позволяет собрать элементы меню вертикально -->
+            <Grid Margin="10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <!-- Каждая кнопка - команда -->
+                <Button Command="{Binding NavigateToSecuritiesCommand}"
+                        Style="{StaticResource MenuButtonStyle}"
+                        Grid.Row="0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border"
+                                    Background="Transparent"
+                                    CornerRadius="12">
+                                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                                    <Image x:Name="MenuIcon"
+                                            Source="/Images/securityIcon.png"
+                                            Style="{StaticResource MenuIconStyle}"/>
+                                    <TextBlock Text="Ценные бумаги"
+                                               Style="{StaticResource MenuTextStyle}"/>
                                 </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/SecurityIconBlue.png"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+
+
+                </Button>
+                <Button Command="{Binding NavigateToUsersCommand}"
+                        Style="{StaticResource MenuButtonStyle}"
+                        Grid.Row="1">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border"
+Background="Transparent"
+CornerRadius="12">
+                                <StackPanel HorizontalAlignment="Center"
+        VerticalAlignment="Center">
+                                    <Image x:Name="MenuIcon"
+                                           Source="/Images/personIcon.png"
+                                           Style="{StaticResource MenuIconStyle}"/>
+                                    <TextBlock Text="Пользователи"
+                                               Style="{StaticResource MenuTextStyle}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/personIconBlue.png"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                </Button>
+                <Button Grid.Row="3"
+        Command="{Binding LogoutCommand}"
+        Style="{StaticResource MenuButtonStyle}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border"
+                    Background="Transparent"
+                    CornerRadius="12">
+                                <StackPanel HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+                                    <Image x:Name="MenuIcon"
+                           Source="/Images/LogoutButton.png"
+                           Style="{StaticResource MenuIconStyle}"/>
+                                    <TextBlock Text="Выход"
+               Style="{StaticResource MenuTextStyle}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="MenuIcon" Property="Source" Value="/Images/LogoutButtonBlue.png"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Border" Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Border>
+        <Grid Grid.Column="1">
+            <Grid Margin="64,32">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                            Text="Панель админа"
+                            Style="{StaticResource Header1}"/>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Button Command="{Binding NavigateToSecuritiesCommand}"
+                            Margin="0,0,24,24"
+                            Content="Панель ценных бумаг"
+                            FontSize="10"
+                            Background="#256EA2"
+                            Foreground="#fff"
+                            FontWeight="DemiBold"
+                            Height="36"
+                            Width="150"
+                            BorderThickness="0">
+                    </Button>
+                    <Button Command="{Binding NavigateToUsersCommand}"
+                            Margin="0,0,0,24"
+                            Content="Панель пользователей"
+                            FontSize="10"
+                            Background="#256EA2"
+                            Foreground="#fff"
+                            FontWeight="DemiBold"
+                            Height="36"
+                            Width="150"
+                            BorderThickness="0">
+                        
+                    </Button>
+                        
+                </StackPanel>
+            </Grid>
+
         </Grid>
-    </DockPanel>
+    </Grid>
 </Page>

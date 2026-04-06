@@ -14,8 +14,15 @@ namespace InvestingManagerApp.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        public AuthService AuthService { get; set; } = new AuthService();
+        public PersonSession PersonSession { get; set; } = new PersonSession();
+        public PersonService PersonService { get; set; } = new PersonService();
+        public PortfolioAnalyticsService PortfolioAnalyticsService { get; set; } = new PortfolioAnalyticsService();
+        public PortfolioService PortfolioService { get; set; } = new PortfolioService();
+        public SecurityService SecurityService { get; set; } = new SecurityService();
+        public TransactionService TransactionService { get; set; } = new TransactionService();
+
         private Page _currentPage;
-        public UserSession CurrentUser { get; private set; }
         public Page CurrentPage
         {
             get => _currentPage;
@@ -24,7 +31,6 @@ namespace InvestingManagerApp.ViewModels
 
         public MainViewModel()
         {
-            CurrentUser = new UserSession();
             ShowLoginPage();
         }
 
@@ -35,6 +41,8 @@ namespace InvestingManagerApp.ViewModels
 
         public void ShowLoginPage()
         {
+            PersonSession session = new PersonSession();
+            AuthService authService = new AuthService();
             var loginVM = new LoginPageViewModel(this);
             CurrentPage = new LoginPage { DataContext = loginVM };
             OnPropertyChanged(nameof(CurrentPage));
@@ -42,7 +50,6 @@ namespace InvestingManagerApp.ViewModels
 
         public void Logout()
         {
-            CurrentUser.Logout();
             ShowLoginPage();
         }
     }
